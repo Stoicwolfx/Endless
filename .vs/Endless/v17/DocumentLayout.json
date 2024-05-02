@@ -1,0 +1,245 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\Unity Projects\\Endless\\Endless\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|g:\\unity projects\\endless\\endless\\assets\\project\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\playerstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\playerstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\surface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\surface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\enemyobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\enemyobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\upgradepanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\upgradepanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\globals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\globals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\endrunpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\endrunpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\weapondatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\weapondatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\enemydatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\enemydatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\projectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\projectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|G:\\Unity Projects\\Endless\\Endless\\assets\\project\\scripts\\gap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{69A4D211-D67A-1778-B2E5-9F9D200FB53E}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\gap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Player.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Player.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Player.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Player.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-01T05:28:54.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Globals.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Globals.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Globals.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Globals.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Globals.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABsAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UpgradePanel.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\UpgradePanel.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\UpgradePanel.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\UpgradePanel.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\UpgradePanel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.889Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ScoreManager.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\ScoreManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\ScoreManager.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\ScoreManager.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\ScoreManager.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAmwCwAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GameController.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\GameController.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\GameController.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\GameController.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\GameController.cs",
+              "ViewState": "AQIAAMEAAAAAAAAAAAAmwNEAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "EnemyDatabase.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\EnemyDatabase.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\EnemyDatabase.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\EnemyDatabase.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\EnemyDatabase.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADUAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EndRunPanel.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\EndRunPanel.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\EndRunPanel.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\EndRunPanel.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\EndRunPanel.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAqwAkAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.893Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "WeaponDatabase.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\WeaponDatabase.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\WeaponDatabase.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\WeaponDatabase.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\WeaponDatabase.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.893Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerStats.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\PlayerStats.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\PlayerStats.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\PlayerStats.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\PlayerStats.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Enemy.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Enemy.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Enemy.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Enemy.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Enemy.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAABOwEQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:13.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Surface.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Surface.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Surface.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Surface.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Surface.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAAUwEwAAACLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:13.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EnemyObject.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\EnemyObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\EnemyObject.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\EnemyObject.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\EnemyObject.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAywCYAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:13.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Gap.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Gap.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Gap.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Gap.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Gap.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:11.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Projectile.cs",
+              "DocumentMoniker": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Projectile.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Projectile.cs",
+              "ToolTip": "G:\\Unity Projects\\Endless\\Endless\\Assets\\Project\\Scripts\\Projectile.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Projectile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-19T23:35:13.122Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
