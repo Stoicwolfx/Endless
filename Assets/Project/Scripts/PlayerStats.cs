@@ -5,7 +5,7 @@ using UnityEngine;
 public static class PlayerStats
 {
 
-    public static float jumpForce = 1.0f;
+    public static float jumpForce = 25.0f;
     public static int maxJumps = 1;
     public static float jumpTime = 0.1f;
     public static float maxJump = 1.0f;

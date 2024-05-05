@@ -1,4 +1,6 @@
 Library/*
-Logs/*
+/.vs
+/Logs
+/Temp
 *.log
 *.cache

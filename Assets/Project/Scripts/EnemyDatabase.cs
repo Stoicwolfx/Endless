@@ -58,9 +58,9 @@ public class EnemyDatabase : MonoBehaviour
         };
     }
 
-    public Enemy GetEnemy(string title)
+    public Enemy GetEnemy(string name)
     {
-        Enemy temp = this.enemies.Find(enemy => enemy.GetTitle() == title);
+        Enemy temp = this.enemies.Find(enemy => enemy.GetName() == name);
         return temp;
     }
 

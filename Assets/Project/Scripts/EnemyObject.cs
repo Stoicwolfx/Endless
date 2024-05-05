@@ -31,12 +31,12 @@ public class EnemyObject : MonoBehaviour
 
         if (this.enemy.GetDomain() == Enemy.domain.air)
         {
-            this.AirBehavior(this.enemy.GetTitle());
+            this.AirBehavior(this.enemy.GetName());
         }
 
         if (this.enemy.GetDomain() == Enemy.domain.ground)
         {
-            this.GroundBehavior(this.enemy.GetTitle());
+            this.GroundBehavior(this.enemy.GetName());
         }
 
         if (this.transform.position.x < Globals.destructionLimit)

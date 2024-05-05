@@ -15,4 +15,9 @@ public class Projectile : MonoBehaviour
     {
         
     }
+
+    public void Create(float angle, Projectile projectile)
+    {
+        this.transform.RotateAround(this.transform.position, this.transform.forward, angle);
+    }
 }

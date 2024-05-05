@@ -37,9 +37,8 @@ public class Player : MonoBehaviour
 
     private GameObject gun;
     private float aimAngle;
-    private float lastAimAngle;
 
-    private float lastRotation;
+    private Weapon currentWeapon;
 
     [SerializeField] private Projectile projectilePreFab;
 
@@ -49,8 +48,6 @@ public class Player : MonoBehaviour
 
         this.gun = this.transform.GetChild(1).gameObject;
         this.aimAngle = 90.0f;
-        this.lastRotation = 0.0f;
-        this.lastAimAngle = 0.0f;
     }
 
     public void Initialize()
@@ -81,7 +78,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (!Globals.gameRunning) return;
-        if ((this.transform.position.y < Globals.screenBottom) || (this.transform.position.x < -10.25f) || (PlayerStats.hp == 0))
+        if ((this.transform.position.y < Globals.screenBottom) || (this.transform.position.x < -11.5f) || (PlayerStats.hp == 0))
         {
             Globals.gameRunning = false;
             return;
@@ -90,7 +87,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.flashLength > 0 && this.flashCount > 0)
+        if ((this.flashLength > 0) && (this.flashCount > 0))
         {
             this.flashLength -= Time.deltaTime;
             return;
@@ -108,15 +105,12 @@ public class Player : MonoBehaviour
                 this.sprite.color = Color.yellow;
             }
         }
+
     }
 
     private void LateUpdate()
     {
         if (!Globals.gameRunning) return;
-
-        this.lastRotation = this.transform.eulerAngles.z;
-        this.lastAimAngle = this.aimAngle;
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -168,22 +162,22 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-
-        if (this.jumping && (this.transform.position.y - this.ground) > this.maxJump)
+        
+        if (this.jumping && ((this.transform.position.y - this.ground) > this.maxJump))
         {
             this.maxJump = (this.transform.position.y - this.ground) * 0.9f;
         }
 
         //Check jump deadzone -- needs refinement/made a global
-        if (context.ReadValue<float>() < 0.1f || this.jumpCount >= this.maxJump)
+        if (context.ReadValue<float>() < 0.1f)
         {
             this.jumping = false;
-            this.jumpTime = -1.0f;
+            this.jumpClock = -1.0f;
             return;
         }
 
         //if not jumping then start a jump
-        if (!this.jumping && this.jumpCount < this.maxJumps)
+        if (!this.jumping && (this.jumpCount < this.maxJumps))
         {
             this.jumping = true;
             this.jumpClock = 0.0f;
@@ -191,13 +185,14 @@ public class Player : MonoBehaviour
 
             this.ground = this.transform.position.y;
 
-            playerBody.velocity = new Vector3(playerBody.velocity.x, 0.0f, 0.0f);
-            playerBody.AddForce(new Vector2(0.0f, this.jumpForce), ForceMode2D.Impulse);
+            playerBody.velocity = new Vector2(playerBody.velocity.x, 0.0f);
+            playerBody.AddForce(new Vector2(0.0f, this.jumpForce * 0.1f), ForceMode2D.Impulse);
         }
 
-        else if (this.jumpClock < this.jumpTime && this.jumpClock >= 0.0f && this.jumping)
+        else if ((this.jumpClock < this.jumpTime) &&
+                 (this.jumpClock >= 0.0f) && this.jumping)
         {
-            playerBody.AddForce(new Vector2(0.0f, this.jumpForce), ForceMode2D.Impulse);
+            playerBody.AddForce(new Vector2(0.0f, this.jumpForce), ForceMode2D.Force);
             this.jumpClock += Time.deltaTime;
         }
     }
@@ -214,14 +209,14 @@ public class Player : MonoBehaviour
             }
             else if (context.ReadValue<float>() > 0.0f)
             {
-                playerBody.velocity = new Vector3(0.0f, playerBody.velocity.y, 0.0f);
+                playerBody.velocity = new Vector2(0.0f, playerBody.velocity.y);
             }
         }
         else
         {
             if (Mathf.Abs(playerBody.velocity.x) >= Mathf.Abs(this.maxVelocity + Globals.scrollRate))
             {
-                playerBody.velocity = new Vector3(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity + Globals.scrollRate, playerBody.velocity.y, 0.0f);
+                playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity + Globals.scrollRate, playerBody.velocity.y);
             }
             else
             {
@@ -234,7 +229,7 @@ public class Player : MonoBehaviour
     {
         float aimX = context.ReadValue<Vector2>().x;
         float aimY = context.ReadValue<Vector2>().y;
-
+        /*
         float deltaRotation = this.transform.eulerAngles.z - this.lastRotation;
         float deltaAim = 0.0f;
 
@@ -246,11 +241,11 @@ public class Player : MonoBehaviour
         
 
         this.gun.transform.RotateAround(this.transform.position, this.gun.transform.forward, -deltaRotation + deltaAim);
-
+        */
     }
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        Projectile projectile = Instantiate(projectilePreFab);
+        this.currentWeapon.Fire(this.aimAngle);
     }
 }

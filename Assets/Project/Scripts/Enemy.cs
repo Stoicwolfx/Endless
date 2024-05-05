@@ -14,7 +14,7 @@ public class Enemy
     }
 
     private int id;
-    private string title;
+    private string name;
     private domain dmn;
     private int level;
     private string description;
@@ -25,7 +25,7 @@ public class Enemy
     public Enemy(Enemy enemy)
     {
         this.id = enemy.id;
-        this.title = enemy.title;
+        this.name = enemy.name;
         this.dmn = enemy.dmn;
         this.level = enemy.level;
         this.description = enemy.description;
@@ -34,10 +34,10 @@ public class Enemy
         this.stats = enemy.stats;
     }
 
-    public Enemy(int id, string title, domain dmn, int level, string description, Weapon weapon, Sprite sprite, Dictionary<string, int> stats)
+    public Enemy(int id, string name, domain dmn, int level, string description, Weapon weapon, Sprite sprite, Dictionary<string, int> stats)
     {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.dmn = dmn;
         this.level = level;
         this.description = description;
@@ -46,9 +46,9 @@ public class Enemy
         this.stats = stats;
     }
 
-    public string GetTitle()
+    public string GetName()
     {
-        return this.title;
+        return this.name;
     }
 
     public domain GetDomain()
@@ -64,5 +64,12 @@ public class Enemy
     public void Damage(int damage)
     {
         this.stats["HP"] -= damage;
+    }
+
+    public void LevelUp(int level)
+    {
+        //Each enemy will have a slightly different leveling algorithm eventually
+
+        this.level = level;
     }
 }
