@@ -123,9 +123,7 @@ public class Surface : MonoBehaviour
                     if (i == j) continue;
                     if (corners[i].y < corners[j].y)
                     {
-                        Vector2 temp = corners[i];
-                        corners[i] = corners[j];
-                        corners[j] = temp;
+                        (corners[j], corners[i]) = (corners[i], corners[j]);
                     }
                 }
             }

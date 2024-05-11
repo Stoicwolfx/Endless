@@ -1,0 +1,41 @@
+[
+	{
+		"id":"0",
+		"name":"basicKinetic",
+		"description":"Basic kinetic projectile.",
+		"type":"kinetic",
+		"sprite":"null",
+		"stats": {
+			"speed":"0",
+			"power":"0",
+			"range":"0",
+			"splashDamage":"0"
+		}
+	},
+	{
+		"id":"1",
+		"name":"basicEnergy",
+		"description":"Basic energy projectile",
+		"type":"energy",
+		"sprite":"null",
+		"stats": {
+			"speed":"0",
+			"power":"0",
+			"range":"0",
+			"splashDamage":"0"
+		}
+	},
+	{
+		"id":"2",
+		"name":"basicMissile",
+		"description":"Basic missile projectile",
+		"type":"missile",
+		"sprite":"null",
+		"stats": {
+			"speed":"0",
+			"power":"0",
+			"range":"0",
+			"splashDamage":"0"
+		}
+	}
+]

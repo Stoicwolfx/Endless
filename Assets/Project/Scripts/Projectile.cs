@@ -1,23 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+
+public class Projectile
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum projectileType
     {
-        
+        kinetic,
+        energy,
+        missile
+    }
+    private int id;
+    private string name;
+    private string description;
+    private projectileType type;
+    private Sprite sprite;
+    private Dictionary<string, int> stats = new Dictionary<string, int>();
+
+
+    public Projectile(Projectile projectile)
+    {
+        this.id = projectile.id;
+        this.name = projectile.name;
+        this.description = projectile.description;
+        this.type = projectile.type;
+        this.sprite = projectile.sprite;
+        this.stats = projectile.stats;
     }
 
-    // Update is called once per frame
-    void Update()
+    public Projectile(int id, string name, string description, projectileType type, Sprite sprite, Dictionary<string, int> stats)
     {
-        
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.type = type;
+        this.sprite = sprite;
+        this.stats = stats;
     }
 
-    public void Create(float angle, Projectile projectile)
+    public string GetName()
     {
-        this.transform.RotateAround(this.transform.position, this.transform.forward, angle);
+        return this.name;
     }
 }

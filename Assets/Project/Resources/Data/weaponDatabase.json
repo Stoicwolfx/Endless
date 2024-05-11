@@ -1,0 +1,38 @@
+[
+	{
+		"id":"0",
+		"type":"kinetic",
+		"name":"Pistol",
+		"description":"Simple starting weapon.",
+		"sprite":"null",
+		"projectile":"null",
+		"stats": {
+			"RateOfFire":"3",
+			"Speed":"4",
+			"Power":"1",
+			"Accuracy":"9",
+			"Range":"7",
+			"MagRounds":"6",
+			"MaxRounds":"-1",
+			"ReloadTime":"5"
+		}
+	},
+	{
+		"id":"1",
+		"type":"kinetic",
+		"name":"1911",
+		"description":"More powerful but slower.",
+		"sprite":"null",
+		"projectile":"null",
+		"stats": {
+			"RateOfFire":"2",
+			"Speed":"3",
+			"Power":"2",
+			"Accuracy":"10",
+			"Range":"8",
+			"MagRounds":"7",
+			"MaxRounds":"54",
+			"ReloadTime":"6"
+		}
+	}
+]

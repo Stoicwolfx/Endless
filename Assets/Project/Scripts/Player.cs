@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     private float moveForce;
     private float maxVelocity;
 
+    private float lastRot;
+
     private int experience;
 
     private int hp;
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
     private GameObject gun;
     private float aimAngle;
 
-    private Weapon currentWeapon;
+    private WeaponObject currentWeapon;
 
     [SerializeField] private Projectile projectilePreFab;
 
@@ -48,6 +50,16 @@ public class Player : MonoBehaviour
 
         this.gun = this.transform.GetChild(1).gameObject;
         this.aimAngle = 90.0f;
+    }
+
+    public void loadSavePlayerStats()
+    {
+        return;
+    }
+
+    public void savePlayerStats()
+    {
+        return;
     }
 
     public void Initialize()
@@ -106,18 +118,25 @@ public class Player : MonoBehaviour
             }
         }
 
+
     }
 
     private void LateUpdate()
     {
         if (!Globals.gameRunning) return;
+
+        //undo rotation due to parent rotation
+        float deltaRot = this.transform.eulerAngles.z - this.lastRot;
+        this.lastRot = this.transform.eulerAngles.z;
+        this.gun.transform.RotateAround(this.transform.position, Vector3.forward, -deltaRot);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         int flashes = 5;
 
-        if (collision.gameObject.tag == "Surface")
+        if (collision.gameObject.CompareTag("Surface"))
         {
             //Need to figure out how to detect if it's a vertical or inverted side and not treat that as a "landing"
             this.jumpCount = 0;
@@ -125,7 +144,7 @@ public class Player : MonoBehaviour
             this.jumping = false;
         }
 
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             if (this.flashCount == 0)
             {
@@ -162,7 +181,7 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        
+
         if (this.jumping && ((this.transform.position.y - this.ground) > this.maxJump))
         {
             this.maxJump = (this.transform.position.y - this.ground) * 0.9f;
@@ -196,16 +215,20 @@ public class Player : MonoBehaviour
             this.jumpClock += Time.deltaTime;
         }
     }
-
+    
+    //Something is off with the movement/jumping. Pretty sure jumping is correct though.
+    //Maybe have the initial move be a impulse then change to Force? Need to figure out
+    //why moving can result in unlimited air-jumps too.
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.ReadValue<float>() == 0.0f) return;
 
+        //check to see if reached the max right side for game play
         if (this.transform.position.x > 5.0f)
         {
             if (context.ReadValue<float>() < 0.0f)
             {
-                playerBody.AddForce(new Vector2(-this.moveForce, 0.0f), ForceMode2D.Impulse);
+                playerBody.AddForce(new Vector2(-this.moveForce, 0.0f), ForceMode2D.Force);
             }
             else if (context.ReadValue<float>() > 0.0f)
             {
@@ -214,13 +237,14 @@ public class Player : MonoBehaviour
         }
         else
         {
+            //check to see if it's at max velocity
             if (Mathf.Abs(playerBody.velocity.x) >= Mathf.Abs(this.maxVelocity + Globals.scrollRate))
             {
                 playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity + Globals.scrollRate, playerBody.velocity.y);
             }
             else
             {
-                playerBody.AddForce(new Vector2(this.moveForce * context.ReadValue<float>(), 0.0f), ForceMode2D.Impulse);
+                playerBody.AddForce(new Vector2(this.moveForce * context.ReadValue<float>(), 0.0f), ForceMode2D.Force);
             }
         }
     }
@@ -229,6 +253,7 @@ public class Player : MonoBehaviour
     {
         float aimX = context.ReadValue<Vector2>().x;
         float aimY = context.ReadValue<Vector2>().y;
+
         /*
         float deltaRotation = this.transform.eulerAngles.z - this.lastRotation;
         float deltaAim = 0.0f;

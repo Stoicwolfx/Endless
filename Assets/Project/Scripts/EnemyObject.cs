@@ -15,7 +15,7 @@ public class EnemyObject : MonoBehaviour
     private void Awake()
     {
         this.jumping = false;
-        enemyDatabase = GameObject.FindAnyObjectByType<EnemyDatabase>();
+        this.enemyDatabase = GameObject.FindAnyObjectByType<EnemyDatabase>();
     }
 
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class EnemyObject : MonoBehaviour
 
     public void Create(string title, float xSurface, float ySurface)
     {
-        this.enemy = new Enemy(enemyDatabase.GetEnemy(title));
+        this.enemy = new Enemy(this.enemyDatabase.GetEnemy(title));
         this.rig = this.GetComponent<Rigidbody2D>();
 
         foreach (Transform child in this.transform)

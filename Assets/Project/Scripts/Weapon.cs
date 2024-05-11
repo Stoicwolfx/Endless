@@ -7,9 +7,7 @@ public class Weapon
 
     public enum weaponType
     {
-        pistol,
-        SMG,
-        HMG,
+        kinetic,
         explosive,
         energy,
         melee
@@ -34,7 +32,7 @@ public class Weapon
     private weaponType type;
     private string name;
     private string description;
-    private Sprite playerWeapon;
+    private Sprite sprite;
     private Projectile projectile;
     private Dictionary<string, int> stats = new Dictionary<string, int>();
     //Deictionary Components:
@@ -46,7 +44,6 @@ public class Weapon
     //  MagRounds
     //  MaxRounds
     //  ReloadTime
-    //  SplashDamage
 
     public Weapon(Weapon weapon)
     {
@@ -54,18 +51,18 @@ public class Weapon
         this.type = weapon.type;
         this.name = weapon.name;
         this.description = weapon.description;
-        this.playerWeapon = weapon.playerWeapon;
+        this.sprite = weapon.sprite;
         this.projectile = weapon.projectile;
         this.stats = weapon.stats;
     }
 
-    public Weapon(int id, weaponType type, string name, string description, Sprite playerWeapon, Projectile projectile, Dictionary<string, int> stats)
+    public Weapon(int id, weaponType type, string name, string description, Sprite sprite, Projectile projectile, Dictionary<string, int> stats)
     {
         this.id = id;
         this.type = type;
         this.name = name;
         this.description = description;
-        this.playerWeapon = playerWeapon;
+        this.sprite = sprite;
         this.projectile = projectile;
         this.stats = stats;
     }
@@ -75,8 +72,8 @@ public class Weapon
         return this.name;
     }
 
-    public void Fire(float aimAngle)
+    public Projectile GetProjectile()
     {
-        return;
+        return this.projectile;
     }
 }
