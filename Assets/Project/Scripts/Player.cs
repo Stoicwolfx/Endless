@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private WeaponDatabase weaponDatabase;
+
     public Rigidbody2D playerBody;
 
     [SerializeField] private TextMeshProUGUI hpText;
@@ -40,16 +42,18 @@ public class Player : MonoBehaviour
     private GameObject gun;
     private float aimAngle;
 
-    private WeaponObject currentWeapon;
+    [SerializeField] private WeaponObject currentWeapon;
+    private List<WeaponObject> weapons;
+    private Dictionary<Projectile.projectileType, int> projectiles = new Dictionary<Projectile.projectileType, int>();
 
     [SerializeField] private Projectile projectilePreFab;
 
     void Awake()
     {
+        if (!Globals.databasesStatus.weaponsBuilt)
+            { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
+        this.weaponDatabase = GameObject.FindAnyObjectByType<WeaponDatabase>();
         this.Initialize();
-
-        this.gun = this.transform.GetChild(1).gameObject;
-        this.aimAngle = 90.0f;
     }
 
     public void loadSavePlayerStats()
@@ -84,6 +88,16 @@ public class Player : MonoBehaviour
 
         this.flashCount = 0;
         this.flashLength = 0.25f;
+
+        this.gun = this.transform.GetChild(1).gameObject;
+        this.aimAngle = 90.0f;
+
+        this.projectiles[Projectile.projectileType.kinetic] = 0;
+        this.projectiles[Projectile.projectileType.energy] = 0;
+        this.projectiles[Projectile.projectileType.missile] = 0;
+
+        //this.currentWeapon = gameObject.AddComponent(typeof(WeaponObject)) as WeaponObject;
+        this.currentWeapon.Create(weaponDatabase.GetWeapon("Pistol"));
     }
 
     // Update is called once per frame
@@ -253,24 +267,31 @@ public class Player : MonoBehaviour
     {
         float aimX = context.ReadValue<Vector2>().x;
         float aimY = context.ReadValue<Vector2>().y;
-
-        /*
-        float deltaRotation = this.transform.eulerAngles.z - this.lastRotation;
-        float deltaAim = 0.0f;
-
+        float newAngle = 0.0f;
+        float deltaAngle = 0.0f;
+        
         if ((aimX != 0) || (aimY != 0))
         {
-            this.aimAngle = Mathf.Atan2(aimY, aimX) * Mathf.Rad2Deg + 90.0f;
-            deltaAim = this.lastAimAngle - this.aimAngle;
+            newAngle = Mathf.Atan2(aimY, aimX) * Mathf.Rad2Deg + 90.0f;
         }
-        
+        deltaAngle = newAngle - this.aimAngle;
+        this.aimAngle = newAngle;
 
-        this.gun.transform.RotateAround(this.transform.position, this.gun.transform.forward, -deltaRotation + deltaAim);
-        */
+        this.gun.transform.RotateAround(this.transform.position, this.gun.transform.forward, deltaAngle);
     }
 
     public void OnFire(InputAction.CallbackContext context)
     {
         this.currentWeapon.Fire(this.aimAngle);
+    }
+
+    public int GetNumProjectile(Projectile.projectileType projectileType)
+    {
+        return this.projectiles[projectileType];
+    }
+
+    public void UseProjectile(Projectile.projectileType projectileType, int count)
+    {
+        this.projectiles[projectileType] =- count;
     }
 }

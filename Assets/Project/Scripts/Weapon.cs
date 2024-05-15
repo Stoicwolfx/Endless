@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Weapon
 {
-
     public enum weaponType
     {
         kinetic,
@@ -45,6 +46,10 @@ public class Weapon
     //  MaxRounds
     //  ReloadTime
 
+    private ProjectileObject projectilePrefab;
+    private bool reloading;
+    private float reloadClock;
+
     public Weapon(Weapon weapon)
     {
         this.id = weapon.id;
@@ -54,6 +59,9 @@ public class Weapon
         this.sprite = weapon.sprite;
         this.projectile = weapon.projectile;
         this.stats = weapon.stats;
+
+        this.reloading = false;
+        this.reloadClock = 0.0f;
     }
 
     public Weapon(int id, weaponType type, string name, string description, Sprite sprite, Projectile projectile, Dictionary<string, int> stats)
@@ -65,6 +73,9 @@ public class Weapon
         this.sprite = sprite;
         this.projectile = projectile;
         this.stats = stats;
+
+        this.reloading = false;
+        this.reloadClock = 0.0f;
     }
 
     public string GetName()
@@ -75,5 +86,35 @@ public class Weapon
     public Projectile GetProjectile()
     {
         return this.projectile;
+    }
+
+    public bool Reload(int totalRounds)
+    {
+        if ((this.stats["MagRounds"] == 0) && (this.reloadClock == 0))
+        {
+            this.reloading = true;
+            this.reloadClock = ((float)this.stats["ReloadTime"]) / 10.0f;
+        }
+
+        if ((this.reloadClock <= 0.0f) && this.reloading)
+        {
+            this.stats["MagRounds"] = (totalRounds >= this.stats["MaxRounds"]) ? this.stats["MaxRounds"] : totalRounds;
+            this.reloading = false;
+            this.reloadClock = 0;
+        }
+        else
+        {
+            this.reloadClock = -Time.deltaTime;
+        }
+
+        return this.reloading;
+    }
+
+    public int Fire(float aimAngle, ProjectileObject projectile)
+    {
+        projectile.Create(this.projectile.GetName(), aimAngle, this.stats);
+
+        this.stats["MagRounds"]--;
+        return 1;
     }
 }

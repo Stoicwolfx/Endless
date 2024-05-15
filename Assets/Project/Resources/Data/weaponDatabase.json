@@ -5,7 +5,7 @@
 		"name":"Pistol",
 		"description":"Simple starting weapon.",
 		"sprite":"null",
-		"projectile":"null",
+		"projectile":"basicKinetic",
 		"stats": {
 			"RateOfFire":"3",
 			"Speed":"4",
@@ -23,7 +23,7 @@
 		"name":"1911",
 		"description":"More powerful but slower.",
 		"sprite":"null",
-		"projectile":"null",
+		"projectile":"basicKinetic",
 		"stats": {
 			"RateOfFire":"2",
 			"Speed":"3",

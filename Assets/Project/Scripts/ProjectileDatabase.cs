@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -35,49 +36,60 @@ public class ProjectileDatabase : MonoBehaviour
 {
     private List<Projectile> projectiles = new List<Projectile>();
 
-    private void Awake()
+    public void Awake()
     {
         this.BuildDatabase();
+        Globals.databasesStatus.projetilesBuilt = true;
     }
 
 
     private void BuildDatabase()
     {
 
+        string projectileJsonFile = Directory.GetCurrentDirectory() + @"\Assets\Project\Resources\Data\projectileDatabase.json";
+        string projectileJson = "{\"projectilesJson\":" + File.ReadAllText(projectileJsonFile) + "}";
 
+        ProjectilesJson rootJson = JsonUtility.FromJson<ProjectilesJson>(projectileJson);
 
-        //This is to be update tomorrow
-        projectiles = new List<Projectile>()
+        foreach (ProjectileJson pJson in rootJson.projectilesJson)
         {
-            new Projectile
-            (
-               0,
-               "basicKinetic",
-               null,
-               Projectile.projectileType.kinetic,
-               null,
-               new Dictionary<string, int>
-               {
-                   {"Speed", 0},
-                   {"Power", 0},
-                   {"Range", 0}
-               }
-            ),
-            new Projectile
-            (
-               1,
-               "basicEnergy",
-               null,
-               Projectile.projectileType.energy,
-               null,
-               new Dictionary<string, int>
-               {
-                   {"Speed", 0},
-                   {"Power", 0},
-                   {"Range", 0}
-               }
-            )
-        };
+            Projectile.projectileType projectileType;
+            switch (pJson.type)
+            {
+                case "kinetic":
+                    projectileType = Projectile.projectileType.kinetic;
+                    break;
+                case "energy":
+                    projectileType = Projectile.projectileType.energy;
+                    break;
+                case "missile":
+                    projectileType = Projectile.projectileType.missile;
+                    break;
+                default:
+                    projectileType = Projectile.projectileType.kinetic;
+                    break;
+            }
+
+            Sprite sprite = (pJson.sprite == null) ? null : Resources.Load<Sprite>(pJson.sprite);
+
+            Dictionary<string, int> stats = new Dictionary<string, int>
+            {
+               {"Speed", pJson.stats.speed},
+               {"Power", pJson.stats.power},
+               {"Range", pJson.stats.range},
+               {"SplashDamage", pJson.stats.splashDamage}
+           };
+
+            Projectile projectile = new Projectile(
+                pJson.id,
+                pJson.name,
+                pJson.description,
+                projectileType,
+                sprite,
+                stats);
+
+            this.projectiles.Add(projectile);
+        }
     }
 
     public Projectile GetProjectile(string name)

@@ -966,8 +966,9 @@ GameObject:
   m_Component:
   - component: {fileID: 658762244}
   - component: {fileID: 658762245}
+  - component: {fileID: 658762246}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1040,6 +1041,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &658762246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658762243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ede382dc840e7141afb60038b77db6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1141030991}
+  projectilePrefab: {fileID: 3759815053401290432, guid: 6902421502f08924abf161eb9a978e5e, type: 3}
 --- !u!1 &717008442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,8 +2217,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7c2fe02c0e7c947b3bf5ada372ddd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDatabase: {fileID: 191815482}
   playerBody: {fileID: 1141030989}
   hpText: {fileID: 1138364434}
+  currentWeapon: {fileID: 658762246}
 --- !u!114 &1141030992
 MonoBehaviour:
   m_ObjectHideFlags: 0

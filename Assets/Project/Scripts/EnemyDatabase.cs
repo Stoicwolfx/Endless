@@ -18,11 +18,11 @@ public class EnemiesJson
 [Serializable]
 public class EnemyStats
 {
-    public int power;
-    public int defense;
-    public int hp;
-    public int speed;
-    public int experience;
+    public int Power;
+    public int Defense;
+    public int HP;
+    public int Speed;
+    public int Experience;
 }
 
 [Serializable]
@@ -43,10 +43,13 @@ public class EnemyDatabase : MonoBehaviour
     private List<Enemy> enemies = new List<Enemy>();
     private WeaponDatabase weaponDatabase;
 
-    private void Awake()
+    public void Awake()
     {
+        if (!Globals.databasesStatus.weaponsBuilt)
+            { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
         this.weaponDatabase = GameObject.FindAnyObjectByType<WeaponDatabase>();
         this.BuildDatabase();
+        Globals.databasesStatus.enemiesBuilt = true;
     }
 
 
@@ -79,11 +82,11 @@ public class EnemyDatabase : MonoBehaviour
 
             Dictionary<string, int> stats = new Dictionary<string, int>
             {
-               {"Power", eJson.stats.power},
-               {"Defense", eJson.stats.defense},
-               {"HP", eJson.stats.hp},
-               {"Speed", eJson.stats.speed},
-               {"Experience", eJson.stats.experience}
+               {"Power", eJson.stats.Power},
+               {"Defense", eJson.stats.Defense},
+               {"HP", eJson.stats.HP},
+               {"Speed", eJson.stats.Speed},
+               {"Experience", eJson.stats.Experience}
            };
 
             Enemy enemy = new Enemy(

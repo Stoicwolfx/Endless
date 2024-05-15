@@ -15,6 +15,8 @@ public class EnemyObject : MonoBehaviour
     private void Awake()
     {
         this.jumping = false;
+        if (!Globals.databasesStatus.enemiesBuilt)
+            { GameObject.FindAnyObjectByType<EnemyDatabase>().Awake(); }
         this.enemyDatabase = GameObject.FindAnyObjectByType<EnemyDatabase>();
     }
 
@@ -45,14 +47,14 @@ public class EnemyObject : MonoBehaviour
         }
     }
 
-    public void Create(string title, float xSurface, float ySurface)
+    public void Create(string name, float xSurface, float ySurface)
     {
-        this.enemy = new Enemy(this.enemyDatabase.GetEnemy(title));
+        this.enemy = new Enemy(this.enemyDatabase.GetEnemy(name));
         this.rig = this.GetComponent<Rigidbody2D>();
 
         foreach (Transform child in this.transform)
         {
-            if (child.name == title)
+            if (child.name == name)
             {
                 child.gameObject.SetActive(true);
                 break;
@@ -62,14 +64,14 @@ public class EnemyObject : MonoBehaviour
         {
             this.gameObject.AddComponent<CircleCollider2D>();
             this.transform.position = new Vector3(xSurface, ySurface + 0.5f * this.transform.localScale.y, 0);
-            this.GroundBehavior(title);
+            this.GroundBehavior(name);
         }
         else if (enemy.GetDomain() == Enemy.domain.air)
         {
             this.gameObject.AddComponent<BoxCollider2D>();
             this.transform.position = new Vector3(xSurface, Random.Range(Globals.maxSurfaceHeight + 0.75f - 5.0f, 5.0f - 0.5f), 0);
             this.rig.gravityScale = 0.0f;
-            this.AirBehavior(title);
+            this.AirBehavior(name);
         }
     }
 

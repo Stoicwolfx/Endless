@@ -44,4 +44,14 @@ public class Projectile
     {
         return this.name;
     }
+
+    public new projectileType GetType()
+    { 
+        return this.type;
+    }
+
+    public int GetSpeed()
+    {
+        return this.stats["Speed"];
+    }
 }

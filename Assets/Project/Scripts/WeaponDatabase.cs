@@ -8,21 +8,20 @@ using static Weapon;
 [Serializable]
 public class WeaponsJson
 {
-    //public List<EnemyJson> enemiesJson = new List<EnemyJson>();
     public WeaponJson[] weaponsJson;
 }
 
 [Serializable]
 public class WeaponStats
 {
-    public int rateOfFire;
-    public int speed;
-    public int power;
-    public int accuracy;
-    public int range;
-    public int magRounds;
-    public int maxRounds;
-    public int reloadTime;
+    public int RateOfFire;
+    public int Speed;
+    public int Power;
+    public int Accuracy;
+    public int Range;
+    public int MagRounds;
+    public int MaxRounds;
+    public int ReloadTime;
 }
 
 [Serializable]
@@ -31,11 +30,9 @@ public class WeaponJson
     public int id;
     public string type;
     public string name;
-    public string dmn;
-    public int level;
     public string description;
-    public string weapon;
     public string sprite;
+    public string projectile;
     public WeaponStats stats;
 }
 
@@ -44,10 +41,13 @@ public class WeaponDatabase : MonoBehaviour
     private List<Weapon> weapons = new List<Weapon>();
     private ProjectileDatabase projectileDatabase;
 
-    private void Awake()
+    public void Awake()
     {
+        if (!Globals.databasesStatus.projetilesBuilt)
+            { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
         this.projectileDatabase = GameObject.FindAnyObjectByType<ProjectileDatabase>();
         this.BuildDatabase();
+        Globals.databasesStatus.weaponsBuilt = true;
     }
 
     //    public Weapon(int id, weaponType type, string name, string description, Sprite sprite, Dictionary<string, int> stats)
@@ -55,7 +55,7 @@ public class WeaponDatabase : MonoBehaviour
     private void BuildDatabase()
     {
 
-        string weaponJsonFile = Directory.GetCurrentDirectory() + @"\Assets\Project\Resources\Data\enemyDatabase.json";
+        string weaponJsonFile = Directory.GetCurrentDirectory() + @"\Assets\Project\Resources\Data\weaponDatabase.json";
         string weaponJson = "{\"weaponsJson\":" + File.ReadAllText(weaponJsonFile) + "}";
 
         WeaponsJson rootJson = JsonUtility.FromJson<WeaponsJson>(weaponJson);
@@ -83,18 +83,18 @@ public class WeaponDatabase : MonoBehaviour
             }
 
             Sprite sprite = (wJson.sprite == null) ? null : Resources.Load<Sprite>(wJson.sprite);
-            Projectile projectile = (wJson.weapon == null) ? null : this.projectileDatabase.GetProjectile(wJson.weapon);
+            Projectile projectile = (wJson.projectile == null) ? null : this.projectileDatabase.GetProjectile(wJson.projectile);
 
             Dictionary<string, int> stats = new Dictionary<string, int>
             {
-               {"RateOfFire", wJson.stats.rateOfFire},
-               {"Speed", wJson.stats.speed},
-               {"Power", wJson.stats.power},
-               {"Accuracy", wJson.stats.accuracy},
-               {"Range", wJson.stats.range},
-               {"MagRounds", wJson.stats.magRounds},
-               {"MaxRounds", wJson.stats.maxRounds},
-               {"ReloadTime", wJson.stats.reloadTime}
+               {"RateOfFire", wJson.stats.RateOfFire},
+               {"Speed", wJson.stats.Speed},
+               {"Power", wJson.stats.Power},
+               {"Accuracy", wJson.stats.Accuracy},
+               {"Range", wJson.stats.Range},
+               {"MagRounds", wJson.stats.MagRounds},
+               {"MaxRounds", wJson.stats.MaxRounds},
+               {"ReloadTime", wJson.stats.ReloadTime}
            };
 
             Weapon weapon = new Weapon(

@@ -29,4 +29,21 @@ public static class Globals
 
     public static float initialX = -7.0f;
     public static float initialY = -1.0f;
+
+
+    public struct DatabasesStatus
+    {
+        public bool enemiesBuilt;
+        public bool projetilesBuilt;
+        public bool weaponsBuilt;
+
+        public DatabasesStatus(bool status)
+        {
+            this.enemiesBuilt = status;
+            this.projetilesBuilt = status;
+            this.weaponsBuilt = status;
+        }
+    }
+
+    public static Globals.DatabasesStatus databasesStatus = new DatabasesStatus(false);
 }
