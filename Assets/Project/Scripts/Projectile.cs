@@ -54,4 +54,9 @@ public class Projectile
     {
         return this.stats["Speed"];
     }
+
+    public Dictionary<string, int> GetStats()
+    {
+        return this.stats;
+    }
 }

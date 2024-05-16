@@ -11,6 +11,8 @@ public class ProjectileObject : MonoBehaviour
     private Projectile projectile;
     private Rigidbody2D rig;
 
+    private Dictionary<string, int> stats = new Dictionary<string, int>();
+
     private void Awake()
     {
         if (!Globals.databasesStatus.projetilesBuilt)
@@ -27,7 +29,13 @@ public class ProjectileObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if ((this.transform.position.x > Globals.creationLimit) ||
+            (this.transform.position.x < Globals.destructionLimit) ||
+            (this.transform.position.y > -Globals.screenBottom) ||
+            (this.transform.position.y < Globals.screenBottom))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void Create(Projectile projectile)
@@ -43,6 +51,8 @@ public class ProjectileObject : MonoBehaviour
                 break;
             }
         }
+
+        this.stats = projectile.GetStats();
     }
 
     public void Create(string name, float aimAngle, Dictionary<string, int> weaponStats)
@@ -59,14 +69,16 @@ public class ProjectileObject : MonoBehaviour
             }
         }
 
-        int speed = this.projectile.GetSpeed() + weaponStats["Speed"];
+        this.stats["Speed"] += weaponStats["Speed"];
+        this.stats["Power"] += weaponStats["Power"];
+        this.stats["Range"] += weaponStats["Range"];
+
         //calculate x and y velocities
-        float xVelocity = (float)speed * Mathf.Cos((aimAngle - 90.0f) * Mathf.Deg2Rad);
-        float yVelocity = (float)speed * Mathf.Sin((aimAngle - 90.0f) * Mathf.Deg2Rad);
+        float xVelocity = (float)this.stats["Speed"] * Mathf.Cos((aimAngle - 90.0f) * Mathf.Deg2Rad);
+        float yVelocity = (float)this.stats["Speed"] * Mathf.Sin((aimAngle - 90.0f) * Mathf.Deg2Rad);
 
         this.rig.velocity = new Vector3(xVelocity, yVelocity, 0.0f);
         this.transform.Rotate(aimAngle, 0, 0);
-        
 
 
         //for the differences in behavior for the different types of projectiles
@@ -82,5 +94,22 @@ public class ProjectileObject : MonoBehaviour
         {
             ;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //check what the collision is with
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyObject enemy = collision.gameObject.GetComponent<EnemyObject>();
+            enemy.Damage(this.stats["Power"]);
+            Destroy(this.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Surface"))
+        {
+            Destroy(this.gameObject);
+        }
+
+
     }
 }

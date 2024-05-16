@@ -61,9 +61,11 @@ public class Enemy
         return this.stats[stat];
     }
 
-    public void Damage(int damage)
+    public bool Damage(int damage)
     {
         this.stats["HP"] -= damage;
+
+        return (this.stats["HP"] > 0);
     }
 
     public void LevelUp(int level)

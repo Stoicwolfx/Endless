@@ -82,7 +82,10 @@ public class EnemyObject : MonoBehaviour
 
     public void Damage(int damage)
     {
-        this.enemy.Damage(damage);
+        if(!this.enemy.Damage(damage))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public Enemy.domain GetDomain()
