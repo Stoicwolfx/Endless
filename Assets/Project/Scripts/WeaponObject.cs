@@ -71,7 +71,7 @@ public class WeaponObject : MonoBehaviour
                                        this.transform.position.y + Mathf.Sin(this.transform.rotation.z) * (this.transform.localScale.x / 2.0f), 
                                        this.transform.position.z);
         ProjectileObject newProjectile = Instantiate(this.projectilePrefab, position, Quaternion.identity);
-        newProjectile.Create(this.projectile);
+        newProjectile.Create(this.projectile, this.player, this);
 
         int count = this.weapon.Fire(aimAngle, newProjectile);
 

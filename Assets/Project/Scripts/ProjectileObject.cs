@@ -6,10 +6,15 @@ using UnityEngine;
 
 public class ProjectileObject : MonoBehaviour
 {
+    private Player player;
+    private WeaponObject weapon;
+
     private ProjectileDatabase projectileDatabase;
 
     private Projectile projectile;
     private Rigidbody2D rig;
+
+    private float aimAngle;
 
     private Dictionary<string, int> stats = new Dictionary<string, int>();
 
@@ -36,9 +41,10 @@ public class ProjectileObject : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
     }
 
-    public void Create(Projectile projectile)
+    public void Create(Projectile projectile, Player player, WeaponObject weapon)
     {
         this.projectile = projectile;
         this.rig = this.GetComponent<Rigidbody2D>();
@@ -53,12 +59,18 @@ public class ProjectileObject : MonoBehaviour
         }
 
         this.stats = projectile.GetStats();
+        this.weapon = weapon;
+        this.player = player;
+
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        //Physics2D.IgnoreCollision(weapon.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     public void Create(string name, float aimAngle, Dictionary<string, int> weaponStats)
     {
         this.projectile = new Projectile(this.projectileDatabase.GetProjectile(name));
         this.rig = this.GetComponent<Rigidbody2D>();
+        this.aimAngle = aimAngle;
 
         foreach (Transform child in this.transform)
         {
