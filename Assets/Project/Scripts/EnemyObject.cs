@@ -117,6 +117,14 @@ public class EnemyObject : MonoBehaviour
         {
             this.rig.AddForce(new Vector2(0.0f, 5.0f), ForceMode2D.Impulse);
         }
+
+
+        else if (collision.gameObject.CompareTag("Projectile"))
+        {
+            ProjectileObject projectile = collision.gameObject.GetComponent<ProjectileObject>();
+            this.Damage(projectile.GetPower());
+            Destroy(projectile);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

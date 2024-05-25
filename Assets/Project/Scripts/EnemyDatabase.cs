@@ -40,7 +40,7 @@ public class EnemyJson
 
 public class EnemyDatabase : MonoBehaviour
 {
-    private List<Enemy> enemies = new List<Enemy>();
+    private List<Enemy> enemies = new();
     private WeaponDatabase weaponDatabase;
 
     public void Awake()
@@ -63,20 +63,12 @@ public class EnemyDatabase : MonoBehaviour
 
         foreach (EnemyJson eJson in rootJson.enemiesJson)
         {
-            Enemy.domain eDmn;
-            switch (eJson.dmn)
+            Enemy.domain eDmn = eJson.dmn switch
             {
-                case "ground": 
-                    eDmn = Enemy.domain.ground;
-                    break;
-                case "air": 
-                    eDmn = Enemy.domain.air;
-                    break;
-                default:
-                    eDmn = Enemy.domain.ground;
-                    break;
-            }
-
+                "ground" => Enemy.domain.ground,
+                "air" => Enemy.domain.air,
+                _ => Enemy.domain.ground,
+            };
             Weapon weapon = (eJson.weapon == null) ? null : this.weaponDatabase.GetWeapon(eJson.weapon);
             Sprite sprite = (eJson.sprite == null) ? null : Resources.Load<Sprite>(eJson.sprite);
 

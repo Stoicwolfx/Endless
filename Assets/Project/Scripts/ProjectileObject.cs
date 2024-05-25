@@ -1,18 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class ProjectileObject : MonoBehaviour
 {
     private Player player;
-    private WeaponObject weapon;
 
     private ProjectileDatabase projectileDatabase;
 
     private Projectile projectile;
     private Rigidbody2D rig;
+    Collider2D cldr;
 
     private float aimAngle;
 
@@ -21,14 +22,14 @@ public class ProjectileObject : MonoBehaviour
     private void Awake()
     {
         if (!Globals.databasesStatus.projetilesBuilt)
-            { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
+        { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
         this.projectileDatabase = GameObject.FindAnyObjectByType<ProjectileDatabase>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -41,10 +42,9 @@ public class ProjectileObject : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 
-    public void Create(Projectile projectile, Player player, WeaponObject weapon)
+    public void Create(Projectile projectile, Player player)
     {
         this.projectile = projectile;
         this.rig = this.GetComponent<Rigidbody2D>();
@@ -54,21 +54,19 @@ public class ProjectileObject : MonoBehaviour
             if (child.name == projectile.GetName())
             {
                 child.gameObject.SetActive(true);
+                this.cldr = child.gameObject.GetComponent<Collider2D>();
                 break;
             }
         }
 
-        this.stats = projectile.GetStats();
-        this.weapon = weapon;
+        projectile.GetStats(this.stats);
         this.player = player;
 
-        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        //Physics2D.IgnoreCollision(weapon.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), this.cldr);
     }
 
-    public void Create(string name, float aimAngle, Dictionary<string, int> weaponStats)
+    public void Fire(float aimAngle, Dictionary<string, int> weaponStats)
     {
-        this.projectile = new Projectile(this.projectileDatabase.GetProjectile(name));
         this.rig = this.GetComponent<Rigidbody2D>();
         this.aimAngle = aimAngle;
 
@@ -81,6 +79,7 @@ public class ProjectileObject : MonoBehaviour
             }
         }
 
+        //I'm not copying the dictionary correctly most likely -- it's probably just a pointer. Need to actually copy.
         this.stats["Speed"] += weaponStats["Speed"];
         this.stats["Power"] += weaponStats["Power"];
         this.stats["Range"] += weaponStats["Range"];
@@ -90,7 +89,7 @@ public class ProjectileObject : MonoBehaviour
         float yVelocity = (float)this.stats["Speed"] * Mathf.Sin((aimAngle - 90.0f) * Mathf.Deg2Rad);
 
         this.rig.velocity = new Vector3(xVelocity, yVelocity, 0.0f);
-        this.transform.Rotate(aimAngle, 0, 0);
+        this.transform.Rotate(0, 0, aimAngle - 90.0f);
 
 
         //for the differences in behavior for the different types of projectiles
@@ -108,20 +107,16 @@ public class ProjectileObject : MonoBehaviour
         }
     }
 
+    public int GetPower()
+    {
+        return this.stats["Power"];
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //check what the collision is with
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            EnemyObject enemy = collision.gameObject.GetComponent<EnemyObject>();
-            enemy.Damage(this.stats["Power"]);
-            Destroy(this.gameObject);
-        }
-        else if (collision.gameObject.CompareTag("Surface"))
+        if (collision.gameObject.CompareTag("Surface"))
         {
             Destroy(this.gameObject);
         }
-
-
     }
 }

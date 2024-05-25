@@ -110,9 +110,10 @@ public class Weapon
         return this.reloading;
     }
 
-    public int Fire(float aimAngle, ProjectileObject projectile)
+    public int Fire(float aimAngle, ProjectileObject projectile, Player player)
     {
-        projectile.Create(this.projectile.GetName(), aimAngle, this.stats);
+        projectile.Create(this.projectile, player);
+        projectile.Fire(aimAngle, this.stats);
 
         this.stats["MagRounds"]--;
         return 1;

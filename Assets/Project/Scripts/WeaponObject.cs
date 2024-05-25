@@ -70,14 +70,19 @@ public class WeaponObject : MonoBehaviour
         Vector3 position = new Vector3(this.transform.position.x + Mathf.Cos(this.transform.rotation.z) * (this.transform.localScale.y / 2.0f), 
                                        this.transform.position.y + Mathf.Sin(this.transform.rotation.z) * (this.transform.localScale.x / 2.0f), 
                                        this.transform.position.z);
-        ProjectileObject newProjectile = Instantiate(this.projectilePrefab, position, Quaternion.identity);
-        newProjectile.Create(this.projectile, this.player, this);
 
-        int count = this.weapon.Fire(aimAngle, newProjectile);
+        ProjectileObject newProjectile = Instantiate(this.projectilePrefab, position, Quaternion.identity);
+
+        int count = this.weapon.Fire(aimAngle, newProjectile, this.player);
 
         if (this.weapon.GetName() != "Pistol")
         {
             player.UseProjectile(this.projectile.GetType(), count);
         }
+    }
+
+    public string GetName()
+    {
+        return this.weapon.GetName();
     }
 }

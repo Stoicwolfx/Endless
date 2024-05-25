@@ -13,14 +13,14 @@ public class Enemy
         air
     }
 
-    private int id;
-    private string name;
-    private domain dmn;
+    private readonly int id;
+    private readonly string name;
+    private readonly domain dmn;
     private int level;
-    private string description;
+    private readonly string description;
     private Weapon weapon;
     private Sprite sprite;
-    private Dictionary<string, int> stats = new Dictionary<string, int>();
+    private Dictionary<string, int> stats = new();
 
     public Enemy(Enemy enemy)
     {

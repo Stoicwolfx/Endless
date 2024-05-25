@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    [SerializeField] private Player playerPrefab;
     [SerializeField] private Surface surfacePrefab;
     [SerializeField] private EnemyObject enemyPrefab;
 
@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private UpgradePanel upgradePanel;
 
     private Surface lastSurface;
+    private Player player;
 
     private bool clearGame;
     private int gameLevel;
@@ -38,6 +39,12 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        if (!Globals.databasesStatus.weaponsBuilt)
+            { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
+        if (!Globals.databasesStatus.enemiesBuilt)
+            { GameObject.FindAnyObjectByType<EnemyDatabase>().Awake(); }
+        if (!Globals.databasesStatus.projetilesBuilt)
+            { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
         this.StartRun();
     }
 
@@ -160,6 +167,9 @@ public class GameController : MonoBehaviour
         Globals.scrollRate = Globals.startScrollRate;
 
         this.waveClock = this.startClock;
+
+        this.player = Instantiate(playerPrefab);
+        this.player.Initialize();
 
         Surface surface = Instantiate(surfacePrefab);
         surface.Create();

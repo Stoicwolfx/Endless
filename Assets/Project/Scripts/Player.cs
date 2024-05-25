@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -7,11 +9,11 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private WeaponDatabase weaponDatabase;
+    private WeaponDatabase weaponDatabase;
 
     public Rigidbody2D playerBody;
 
-    [SerializeField] private TextMeshProUGUI hpText;
+    private TextMeshProUGUI hpText;
 
     private int jumpCount = 0;
     private bool jumping = false;
@@ -53,20 +55,110 @@ public class Player : MonoBehaviour
         if (!Globals.databasesStatus.weaponsBuilt)
             { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
         this.weaponDatabase = GameObject.FindAnyObjectByType<WeaponDatabase>();
+
+        TextMeshProUGUI[] uiElements = GameObject.FindObjectsOfType<TextMeshProUGUI>();
+
+        foreach (var uiElement in uiElements)
+        {
+            if (uiElement.name == "HP")
+            {
+                this.hpText = uiElement;
+                break;
+            }
+        }
+
         this.Initialize();
     }
 
-    public void loadSavePlayerStats()
+    public void LoadSavePlayerStats()
     {
         return;
     }
 
-    public void savePlayerStats()
+    //CMC this still needs a way to save the file then be tested (check validity of saved json)
+    public void SavePlayerStats()
     {
-        return;
-    }
+        string json;
+        int count = 0;
 
-    public void Initialize()
+        //create the Json -- not using serializable for variables so manually creating the json
+        json = "{\n";
+        json += "\t\"jumpCount\":\"" + this.jumpCount + "\",\n";
+        json += "\t\"jumpClock\":\"" + this.jumpClock + "\",\n";
+        json += "\t\"jumpForce\":\"" + this.jumpForce + "\",\n";
+        json += "\t\"jumpTime\":\"" + this.jumpTime + "\",\n";
+
+        json += "\t\"maxJumps\":\"" + this.maxJumps + "\",\n";
+        json += "\t\"maxJump\":\"" + this.maxJump + "\",\n";
+        json += "\t\"maxGap\":\"" + this.maxGap + "\",\n";
+
+        json += "\t\"moveForce\":\"" + this.moveForce + "\",\n";
+        json += "\t\"maxVelocity\":\"" + this.maxVelocity + "\",\n";
+
+        json += "\t\"experience\":\"" + this.experience + "\",\n";
+        json += "\t\"hp\":\"" + this.hp + "\",\n";
+        json += "\t\"defense\":\"" + this.defense + "\",\n";
+
+        json += "\t\"currentWeapon\":\"" + this.currentWeapon.GetName() + "\"";
+
+        if ((this.weapons.Count > 0) || (this.projectiles.Count > 0))
+        {
+            json += ",\n";
+        }
+        else
+        {
+            json += "\n";
+        }
+
+        if (this.weapons.Count > 0)
+        {
+            json += "\t\"weapons\": {\n";
+
+            for (int i = 0; i < this.weapons.Count; i++)
+            {
+                WeaponObject weapon = this.weapons[i];
+                count++;
+                json += "\t\t\"weapon\":\"" + weapon.GetName() + "\"";
+                if (count == this.weapons.Count)
+                {
+                    json += "\n";
+                }
+                else
+                {
+                    json += ",\n";
+                }
+            }
+            if (this.projectiles.Count > 0)
+            {
+                json += "\t},\n";
+                json += "\t\"projectils\": {\n";
+
+                for (int i = 0; i < this.projectiles.Count; i++)
+                {
+                    Projectile.projectileType projectile = this.projectiles.ElementAt(i).Key;
+                    
+                    json += "\t\t\"" + projectile.ToString() + "\":\"" + this.projectiles[projectile] + "\"";
+
+                    if (i == this.projectiles.Count - 1)
+                    {
+                        json += "\n";
+                        json += "\t}\n";
+                    }
+                    else
+                    {
+                        json += ",\n";
+                    }
+                }
+            }
+            else
+            {
+                json += "\t}\n";
+            }
+            json += "}";
+        }
+}
+
+public void Initialize()
     {
         this.transform.position = new Vector3(Globals.initialX, Globals.initialY, 0.0f);
         this.sprite = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
@@ -96,8 +188,9 @@ public class Player : MonoBehaviour
         this.projectiles[Projectile.projectileType.energy] = 0;
         this.projectiles[Projectile.projectileType.missile] = 0;
 
-        //this.currentWeapon = gameObject.AddComponent(typeof(WeaponObject)) as WeaponObject;
+        this.weapons = new();
         this.currentWeapon.Create(weaponDatabase.GetWeapon("Pistol"));
+        this.weapons.Add(this.currentWeapon);
     }
 
     // Update is called once per frame

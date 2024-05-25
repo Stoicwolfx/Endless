@@ -55,8 +55,14 @@ public class Projectile
         return this.stats["Speed"];
     }
 
-    public Dictionary<string, int> GetStats()
+    //CMC
+    public void GetStats(Dictionary<string, int> newStats)
     {
-        return this.stats;
+        foreach (var item in this.stats)
+        {
+            string key = item.Key;
+            int value = item.Value;
+            newStats.Add(key, value);
+        }
     }
 }
