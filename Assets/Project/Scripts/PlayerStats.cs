@@ -14,9 +14,19 @@ public static class PlayerStats
     public static float maxVelocity = 3.5f;
 
     public static int experience = 0;
-    public static int level = 1;
     public static int upgradePoints = 0;
 
     public static int hp = 50;
     public static int defense = 0;
+
+    //current levels for player and player stats -- used to calculate actual properties
+    public static int playerLevel = 1;
+    public static int jumpForceLevel = 1;
+    public static int maxJumpsLevel = 1;
+    public static int jumpTimeLevel = 1;
+    public static int moveForceLevel = 1;
+    public static int maxVelocityLevel = 1;
+    public static int hpLevel = 1;
+    public static int defenseLevel = 1;
+    
 }

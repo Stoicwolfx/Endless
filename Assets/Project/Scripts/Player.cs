@@ -75,88 +75,10 @@ public class Player : MonoBehaviour
         return;
     }
 
-    //CMC this still needs a way to save the file then be tested (check validity of saved json)
-    public void SavePlayerStats()
+    public void SavePlayer()
     {
-        string json;
-        int count = 0;
-
-        //create the Json -- not using serializable for variables so manually creating the json
-        json = "{\n";
-        json += "\t\"jumpCount\":\"" + this.jumpCount + "\",\n";
-        json += "\t\"jumpClock\":\"" + this.jumpClock + "\",\n";
-        json += "\t\"jumpForce\":\"" + this.jumpForce + "\",\n";
-        json += "\t\"jumpTime\":\"" + this.jumpTime + "\",\n";
-
-        json += "\t\"maxJumps\":\"" + this.maxJumps + "\",\n";
-        json += "\t\"maxJump\":\"" + this.maxJump + "\",\n";
-        json += "\t\"maxGap\":\"" + this.maxGap + "\",\n";
-
-        json += "\t\"moveForce\":\"" + this.moveForce + "\",\n";
-        json += "\t\"maxVelocity\":\"" + this.maxVelocity + "\",\n";
-
-        json += "\t\"experience\":\"" + this.experience + "\",\n";
-        json += "\t\"hp\":\"" + this.hp + "\",\n";
-        json += "\t\"defense\":\"" + this.defense + "\",\n";
-
-        json += "\t\"currentWeapon\":\"" + this.currentWeapon.GetName() + "\"";
-
-        if ((this.weapons.Count > 0) || (this.projectiles.Count > 0))
-        {
-            json += ",\n";
-        }
-        else
-        {
-            json += "\n";
-        }
-
-        if (this.weapons.Count > 0)
-        {
-            json += "\t\"weapons\": {\n";
-
-            for (int i = 0; i < this.weapons.Count; i++)
-            {
-                WeaponObject weapon = this.weapons[i];
-                count++;
-                json += "\t\t\"weapon\":\"" + weapon.GetName() + "\"";
-                if (count == this.weapons.Count)
-                {
-                    json += "\n";
-                }
-                else
-                {
-                    json += ",\n";
-                }
-            }
-            if (this.projectiles.Count > 0)
-            {
-                json += "\t},\n";
-                json += "\t\"projectils\": {\n";
-
-                for (int i = 0; i < this.projectiles.Count; i++)
-                {
-                    Projectile.projectileType projectile = this.projectiles.ElementAt(i).Key;
-                    
-                    json += "\t\t\"" + projectile.ToString() + "\":\"" + this.projectiles[projectile] + "\"";
-
-                    if (i == this.projectiles.Count - 1)
-                    {
-                        json += "\n";
-                        json += "\t}\n";
-                    }
-                    else
-                    {
-                        json += ",\n";
-                    }
-                }
-            }
-            else
-            {
-                json += "\t}\n";
-            }
-            json += "}";
-        }
-}
+        return;
+    }
 
 public void Initialize()
     {

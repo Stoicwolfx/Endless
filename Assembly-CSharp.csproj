@@ -79,6 +79,7 @@
     <Compile Include="Assets\Project\Controls\EndlessPlayerInputs.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Project\Scripts\StartScreenPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Project\Scripts\Enemy.cs" />
     <Compile Include="Assets\Project\Scripts\Surface.cs" />

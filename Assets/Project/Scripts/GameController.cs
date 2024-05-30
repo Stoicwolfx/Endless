@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,9 +10,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private Surface surfacePrefab;
     [SerializeField] private EnemyObject enemyPrefab;
 
-    [SerializeField] private ScoreManager scoreManager;
-    [SerializeField] private EndRunPanel endRunPanel;
+    [SerializeField] private StartScreenPanel startScreenPanel;
     [SerializeField] private UpgradePanel upgradePanel;
+    [SerializeField] private EndRunPanel endRunPanel;
+
+    [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private TextMeshProUGUI HpText;
 
     private Surface lastSurface;
     private Player player;
@@ -45,7 +49,6 @@ public class GameController : MonoBehaviour
             { GameObject.FindAnyObjectByType<EnemyDatabase>().Awake(); }
         if (!Globals.databasesStatus.projetilesBuilt)
             { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
-        this.StartRun();
     }
 
     // Update is called once per frame
@@ -158,10 +161,17 @@ public class GameController : MonoBehaviour
     {
     }
 
-    private void StartRun()
+    public void StartRun()
     {
+        Globals.gameRunning = true;
         this.clearGame = true;
+        this.startScreenPanel.gameObject.SetActive(false);
+        this.upgradePanel.gameObject.SetActive(false);
         this.endRunPanel.gameObject.SetActive(false);
+
+        this.scoreManager.gameObject.SetActive(true);
+        this.HpText.gameObject.SetActive(true);
+
         this.gameLevel = 1;
         Globals.gameRunning = true;
         Globals.scrollRate = Globals.startScrollRate;
@@ -190,19 +200,33 @@ public class GameController : MonoBehaviour
 
         PlayerStats.experience += scoreManager.GetExperience();
 
-        this.endRunPanel.DisplayEndRunPanel(scoreManager.GetScore(), scoreManager.GetExperience());
-
-    }
-
-    public void PostCleanUp()
-    {
-        this.endRunPanel.gameObject.SetActive(false);
-
+        //Need to clear the player, any enemies, projectiles, surfaces, and anything else present
+        Destroy(this.player);
+        foreach (var enemy in FindObjectsOfType<EnemyObject>())
+        {
+            Destroy(enemy.gameObject);
+        }
+        foreach (var projectile in FindObjectsOfType<ProjectileObject>())
+        {
+            Destroy(projectile.gameObject);
+        }
         foreach (var surface in FindObjectsOfType<Surface>())
         {
             Destroy(surface.gameObject);
         }
+        foreach (var gap in FindObjectsOfType<Gap>())
+        {
+            Destroy(gap.gameObject);
+        }
 
+        this.endRunPanel.DisplayEndRunPanel(scoreManager.GetScore(), scoreManager.GetExperience());
+
+    }
+
+    public void Upgrades()
+    {
+        this.endRunPanel.gameObject.SetActive(false);
+        
         scoreManager.EndRun();
 
         this.upgradePanel.gameObject.SetActive(true);
@@ -210,7 +234,23 @@ public class GameController : MonoBehaviour
 
     public void Reload()
     {
+        //Need to autosave the player's progress
+        //this.player.SavePlayer();
 
+        this.endRunPanel.gameObject.SetActive(false);
+
+        //Need to set scrolling back to default start scroll rate
+        Globals.scrollRate = Globals.startScrollRate;
+
+        this.StartRun();
+    }
+
+    public void Exit()
+    {
+        //Need to auto-save. When the game starts it ill give the option of continue or new game
+        //this.player.SavePlayer();
+
+        Application.Quit();
     }
 
     private void StartGroundWave()
