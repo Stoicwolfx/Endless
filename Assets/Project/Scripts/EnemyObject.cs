@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using static Enemy;
@@ -14,6 +15,8 @@ public class EnemyObject : MonoBehaviour
     private bool jumping;
 
     private float checkRadius = 0.01f;
+
+    private float jumpForce = 6.0f;
 
     private void Awake()
     {
@@ -133,8 +136,10 @@ public class EnemyObject : MonoBehaviour
             //check for being on a hill
             float travelDirection = Mathf.Atan2(this.rig.velocity.y, this.rig.velocity.x); //Radians
 
-            float rotation = (travelDirection * Mathf.Rad2Deg > 270.0f) ? (travelDirection * Mathf.Rad2Deg - 270.0f) 
-                                                                        : (270.0f - travelDirection * Mathf.Rad2Deg);
+            float rotation = (travelDirection * Mathf.Rad2Deg > 180.0f) ? (travelDirection * Mathf.Rad2Deg - 180.0f) 
+                                                                        : (180.0f - travelDirection * Mathf.Rad2Deg);
+
+
             if ((rotation > Globals.minRotationDeg) && (rotation < Globals.maxRotationDeg))
             {
                 perpendicular = travelDirection - (Mathf.PI / 2);
@@ -160,7 +165,71 @@ public class EnemyObject : MonoBehaviour
             // 2 - uphill
             // 3 - downhill
 
+            if (!hill)
+            {
+                //flat ground -- check for wall or surface slanting towards and overhanging path
+                //NOTE: Need to check if looking far enough ahead for the jump
+                checkX = this.transform.position.x - this.GetStat("Speed") * Time.deltaTime * 50;
+                checkY = this.transform.position.y;
+
+                intersections = Physics2D.OverlapCircleAll(new Vector2(checkX, checkY), radius);
+
+                foreach (Collider2D intersection in intersections)
+                {
+                    if (intersection.gameObject.CompareTag("Surface"))
+                    {
+                        wall = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                //check for uphill or downhill then the appropriate wall or overhang type
+                if (((travelDirection * Mathf.Rad2Deg) < Mathf.PI) && ((travelDirection * Mathf.Rad2Deg) >= 0))
+                {
+                    //uphill
+                    Debug.Log("uphill: " + travelDirection);
+                    float dist = this.GetStat("Speed") * Time.deltaTime * 75.0f;
+                    checkX = this.transform.position.x - Mathf.Cos(travelDirection) * dist;
+                    checkY = this.transform.position.y + Mathf.Sin(travelDirection) * dist;
+
+                    intersections = Physics2D.OverlapCircleAll(new Vector2(checkX, checkY), radius);
+
+                    foreach (Collider2D intersection in intersections)
+                    {
+                        if (intersection.gameObject.CompareTag("Surface"))
+                        {
+                            wall = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    //downhill
+                    Debug.Log("downhill: " + travelDirection);
+                    //NOTE: Currently the same logic as uphill - need to look up and at an angle for best detection
+                    //      However I have it separated for tweaking if needed.
+                    float dist = this.GetStat("Speed") * Time.deltaTime * 75.0f;
+                    checkX = this.transform.position.x - Mathf.Cos(travelDirection) * dist;
+                    checkY = this.transform.position.y + Mathf.Sin(travelDirection) * dist;
+
+                    intersections = Physics2D.OverlapCircleAll(new Vector2(checkX, checkY), radius);
+
+                    foreach (Collider2D intersection in intersections)
+                    {
+                        if (intersection.gameObject.CompareTag("Surface"))
+                        {
+                            wall = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
         }
+
 
         if (this.jumping)
         {
@@ -169,11 +238,16 @@ public class EnemyObject : MonoBehaviour
         else if (gap)
         {
             //gap action - start jump
-            //this.jumping = true;
+            this.jumping = true;
+            this.rig.AddForce(new Vector2(-this.jumpForce / 8.0f, this.jumpForce), ForceMode2D.Impulse);
+
+            //NOTE: to improve, check width of gap and height of surface on the otherside.
+            //      Then figure out a calculation to determine required forces to get Enemy across//implement double jump
         }
         else if (hill && !wall)
         {
             //hill with no wall at top
+            //need uphill and downhill components
         }
         else if (hill && wall)
         {
@@ -182,6 +256,10 @@ public class EnemyObject : MonoBehaviour
         else if (wall && !hill)
         {
             //wall action
+            this.jumping = true;
+            this.rig.AddForce(new Vector2(-this.jumpForce / 8.0f, this.jumpForce), ForceMode2D.Impulse);
+
+            //NOTE: Same improvement types as gap needed
         }
         else
         {
@@ -201,6 +279,7 @@ public class EnemyObject : MonoBehaviour
 
         wall = false;
         hill = false;
+        gap = false;
     }
 
     private void AirBehavior(string title)
