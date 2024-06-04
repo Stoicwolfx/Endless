@@ -24,6 +24,10 @@ public class ScoreManager : MonoBehaviour
         UpdateScore();
     }
 
+    public void ResetScore()
+    {
+        this.score = 0f;
+    }
     void UpdateScore()
     {
         scoreText.text = "Score: ";

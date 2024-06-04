@@ -164,7 +164,10 @@ public class GameController : MonoBehaviour
     public void StartRun()
     {
         Globals.gameRunning = true;
+        this.accelerating = false;
+        this.accCount = 0.0f;
         this.clearGame = true;
+
         this.startScreenPanel.gameObject.SetActive(false);
         this.upgradePanel.gameObject.SetActive(false);
         this.endRunPanel.gameObject.SetActive(false);
@@ -172,6 +175,7 @@ public class GameController : MonoBehaviour
         this.scoreManager.gameObject.SetActive(true);
         this.HpText.gameObject.SetActive(true);
 
+        this.scoreManager.ResetScore();
         this.gameLevel = 1;
         Globals.gameRunning = true;
         Globals.scrollRate = Globals.startScrollRate;
