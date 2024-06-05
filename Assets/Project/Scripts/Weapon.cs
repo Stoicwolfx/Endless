@@ -132,8 +132,8 @@ public class Weapon
         if (this.name != "Pistol")
         {
             this.stats["MagRounds"]--;
-            return 0;
+            return 1;
         }
-        return 1;
+        return 0;
     }
 }
