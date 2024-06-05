@@ -49,6 +49,7 @@ public class Weapon
     private ProjectileObject projectilePrefab;
     private bool reloading;
     private float reloadClock;
+    private float fireClock;
 
     public Weapon(Weapon weapon)
     {
@@ -62,6 +63,7 @@ public class Weapon
 
         this.reloading = false;
         this.reloadClock = 0.0f;
+        this.fireClock = 1.0f;
     }
 
     public Weapon(int id, weaponType type, string name, string description, Sprite sprite, Projectile projectile, Dictionary<string, int> stats)
@@ -112,10 +114,26 @@ public class Weapon
 
     public int Fire(float aimAngle, ProjectileObject projectile, Player player)
     {
+        if ((this.fireClock > 0.0f) &&
+            (this.fireClock < 1.0f))
+        {
+            this.fireClock -= 1.0f / this.stats["RateOfFire"];
+            return 0;
+        }
+        else if (this.fireClock <= 0.0f)
+        {
+            this.fireClock = 1.0f;
+        }
+
         projectile.Create(this.projectile, player);
         projectile.Fire(aimAngle, this.stats);
+        this.fireClock -= 1.0f / this.stats["RateOfFire"];
 
-        this.stats["MagRounds"]--;
+        if (this.name != "Pistol")
+        {
+            this.stats["MagRounds"]--;
+            return 0;
+        }
         return 1;
     }
 }

@@ -189,7 +189,6 @@ public class EnemyObject : MonoBehaviour
                 if (((travelDirection * Mathf.Rad2Deg) < Mathf.PI) && ((travelDirection * Mathf.Rad2Deg) >= 0))
                 {
                     //uphill
-                    Debug.Log("uphill: " + travelDirection);
                     float dist = this.GetStat("Speed") * Time.deltaTime * 75.0f;
                     checkX = this.transform.position.x - Mathf.Cos(travelDirection) * dist;
                     checkY = this.transform.position.y + Mathf.Sin(travelDirection) * dist;
@@ -208,7 +207,6 @@ public class EnemyObject : MonoBehaviour
                 else
                 {
                     //downhill
-                    Debug.Log("downhill: " + travelDirection);
                     //NOTE: Currently the same logic as uphill - need to look up and at an angle for best detection
                     //      However I have it separated for tweaking if needed.
                     float dist = this.GetStat("Speed") * Time.deltaTime * 75.0f;
