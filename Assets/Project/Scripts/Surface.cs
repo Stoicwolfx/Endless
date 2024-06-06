@@ -23,15 +23,18 @@ public class Surface : MonoBehaviour
     {
         if (!Globals.gameRunning) return;
 
-        this.transform.position = new Vector3(this.transform.position.x + Globals.scrollRate * Time.deltaTime,
-                                              this.transform.position.y,
-                                              this.transform.position.z);
+        //this.transform.position = new Vector3(this.transform.position.x + Globals.scrollRate * Time.deltaTime,
+        //                                      this.transform.position.y,
+        //                                      this.transform.position.z);
 
-        maxX = this.transform.position.x + this.transform.localScale.x * 0.5f;
+        //maxX = this.transform.position.x + this.transform.localScale.x * 0.5f;
         if (maxX < Globals.destructionLimit)
         {
             Destroy(this.gameObject);
         }
+
+        Globals.destructionLimit -= Globals.scrollRate * Time.deltaTime;
+        Globals.creationLimit -= Globals.scrollRate * Time.deltaTime;
 
     }
 
