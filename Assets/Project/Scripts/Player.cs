@@ -98,7 +98,7 @@ public void Initialize()
 
         this.jumpClock = -1.0f;
 
-        this.maxGap = -Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
+        this.maxGap = Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
 
         this.flashCount = 0;
         this.flashLength = 0.25f;
@@ -119,10 +119,9 @@ public void Initialize()
     void Update()
     {
         if (!Globals.gameRunning) return;
-        if ((this.transform.position.y < Globals.screenBottom) || (this.transform.position.x < -11.5f) || (PlayerStats.hp == 0))
+        if ((this.transform.position.y < Globals.screenBottom) || (this.transform.position.x < Globals.destructionLimit) || (PlayerStats.hp == 0))
         {
             Globals.gameRunning = false;
-            return;
         }
     }
 
@@ -195,7 +194,7 @@ public void Initialize()
     public void Accelerate(float acceleration)
     {
         this.maxVelocity += acceleration;
-        this.maxGap = -Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
+        this.maxGap = Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
     }
 
     public float JumpHeight()
@@ -269,7 +268,7 @@ public void Initialize()
             //check to see if it's at max velocity
             if (Mathf.Abs(playerBody.velocity.x) >= Mathf.Abs(this.maxVelocity + Globals.scrollRate))
             {
-                playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity + Globals.scrollRate, playerBody.velocity.y);
+                playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity - Globals.scrollRate, playerBody.velocity.y);
             }
             else
             {

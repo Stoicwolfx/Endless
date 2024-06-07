@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private TextMeshProUGUI HpText;
+    [SerializeField] private CameraController cameraController;
 
     private Surface lastSurface;
     private Player player;
@@ -54,6 +55,9 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Globals.destructionLimit += Globals.scrollRate * Time.deltaTime;
+        Globals.creationLimit += Globals.scrollRate * Time.deltaTime;
+
         if (!Globals.gameRunning)
         {
             if (this.clearGame) this.EndRun();
@@ -139,12 +143,12 @@ public class GameController : MonoBehaviour
             if (!this.accelerating)
             {
                 this.accCount = 60;
-                this.acceleration += -1.0f;
+                this.acceleration += 1.0f;
                 this.accelerating = true;
             }
 
 
-            player.Accelerate(-this.acceleration);
+            player.Accelerate(this.acceleration);
             Globals.scrollRate += this.acceleration;
 
             this.accCount--;
@@ -168,6 +172,7 @@ public class GameController : MonoBehaviour
         this.accCount = 0.0f;
         this.clearGame = true;
 
+        this.cameraController.ResetCamera();
         this.startScreenPanel.gameObject.SetActive(false);
         this.upgradePanel.gameObject.SetActive(false);
         this.endRunPanel.gameObject.SetActive(false);
@@ -177,8 +182,11 @@ public class GameController : MonoBehaviour
 
         this.scoreManager.ResetScore();
         this.gameLevel = 1;
+
         Globals.gameRunning = true;
         Globals.scrollRate = Globals.startScrollRate;
+        Globals.creationLimit = Globals.initialCreationLimit;
+        Globals.destructionLimit = Globals.initialDestructionLimit;
 
         this.waveClock = this.startClock;
 
@@ -205,7 +213,7 @@ public class GameController : MonoBehaviour
         PlayerStats.experience += scoreManager.GetExperience();
 
         //Need to clear the player, any enemies, projectiles, surfaces, and anything else present
-        Destroy(this.player);
+        Destroy(this.player.gameObject);
         foreach (var enemy in FindObjectsOfType<EnemyObject>())
         {
             Destroy(enemy.gameObject);

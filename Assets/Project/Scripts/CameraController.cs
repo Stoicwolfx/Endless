@@ -16,12 +16,18 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bounds.center -= new Vector2(Globals.scrollRate * Time.deltaTime, 0.0f);
-        this.mainCamera.transform.position = new Vector3 (bounds.center.x, bounds.center.y, this.mainCamera.transform.position.z);
+        this.bounds.center += new Vector2(Globals.scrollRate * Time.deltaTime, 0.0f);
+        this.mainCamera.transform.position = new Vector3 (this.bounds.center.x, this.bounds.center.y, this.mainCamera.transform.position.z);
+    }
+
+    public void ResetCamera()
+    {
+        this.bounds.center = new Vector2(0.0f, 0.0f);
+        this.mainCamera.transform.position = new Vector3(0.0f, 0.0f, this.mainCamera.transform.position.z);
     }
 
     public Rect GetBounds()
     {
-        return bounds;
+        return this.bounds;
     }
 }

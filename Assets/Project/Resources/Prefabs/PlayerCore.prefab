@@ -169,9 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7c2fe02c0e7c947b3bf5ada372ddd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDatabase: {fileID: 0}
   playerBody: {fileID: 662703451112402403}
-  hpText: {fileID: 0}
   currentWeapon: {fileID: 3087592529196934878}
 --- !u!58 &5416697365461868686
 CircleCollider2D:
