@@ -13,19 +13,11 @@ public class Surface : MonoBehaviour
 
     [SerializeField] private Gap gapPrefab;
 
-    private float currentXPos;
-    private float currentYPos;
-
     private readonly float initialXPos = -7.5f;
     private readonly float initialYPos = -3.5f;
     private readonly float initialXScale = 3.0f;
     private readonly float initialYScale = 3.0f;
 
-    private void Awake()
-    {
-        this.currentXPos = this.initialXPos;
-        this.currentYPos = this.initialYPos;
-    }
     // Update is called once per frame
     void LateUpdate()
     {
@@ -41,15 +33,15 @@ public class Surface : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        this.currentXPos += Globals.scrollRate * Time.deltaTime;
+        //this.currentXPos += Globals.scrollRate * Time.deltaTime;
 
     }
 
     //Will create a surface in the starting position everytime
     public void Create()
     {
-        this.transform.position = new Vector3(this.currentXPos, this.currentYPos, 0.0f);
-        this.transform.localScale = new Vector3(this.currentXPos, this.currentYPos, 0.0f);
+        this.transform.position = new Vector3(this.initialXPos, this.initialYPos, 0.0f);
+        this.transform.localScale = new Vector3(this.initialXScale, this.initialYScale, 0.0f);
 
         this.maxX = this.transform.position.x + this.transform.localScale.x * 0.5f;
         this.maxY = this.transform.position.y + this.transform.localScale.y * 0.5f;

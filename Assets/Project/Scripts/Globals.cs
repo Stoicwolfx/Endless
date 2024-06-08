@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class Globals
 {
+    public static bool testing = true;
+
     public static bool gameRunning = false;
 
     public static float scrollRate = 2.0f;

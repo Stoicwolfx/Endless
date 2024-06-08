@@ -123,6 +123,16 @@ public void Initialize()
         {
             Globals.gameRunning = false;
         }
+
+        if (Globals.testing)
+        {
+            this.playerBody.velocity = new Vector2(Globals.scrollRate, this.playerBody.velocity.y);
+            if (!this.jumping)
+            {
+                this.playerBody.AddForce(new Vector2(0.0f, 10.0f), ForceMode2D.Impulse);
+                this.jumping = true;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -246,35 +256,35 @@ public void Initialize()
     
     //Something is off with the movement/jumping. Pretty sure jumping is correct though.
     //Maybe have the initial move be a impulse then change to Force? Need to figure out
-    //why moving can result in unlimited air-jumps too.
+    //why moving can result in unlimited air-jumps too (may just be related to rdp connection though).
     public void OnMove(InputAction.CallbackContext context)
     {
         if (context.ReadValue<float>() == 0.0f) return;
 
-        //check to see if reached the max right side for game play
-        if (this.transform.position.x > 5.0f)
-        {
-            if (context.ReadValue<float>() < 0.0f)
-            {
-                playerBody.AddForce(new Vector2(-this.moveForce, 0.0f), ForceMode2D.Force);
-            }
-            else if (context.ReadValue<float>() > 0.0f)
-            {
-                playerBody.velocity = new Vector2(0.0f, playerBody.velocity.y);
-            }
-        }
-        else
-        {
-            //check to see if it's at max velocity
-            if (Mathf.Abs(playerBody.velocity.x) >= Mathf.Abs(this.maxVelocity + Globals.scrollRate))
-            {
-                playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity - Globals.scrollRate, playerBody.velocity.y);
-            }
-            else
-            {
-                playerBody.AddForce(new Vector2(this.moveForce * context.ReadValue<float>(), 0.0f), ForceMode2D.Force);
-            }
-        }
+        ////check to see if reached the max right side for game play
+        //if (this.transform.position.x > 5.0f)
+        //{
+        //    if (context.ReadValue<float>() < 0.0f)
+        //    {
+        //        playerBody.AddForce(new Vector2(-this.moveForce, 0.0f), ForceMode2D.Force);
+        //    }
+        //    else if (context.ReadValue<float>() > 0.0f)
+        //    {
+        //        playerBody.velocity = new Vector2(0.0f, playerBody.velocity.y);
+        //    }
+        //}
+        //else
+        //{
+        //    //check to see if it's at max velocity
+        //    if (Mathf.Abs(playerBody.velocity.x) >= Mathf.Abs(this.maxVelocity + Globals.scrollRate))
+        //    {
+        //        playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity + Globals.scrollRate, playerBody.velocity.y);
+        //    }
+        //    else
+        //    {
+        //        playerBody.AddForce(new Vector2(this.moveForce * context.ReadValue<float>(), 0.0f), ForceMode2D.Force);
+        //    }
+        //}
     }
 
     public void OnAim(InputAction.CallbackContext context)
