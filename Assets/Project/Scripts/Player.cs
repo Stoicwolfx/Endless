@@ -204,7 +204,7 @@ public void Initialize()
     public void Accelerate(float acceleration)
     {
         this.maxVelocity += acceleration;
-        this.maxGap = Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
+        this.maxGap = this.maxVelocity * PlayerStats.maxJumps * 0.8f;
     }
 
     public float JumpHeight()
@@ -261,6 +261,11 @@ public void Initialize()
     {
         if (context.ReadValue<float>() == 0.0f) return;
 
+        float xMod = context.ReadValue<float>();
+
+        //initial check to see if moving in the correct direction. If so will work in other parts to improve handling
+        this.playerBody.velocity = new Vector2(this.maxVelocity * xMod, this.playerBody.velocity.y);
+        
         ////check to see if reached the max right side for game play
         //if (this.transform.position.x > 5.0f)
         //{

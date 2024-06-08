@@ -231,7 +231,7 @@ public class EnemyObject : MonoBehaviour
 
         if (this.jumping)
         {
-            //jumping action
+            //jumping action - for enemies who can jump more than once ("double jump")
         }
         else if (gap)
         {
