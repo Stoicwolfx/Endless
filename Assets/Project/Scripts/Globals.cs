@@ -4,9 +4,10 @@ using UnityEngine;
 
 public static class Globals
 {
-    public static bool testing = true;
+    public static bool testing = false;
 
     public static bool gameRunning = false;
+    public static float scrollDelay = 0.5f;
 
     public static float scrollRate = 2.0f;
     public static float startScrollRate = 2.0f;

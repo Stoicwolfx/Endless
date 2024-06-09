@@ -29,4 +29,8 @@ public static class PlayerStats
     public static int hpLevel = 1;
     public static int defenseLevel = 1;
     
+    public static void playerLevelUp()
+    {
+        PlayerStats.playerLevel += 1;
+    }
 }

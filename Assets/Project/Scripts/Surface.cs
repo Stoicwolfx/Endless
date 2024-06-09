@@ -32,9 +32,6 @@ public class Surface : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        //this.currentXPos += Globals.scrollRate * Time.deltaTime;
-
     }
 
     //Will create a surface in the starting position everytime

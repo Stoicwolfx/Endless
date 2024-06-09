@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Globals.scrollDelay > 0) return;
+
         this.bounds.center += new Vector2(Globals.scrollRate * Time.deltaTime, 0.0f);
         this.mainCamera.transform.position = new Vector3 (this.bounds.center.x, this.bounds.center.y, this.mainCamera.transform.position.z);
     }

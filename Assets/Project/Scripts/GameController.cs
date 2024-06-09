@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
 
     private bool clearGame;
     private int gameLevel;
+    private float scrollDelay;
 
     private float acceleration;
     private float accCount;
@@ -55,14 +56,23 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Globals.destructionLimit += Globals.scrollRate * Time.deltaTime;
-        Globals.creationLimit += Globals.scrollRate * Time.deltaTime;
-
         if (!Globals.gameRunning)
         {
             if (this.clearGame) this.EndRun();
             return;
         }
+
+        if (Globals.scrollDelay < 0.0f)
+        { 
+            Globals.destructionLimit += Globals.scrollRate * Time.deltaTime;
+            Globals.creationLimit += Globals.scrollRate * Time.deltaTime;
+        }
+        else
+        {
+            Globals.scrollDelay -= Time.deltaTime;
+        }
+
+
 
         if (this.lastSurface.maxX < Globals.creationLimit)
         {
@@ -171,6 +181,7 @@ public class GameController : MonoBehaviour
         this.accelerating = false;
         this.accCount = 0.0f;
         this.clearGame = true;
+        this.scrollDelay = Globals.scrollDelay;
 
         this.cameraController.ResetCamera();
         this.startScreenPanel.gameObject.SetActive(false);
@@ -209,7 +220,7 @@ public class GameController : MonoBehaviour
     private void EndRun()
     {
         clearGame = false;
-
+        Globals.scrollDelay = this.scrollDelay;
         PlayerStats.experience += scoreManager.GetExperience();
 
         //Need to clear the player, any enemies, projectiles, surfaces, and anything else present

@@ -28,10 +28,9 @@ public class Player : MonoBehaviour
 
     private float moveForce;
     private float maxVelocity;
+    private float maxForward;
 
     private float lastRot;
-
-    private int experience;
 
     private int hp;
     private int defense;
@@ -92,11 +91,11 @@ public void Initialize()
         this.jumpTime = PlayerStats.jumpTime;
         this.moveForce = PlayerStats.moveForce;
         this.maxVelocity = PlayerStats.maxVelocity;
-        this.experience = 0;
         this.hp = PlayerStats.hp;
         this.defense = PlayerStats.defense;
 
         this.jumpClock = -1.0f;
+        this.maxForward = 5.0f;
 
         this.maxGap = Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
 
@@ -168,6 +167,18 @@ public void Initialize()
         this.lastRot = this.transform.eulerAngles.z;
         this.gun.transform.RotateAround(this.transform.position, Vector3.forward, -deltaRot);
 
+        //make sure not passed furthest acceptable point
+        this.maxForward += Globals.scrollRate * Time.deltaTime;
+        if (this.transform.position.x > this.maxForward)
+        {
+            this.transform.position = new Vector3(5.0f, this.transform.position.y, 0.0f);
+        }
+
+        //make sure it's not going faster than max velocity
+        if (this.playerBody.velocity.x > this.maxVelocity)
+        {
+            this.playerBody.velocity = new Vector2(this.maxVelocity, this.playerBody.velocity.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -259,37 +270,18 @@ public void Initialize()
     //why moving can result in unlimited air-jumps too (may just be related to rdp connection though).
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() == 0.0f) return;
+        //Deadband check (should add a modifiable setting
+        if (context.ReadValue<float>() == 0.02f) return;
 
         float xMod = context.ReadValue<float>();
 
-        //initial check to see if moving in the correct direction. If so will work in other parts to improve handling
-        this.playerBody.velocity = new Vector2(this.maxVelocity * xMod, this.playerBody.velocity.y);
-        
-        ////check to see if reached the max right side for game play
-        //if (this.transform.position.x > 5.0f)
-        //{
-        //    if (context.ReadValue<float>() < 0.0f)
-        //    {
-        //        playerBody.AddForce(new Vector2(-this.moveForce, 0.0f), ForceMode2D.Force);
-        //    }
-        //    else if (context.ReadValue<float>() > 0.0f)
-        //    {
-        //        playerBody.velocity = new Vector2(0.0f, playerBody.velocity.y);
-        //    }
-        //}
-        //else
-        //{
-        //    //check to see if it's at max velocity
-        //    if (Mathf.Abs(playerBody.velocity.x) >= Mathf.Abs(this.maxVelocity + Globals.scrollRate))
-        //    {
-        //        playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity + Globals.scrollRate, playerBody.velocity.y);
-        //    }
-        //    else
-        //    {
-        //        playerBody.AddForce(new Vector2(this.moveForce * context.ReadValue<float>(), 0.0f), ForceMode2D.Force);
-        //    }
-        //}
+        //Velocity method works but may change to the AddForce method in the future (needs tweaking though)
+        if (this.playerBody.velocity.x < (this.maxVelocity + Globals.scrollRate))
+        {
+            //this.playerBody.velocity = new Vector2((this.maxVelocity + Globals.scrollRate) * xMod,
+            //                                        this.playerBody.velocity.y);
+            this.playerBody.AddForce(new Vector2(this.moveForce * xMod, 0.0f), ForceMode2D.Force);
+        }
     }
 
     public void OnAim(InputAction.CallbackContext context)
