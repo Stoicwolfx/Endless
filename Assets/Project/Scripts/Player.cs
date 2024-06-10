@@ -171,7 +171,7 @@ public void Initialize()
         this.maxForward += Globals.scrollRate * Time.deltaTime;
         if (this.transform.position.x > this.maxForward)
         {
-            this.transform.position = new Vector3(5.0f, this.transform.position.y, 0.0f);
+            this.transform.position = new Vector3(this.maxForward, this.transform.position.y, 0.0f);
         }
 
         //make sure it's not going faster than max velocity
@@ -237,7 +237,7 @@ public void Initialize()
         }
 
         //Check jump deadzone -- needs refinement/made a global
-        if (context.ReadValue<float>() < 0.1f)
+        if (context.ReadValue<float>() < 0.2f)
         {
             this.jumping = false;
             this.jumpClock = -1.0f;
@@ -254,7 +254,7 @@ public void Initialize()
             this.ground = this.transform.position.y;
 
             playerBody.velocity = new Vector2(playerBody.velocity.x, 0.0f);
-            playerBody.AddForce(new Vector2(0.0f, this.jumpForce * 0.1f), ForceMode2D.Impulse);
+            playerBody.AddForce(new Vector2(0.0f, this.jumpForce), ForceMode2D.Impulse);
         }
 
         else if ((this.jumpClock < this.jumpTime) &&
@@ -280,7 +280,7 @@ public void Initialize()
         {
             //this.playerBody.velocity = new Vector2((this.maxVelocity + Globals.scrollRate) * xMod,
             //                                        this.playerBody.velocity.y);
-            this.playerBody.AddForce(new Vector2(this.moveForce * xMod, 0.0f), ForceMode2D.Force);
+            this.playerBody.AddForce(new Vector2(this.moveForce * xMod, 0.0f), ForceMode2D.Impulse);
         }
     }
 
