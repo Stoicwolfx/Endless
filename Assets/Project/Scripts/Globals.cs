@@ -4,10 +4,13 @@ using UnityEngine;
 
 public static class Globals
 {
-    public static bool gameRunning = false;
+    public static bool testing = false;
 
-    public static float scrollRate = -2.0f;
-    public static float startScrollRate = -2.0f;
+    public static bool gameRunning = false;
+    public static float scrollDelay = 0.5f;
+
+    public static float scrollRate = 2.0f;
+    public static float startScrollRate = 2.0f;
 
     public static float maxSurfaceHeight = 7.0f;
     public static float minSurfaceHeight = 2.0f;
@@ -19,6 +22,8 @@ public static class Globals
     public static float maxRotationDeg = 30.0f;
     public static float minRotationDeg = 10.0f;
 
+    public static float initialDestructionLimit = -12.0f;
+    public static float initialCreationLimit = 12.0f;
     public static float destructionLimit = -12.0f;
     public static float creationLimit = 12.0f;
 

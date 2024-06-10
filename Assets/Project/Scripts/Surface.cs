@@ -23,23 +23,22 @@ public class Surface : MonoBehaviour
     {
         if (!Globals.gameRunning) return;
 
-        this.transform.position = new Vector3(this.transform.position.x + Globals.scrollRate * Time.deltaTime,
-                                              this.transform.position.y,
-                                              this.transform.position.z);
+        //this.transform.position = new Vector3(this.transform.position.x + Globals.scrollRate * Time.deltaTime,
+        //                                      this.transform.position.y,
+        //                                      this.transform.position.z);
 
-        maxX = this.transform.position.x + this.transform.localScale.x * 0.5f;
+        //maxX = this.transform.position.x + this.transform.localScale.x * 0.5f;
         if (maxX < Globals.destructionLimit)
         {
             Destroy(this.gameObject);
         }
-
     }
 
     //Will create a surface in the starting position everytime
     public void Create()
     {
-        this.transform.position = new Vector3(initialXPos, initialYPos, 0.0f);
-        this.transform.localScale = new Vector3(initialXScale, initialYScale, 0.0f);
+        this.transform.position = new Vector3(this.initialXPos, this.initialYPos, 0.0f);
+        this.transform.localScale = new Vector3(this.initialXScale, this.initialYScale, 0.0f);
 
         this.maxX = this.transform.position.x + this.transform.localScale.x * 0.5f;
         this.maxY = this.transform.position.y + this.transform.localScale.y * 0.5f;

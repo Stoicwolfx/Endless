@@ -28,10 +28,9 @@ public class Player : MonoBehaviour
 
     private float moveForce;
     private float maxVelocity;
+    private float maxForward;
 
     private float lastRot;
-
-    private int experience;
 
     private int hp;
     private int defense;
@@ -92,13 +91,13 @@ public void Initialize()
         this.jumpTime = PlayerStats.jumpTime;
         this.moveForce = PlayerStats.moveForce;
         this.maxVelocity = PlayerStats.maxVelocity;
-        this.experience = 0;
         this.hp = PlayerStats.hp;
         this.defense = PlayerStats.defense;
 
         this.jumpClock = -1.0f;
+        this.maxForward = 5.0f;
 
-        this.maxGap = -Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
+        this.maxGap = Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
 
         this.flashCount = 0;
         this.flashLength = 0.25f;
@@ -119,10 +118,19 @@ public void Initialize()
     void Update()
     {
         if (!Globals.gameRunning) return;
-        if ((this.transform.position.y < Globals.screenBottom) || (this.transform.position.x < -11.5f) || (PlayerStats.hp == 0))
+        if ((this.transform.position.y < Globals.screenBottom) || (this.transform.position.x < Globals.destructionLimit) || (PlayerStats.hp == 0))
         {
             Globals.gameRunning = false;
-            return;
+        }
+
+        if (Globals.testing)
+        {
+            this.playerBody.velocity = new Vector2(Globals.scrollRate, this.playerBody.velocity.y);
+            if (!this.jumping)
+            {
+                this.playerBody.AddForce(new Vector2(0.0f, 10.0f), ForceMode2D.Impulse);
+                this.jumping = true;
+            }
         }
     }
 
@@ -159,6 +167,18 @@ public void Initialize()
         this.lastRot = this.transform.eulerAngles.z;
         this.gun.transform.RotateAround(this.transform.position, Vector3.forward, -deltaRot);
 
+        //make sure not passed furthest acceptable point
+        this.maxForward += Globals.scrollRate * Time.deltaTime;
+        if (this.transform.position.x > this.maxForward)
+        {
+            this.transform.position = new Vector3(this.maxForward, this.transform.position.y, 0.0f);
+        }
+
+        //make sure it's not going faster than max velocity
+        if (this.playerBody.velocity.x > this.maxVelocity)
+        {
+            this.playerBody.velocity = new Vector2(this.maxVelocity, this.playerBody.velocity.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -195,7 +215,7 @@ public void Initialize()
     public void Accelerate(float acceleration)
     {
         this.maxVelocity += acceleration;
-        this.maxGap = -Globals.scrollRate * this.maxJump * PlayerStats.maxJumps * 1.0f;
+        this.maxGap = this.maxVelocity * PlayerStats.maxJumps * 0.8f;
     }
 
     public float JumpHeight()
@@ -217,7 +237,7 @@ public void Initialize()
         }
 
         //Check jump deadzone -- needs refinement/made a global
-        if (context.ReadValue<float>() < 0.1f)
+        if (context.ReadValue<float>() < 0.2f)
         {
             this.jumping = false;
             this.jumpClock = -1.0f;
@@ -234,7 +254,7 @@ public void Initialize()
             this.ground = this.transform.position.y;
 
             playerBody.velocity = new Vector2(playerBody.velocity.x, 0.0f);
-            playerBody.AddForce(new Vector2(0.0f, this.jumpForce * 0.1f), ForceMode2D.Impulse);
+            playerBody.AddForce(new Vector2(0.0f, this.jumpForce), ForceMode2D.Impulse);
         }
 
         else if ((this.jumpClock < this.jumpTime) &&
@@ -247,34 +267,20 @@ public void Initialize()
     
     //Something is off with the movement/jumping. Pretty sure jumping is correct though.
     //Maybe have the initial move be a impulse then change to Force? Need to figure out
-    //why moving can result in unlimited air-jumps too.
+    //why moving can result in unlimited air-jumps too (may just be related to rdp connection though).
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.ReadValue<float>() == 0.0f) return;
+        //Deadband check (should add a modifiable setting
+        if (context.ReadValue<float>() == 0.02f) return;
 
-        //check to see if reached the max right side for game play
-        if (this.transform.position.x > 5.0f)
+        float xMod = context.ReadValue<float>();
+
+        //Velocity method works but may change to the AddForce method in the future (needs tweaking though)
+        if (this.playerBody.velocity.x < (this.maxVelocity + Globals.scrollRate))
         {
-            if (context.ReadValue<float>() < 0.0f)
-            {
-                playerBody.AddForce(new Vector2(-this.moveForce, 0.0f), ForceMode2D.Force);
-            }
-            else if (context.ReadValue<float>() > 0.0f)
-            {
-                playerBody.velocity = new Vector2(0.0f, playerBody.velocity.y);
-            }
-        }
-        else
-        {
-            //check to see if it's at max velocity
-            if (Mathf.Abs(playerBody.velocity.x) >= Mathf.Abs(this.maxVelocity + Globals.scrollRate))
-            {
-                playerBody.velocity = new Vector2(((context.ReadValue<float>() < 0) ? (-1f) : (1f)) * this.maxVelocity + Globals.scrollRate, playerBody.velocity.y);
-            }
-            else
-            {
-                playerBody.AddForce(new Vector2(this.moveForce * context.ReadValue<float>(), 0.0f), ForceMode2D.Force);
-            }
+            //this.playerBody.velocity = new Vector2((this.maxVelocity + Globals.scrollRate) * xMod,
+            //                                        this.playerBody.velocity.y);
+            this.playerBody.AddForce(new Vector2(this.moveForce * xMod, 0.0f), ForceMode2D.Impulse);
         }
     }
 

@@ -231,7 +231,7 @@ public class EnemyObject : MonoBehaviour
 
         if (this.jumping)
         {
-            //jumping action
+            //jumping action - for enemies who can jump more than once ("double jump")
         }
         else if (gap)
         {
@@ -262,7 +262,7 @@ public class EnemyObject : MonoBehaviour
         else
         {
             //flat terrain or downhill
-            if (this.rig.velocity.x > (Globals.scrollRate - this.GetStat("Speed")) &&
+            if (this.rig.velocity.x > (-this.GetStat("Speed")) &&
                 this.rig.velocity.y >= 0.0f)
             {
                 //Accelerate to max speed
@@ -282,7 +282,7 @@ public class EnemyObject : MonoBehaviour
 
     private void AirBehavior(string title)
     {
-        this.rig.velocity = new Vector3(Globals.scrollRate - this.enemy.GetStat("Speed"), 0.5f * Mathf.Sin(this.transform.position.x), 0.0f);
+        this.rig.velocity = new Vector3(-this.enemy.GetStat("Speed"), 0.5f * Mathf.Sin(this.transform.position.x), 0.0f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
