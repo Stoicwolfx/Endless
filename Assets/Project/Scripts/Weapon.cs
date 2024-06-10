@@ -90,6 +90,21 @@ public class Weapon
         return this.projectile;
     }
 
+    public int GetRateOfFire()
+    {
+        return this.stats["RateOfFire"];
+    }
+
+    public int GetMagRounds()
+    {
+        return this.stats["MagRounds"];
+    }
+
+    public void UseProjectile(int projectiles)
+    {
+        this.stats["MagRounds"] -= projectiles;
+    }
+
     public bool Reload(int totalRounds)
     {
         if ((this.stats["MagRounds"] == 0) && (this.reloadClock == 0))
@@ -127,7 +142,7 @@ public class Weapon
 
         projectile.Create(this.projectile, player);
         projectile.Fire(aimAngle, this.stats);
-        this.fireClock -= 1.0f / this.stats["RateOfFire"];
+        this.fireClock = 1.0f / this.stats["RateOfFire"];
 
         if (this.name != "Pistol")
         {
