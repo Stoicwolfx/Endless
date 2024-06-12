@@ -33,7 +33,7 @@ public partial class @EndlessPlayerInputs: IInputActionCollection2, IDisposable
                     ""id"": ""f642e36b-d21e-491d-a5d6-56a1a351a7de"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""PullAndHold"",
                     ""initialStateCheck"": true
                 },
                 {
@@ -49,7 +49,7 @@ public partial class @EndlessPlayerInputs: IInputActionCollection2, IDisposable
                     ""name"": ""Fire"",
                     ""type"": ""Value"",
                     ""id"": ""a0405520-9093-4095-9567-50dd051fcbff"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true

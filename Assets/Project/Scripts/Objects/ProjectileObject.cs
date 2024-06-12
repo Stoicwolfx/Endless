@@ -79,7 +79,6 @@ public class ProjectileObject : MonoBehaviour
             }
         }
 
-        //I'm not copying the dictionary correctly most likely -- it's probably just a pointer. Need to actually copy.
         this.stats["Speed"] += weaponStats["Speed"] + (int)Globals.scrollRate + 2;
         this.stats["Power"] += weaponStats["Power"];
         this.stats["Range"] += weaponStats["Range"];
