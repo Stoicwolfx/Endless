@@ -305,7 +305,6 @@ public void Initialize()
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        Debug.Log("Fire Trigger: " + context.ReadValue<float>().ToString());
         this.currentWeapon.Fire(this.aimAngle);
     }
 
