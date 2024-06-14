@@ -94,12 +94,13 @@
     <Compile Include="Assets\Project\Scripts\Screens\StartPanel.cs" />
     <Compile Include="Assets\Project\Scripts\Conntrollers\CameraController.cs" />
     <Compile Include="Assets\Project\Scripts\Databases\WeaponDatabase.cs" />
+    <Compile Include="Assets\Project\Scripts\ControlInteractions\PullAndHoldInteraction.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Project\Scripts\Conntrollers\GameController.cs" />
     <Compile Include="Assets\Project\Scripts\Screens\StartScreenPanel.cs" />
-    <Compile Include="Assets\Project\Scripts\Databases\EnemyDatabase.cs" />
     <Compile Include="Assets\Project\Scripts\Screens\ScoreManager.cs" />
+    <Compile Include="Assets\Project\Scripts\Databases\EnemyDatabase.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Project\Scripts\Databases\ProjectileDatabase.cs" />
     <Compile Include="Assets\Project\Scripts\Objects\PlayerStats.cs" />
-    <Compile Include="Assets\Project\Scripts\Interactions\PressAndHoldInteraction.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />

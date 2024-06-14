@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,20 +12,20 @@ public class PullAndHoldInteraction : IInputInteraction
 
     public void Process(ref InputInteractionContext context)
     {
-        this.pulled = context.ControlIsActuated();
+        this.pulled = (context.ReadValue<float>() > 0.0f);
 
         if (this.control != null)
         {
-            if (this.control != context.control)
-                return;
-
             if (pulled)
             {
                 context.PerformedAndStayStarted();
+                Globals.playerFiring = true;
             }
             else
             {
                 context.Canceled();
+                control = null;
+                Globals.playerFiring = false;
             }
         }
         else
@@ -33,13 +34,13 @@ public class PullAndHoldInteraction : IInputInteraction
             {
                 control = context.control;
                 context.Started();
+                Globals.playerFiring = true;
             }
         }
     }
 
     public void Reset()
     {
-        control = null;
     }
 
     static PullAndHoldInteraction()
