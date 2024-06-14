@@ -134,6 +134,11 @@ public void Initialize()
                 this.jumping = true;
             }
         }
+
+        if (Globals.playerFiring)
+        {
+            this.currentWeapon.Fire(this.aimAngle);
+        }
     }
 
     private void FixedUpdate()
