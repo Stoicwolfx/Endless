@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
     private GameObject gun;
     private float aimAngle;
 
-    [SerializeField] private WeaponObject currentWeapon;
+    private WeaponObject currentWeapon;
     private List<WeaponObject> weapons;
     private Dictionary<Projectile.projectileType, int> projectiles = new Dictionary<Projectile.projectileType, int>();
 
@@ -110,6 +111,7 @@ public void Initialize()
         this.projectiles[Projectile.projectileType.missile] = 0;
 
         this.weapons = new();
+        this.currentWeapon = this.transform.GetChild(1).gameObject.GetComponent<WeaponObject>();
         this.currentWeapon.Create(weaponDatabase.GetWeapon("Pistol"));
         this.weapons.Add(this.currentWeapon);
     }
@@ -131,6 +133,11 @@ public void Initialize()
                 this.playerBody.AddForce(new Vector2(0.0f, 10.0f), ForceMode2D.Impulse);
                 this.jumping = true;
             }
+        }
+
+        if (Globals.playerFiring)
+        {
+            this.currentWeapon.Fire(this.aimAngle);
         }
     }
 
@@ -313,6 +320,6 @@ public void Initialize()
 
     public void UseProjectile(Projectile.projectileType projectileType, int count)
     {
-        this.projectiles[projectileType] =- count;
+        this.projectiles[projectileType] -= count;
     }
 }

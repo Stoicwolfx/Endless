@@ -47,9 +47,6 @@ public class Weapon
     //  ReloadTime
 
     private ProjectileObject projectilePrefab;
-    private bool reloading;
-    private float reloadClock;
-    private float fireClock;
 
     public Weapon(Weapon weapon)
     {
@@ -60,10 +57,6 @@ public class Weapon
         this.sprite = weapon.sprite;
         this.projectile = weapon.projectile;
         this.stats = weapon.stats;
-
-        this.reloading = false;
-        this.reloadClock = 0.0f;
-        this.fireClock = 1.0f;
     }
 
     public Weapon(int id, weaponType type, string name, string description, Sprite sprite, Projectile projectile, Dictionary<string, int> stats)
@@ -75,9 +68,6 @@ public class Weapon
         this.sprite = sprite;
         this.projectile = projectile;
         this.stats = stats;
-
-        this.reloading = false;
-        this.reloadClock = 0.0f;
     }
 
     public string GetName()
@@ -90,50 +80,33 @@ public class Weapon
         return this.projectile;
     }
 
-    public bool Reload(int totalRounds)
+    public int GetRateOfFire()
     {
-        if ((this.stats["MagRounds"] == 0) && (this.reloadClock == 0))
-        {
-            this.reloading = true;
-            this.reloadClock = ((float)this.stats["ReloadTime"]) / 10.0f;
-        }
-
-        if ((this.reloadClock <= 0.0f) && this.reloading)
-        {
-            this.stats["MagRounds"] = (totalRounds >= this.stats["MaxRounds"]) ? this.stats["MaxRounds"] : totalRounds;
-            this.reloading = false;
-            this.reloadClock = 0;
-        }
-        else
-        {
-            this.reloadClock = -Time.deltaTime;
-        }
-
-        return this.reloading;
+        return this.stats["RateOfFire"];
     }
 
-    public int Fire(float aimAngle, ProjectileObject projectile, Player player)
+    public int GetMagRounds()
     {
-        if ((this.fireClock > 0.0f) &&
-            (this.fireClock < 1.0f))
-        {
-            this.fireClock -= 1.0f / this.stats["RateOfFire"];
-            return 0;
-        }
-        else if (this.fireClock <= 0.0f)
-        {
-            this.fireClock = 1.0f;
-        }
+        return this.stats["MagRounds"];
+    }
 
-        projectile.Create(this.projectile, player);
-        projectile.Fire(aimAngle, this.stats);
-        this.fireClock -= 1.0f / this.stats["RateOfFire"];
+    public float GetReloadTime()
+    {
+        return (float)this.stats["ReloadTime"] / 10.0f;
+    }
 
-        if (this.name != "Pistol")
-        {
-            this.stats["MagRounds"]--;
-            return 1;
-        }
-        return 0;
+    public Dictionary<string, int> GetStats()
+    {
+        return this.stats;
+    }
+
+    public void UseProjectile(int projectiles)
+    {
+        this.stats["MagRounds"] -= projectiles;
+    }
+
+    public void ReloadMag(int totalRounds)
+    {
+        this.stats["MagRounds"] = (totalRounds >= this.stats["MaxRounds"]) ? this.stats["MaxRounds"] : totalRounds;
     }
 }

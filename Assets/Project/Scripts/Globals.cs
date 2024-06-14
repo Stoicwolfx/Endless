@@ -35,6 +35,7 @@ public static class Globals
     public static float initialX = -7.0f;
     public static float initialY = -1.0f;
 
+    public static bool playerFiring = false;
 
     public struct DatabasesStatus
     {

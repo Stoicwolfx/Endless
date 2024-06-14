@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBody: {fileID: 662703451112402403}
-  currentWeapon: {fileID: 3087592529196934878}
 --- !u!58 &5416697365461868686
 CircleCollider2D:
   m_ObjectHideFlags: 0
