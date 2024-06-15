@@ -143,6 +143,9 @@ public class GameController : MonoBehaviour
         {
             this.waveClock -= Time.deltaTime;
         }
+
+        //Update experience
+        this.scoreManager.UpdateExperience(this.player.GetExperience());
     }
 
     private void FixedUpdate()
@@ -196,6 +199,7 @@ public class GameController : MonoBehaviour
         this.gameLevel = 1;
 
         Globals.gameRunning = true;
+        Globals.playerFiring = false;
         Globals.scrollRate = Globals.startScrollRate;
         Globals.creationLimit = Globals.initialCreationLimit;
         Globals.destructionLimit = Globals.initialDestructionLimit;

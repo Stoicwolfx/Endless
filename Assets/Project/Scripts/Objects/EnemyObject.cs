@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using static Enemy;
@@ -14,7 +15,7 @@ public class EnemyObject : MonoBehaviour
 
     private bool jumping;
 
-    private float checkRadius = 0.01f;
+    private readonly float checkRadius = 0.01f;
 
     private float jumpForce = 6.0f;
 
@@ -37,12 +38,12 @@ public class EnemyObject : MonoBehaviour
     {
         if (!Globals.gameRunning) return;
 
-        if (this.enemy.GetDomain() == Enemy.domain.air)
+        if (this.enemy.GetDomain() == Enemy.Domain.air)
         {
             this.AirBehavior(this.enemy.GetName());
         }
 
-        if (this.enemy.GetDomain() == Enemy.domain.ground)
+        if (this.enemy.GetDomain() == Enemy.Domain.ground)
         {
             this.GroundBehavior(this.enemy.GetName());
         }
@@ -66,13 +67,13 @@ public class EnemyObject : MonoBehaviour
                 break;
             }
         }
-        if (enemy.GetDomain() == Enemy.domain.ground)
+        if (enemy.GetDomain() == Enemy.Domain.ground)
         {
             this.gameObject.AddComponent<CircleCollider2D>();
             this.transform.position = new Vector3(xSurface - this.transform.localScale.x, ySurface + 0.5f * this.transform.localScale.y, 0);
             this.GroundBehavior(name);
         }
-        else if (enemy.GetDomain() == Enemy.domain.air)
+        else if (enemy.GetDomain() == Enemy.Domain.air)
         {
             this.gameObject.AddComponent<BoxCollider2D>();
             this.transform.position = new Vector3(xSurface, Random.Range(Globals.maxSurfaceHeight + 0.75f - 5.0f, 5.0f - 0.5f), 0);
@@ -90,11 +91,14 @@ public class EnemyObject : MonoBehaviour
     {
         if(!this.enemy.Damage(damage))
         {
+            Player player = GameObject.FindObjectOfType<Player>();
+            player.UpdateExperience(this.enemy.GetStat("Experience"));
             Destroy(this.gameObject);
+
         }
     }
 
-    public Enemy.domain GetDomain()
+    public Enemy.Domain GetDomain()
     {
         return this.enemy.GetDomain();
     }

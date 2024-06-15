@@ -28,12 +28,17 @@ public class ScoreManager : MonoBehaviour
     {
         this.score = 0f;
     }
-    void UpdateScore()
+    private void UpdateScore()
     {
         scoreText.text = "Score: ";
         scoreText.text += Mathf.Round(this.score);
         scoreText.text += "\nExp:    ";
         scoreText.text += this.exp;
+    }
+
+    public void UpdateExperience(int exp)
+    {
+        this.exp = exp;
     }
 
     public float GetScore()

@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public Rigidbody2D playerBody;
 
     private TextMeshProUGUI hpText;
+    private ScoreManager scoreManager;
+    private int experience;
 
     private int jumpCount = 0;
     private bool jumping = false;
@@ -57,7 +59,6 @@ public class Player : MonoBehaviour
         this.weaponDatabase = GameObject.FindAnyObjectByType<WeaponDatabase>();
 
         TextMeshProUGUI[] uiElements = GameObject.FindObjectsOfType<TextMeshProUGUI>();
-
         foreach (var uiElement in uiElements)
         {
             if (uiElement.name == "HP")
@@ -66,7 +67,10 @@ public class Player : MonoBehaviour
                 break;
             }
         }
+    }
 
+    private void Start()
+    {
         this.Initialize();
     }
 
@@ -217,6 +221,16 @@ public void Initialize()
         {
             Globals.gameRunning = false;
         }
+    }
+
+    public void UpdateExperience(int exp)
+    {
+        this.experience += exp;
+    }
+
+    public int GetExperience()
+    {
+        return this.experience;
     }
 
     public void Accelerate(float acceleration)
