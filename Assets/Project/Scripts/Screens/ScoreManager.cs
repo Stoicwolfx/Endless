@@ -39,6 +39,7 @@ public class ScoreManager : MonoBehaviour
     public void UpdateExperience(int exp)
     {
         this.exp = exp;
+        PlayerStats.experience = exp;
     }
 
     public float GetScore()

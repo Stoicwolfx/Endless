@@ -310,7 +310,7 @@ public void Initialize()
         float aimX = context.ReadValue<Vector2>().x;
         float aimY = context.ReadValue<Vector2>().y;
         float newAngle = 0.0f;
-        float deltaAngle = 0.0f;
+        float deltaAngle;
         
         if ((aimX != 0) || (aimY != 0))
         {
