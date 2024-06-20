@@ -16,7 +16,8 @@ public static class PlayerStats : object
         MoveForce,
         MaxVelocity,
         HP,
-        Defense
+        Defense,
+        MaxStats
     }
     public static float jumpForce = 5.0f;
     public static int maxJumps = 1;
@@ -95,6 +96,7 @@ public static class PlayerStats : object
         if (cost > PlayerStats.experience) return false;
         
         PlayerStats.experience -= cost;
+        Debug.Log("Exp: " + PlayerStats.experience + " cost: " + cost);
         switch (stat)
         {
             case PlayerStats.Stat.JumpForce:
@@ -131,25 +133,25 @@ public static class PlayerStats : object
         switch (stat)
         {
             case PlayerStats.Stat.JumpForce:
-                cost = 1;
+                cost = PlayerStats.Fibonacci(PlayerStats.jumpForceLevel);
                 break;
             case PlayerStats.Stat.MaxJumps:
-                cost = 1;
+                cost = PlayerStats.Fibonacci(PlayerStats.maxJumpsLevel);
                 break;
             case PlayerStats.Stat.JumpTime:
-                cost = 1;
+                cost = PlayerStats.Fibonacci(PlayerStats.jumpTimeLevel);
                 break;
             case PlayerStats.Stat.MoveForce:
-                cost = 1;
+                cost = PlayerStats.Fibonacci(PlayerStats.moveForceLevel);
                 break;
             case PlayerStats.Stat.MaxVelocity:
-                cost = 1;
+                cost = PlayerStats.Fibonacci(PlayerStats.maxVelocityLevel);
                 break;
             case PlayerStats.Stat.HP:
-                cost = 1;
+                cost = PlayerStats.Fibonacci(PlayerStats.hpLevel);
                 break;
             case PlayerStats.Stat.Defense:
-                cost = 1;
+                cost = PlayerStats.Fibonacci(PlayerStats.defenseLevel);
                 break;
             default:
                 cost = 0;
@@ -157,5 +159,23 @@ public static class PlayerStats : object
         }
 
         return cost;
+    }
+
+    private static int Fibonacci(int n)
+    {
+        int n0 = 0;
+        int n1 = 1;
+        int temp;
+
+        for (int i = 0; i < n; i++)
+        {
+            //temp = n0;
+            //n0 = n1;
+            //n1 = temp + n1;
+            (n0, n1) = (n1, n0 + n1);
+            Debug.Log("n0: " + n0 + " n1: " + n1);
+        }
+
+        return n0;
     }
 }

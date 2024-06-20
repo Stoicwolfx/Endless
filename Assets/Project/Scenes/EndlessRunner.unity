@@ -397,7 +397,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3716,6 +3716,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endRunPanel: {fileID: 1617908323}
+  jumpForceCost: {fileID: 912754988}
+  jumpForceLevel: {fileID: 176074260}
+  maxJumpsCost: {fileID: 1592174197}
+  maxJumpsLevel: {fileID: 100925413}
+  jumpTimeCost: {fileID: 485685013}
+  jumpTimeLevel: {fileID: 375191863}
+  moveForceCost: {fileID: 1335002769}
+  moveForceLevel: {fileID: 260664305}
+  maxVelocityCost: {fileID: 2139924189}
+  maxVelocityLevel: {fileID: 991259464}
+  hpCost: {fileID: 1213579992}
+  hpLevel: {fileID: 858084321}
+  defenseCost: {fileID: 81873586}
+  defenseLevel: {fileID: 788622055}
 --- !u!1 &858084319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4128,7 +4142,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4233,7 +4247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &937554116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5670,7 +5684,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6073,7 +6087,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6879,7 +6893,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6940,7 +6954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1617908320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7471,9 +7485,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 881511541}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: Upgrades
+      - m_Target: {fileID: 803220813}
+        m_TargetAssemblyTypeName: UpgradePanel, Assembly-CSharp
+        m_MethodName: CloseUpgradePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8091,7 +8105,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
