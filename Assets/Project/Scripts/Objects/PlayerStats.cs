@@ -96,7 +96,7 @@ public static class PlayerStats : object
         if (cost > PlayerStats.experience) return false;
         
         PlayerStats.experience -= cost;
-        Debug.Log("Exp: " + PlayerStats.experience + " cost: " + cost);
+        PlayerStats.playerLevel++;
         switch (stat)
         {
             case PlayerStats.Stat.JumpForce:
@@ -165,15 +165,10 @@ public static class PlayerStats : object
     {
         int n0 = 0;
         int n1 = 1;
-        int temp;
 
         for (int i = 0; i < n; i++)
         {
-            //temp = n0;
-            //n0 = n1;
-            //n1 = temp + n1;
             (n0, n1) = (n1, n0 + n1);
-            Debug.Log("n0: " + n0 + " n1: " + n1);
         }
 
         return n0;
