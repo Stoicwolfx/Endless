@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy
 {
     //Enumerations
-    public enum domain
+    public enum Domain
     {
         ground,
         air
@@ -15,7 +15,7 @@ public class Enemy
 
     private readonly int id;
     private readonly string name;
-    private readonly domain dmn;
+    private readonly Domain dmn;
     private int level;
     private readonly string description;
     private Weapon weapon;
@@ -34,7 +34,7 @@ public class Enemy
         this.stats = enemy.stats;
     }
 
-    public Enemy(int id, string name, domain dmn, int level, string description, Weapon weapon, Sprite sprite, Dictionary<string, int> stats)
+    public Enemy(int id, string name, Domain dmn, int level, string description, Weapon weapon, Sprite sprite, Dictionary<string, int> stats)
     {
         this.id = id;
         this.name = name;
@@ -51,7 +51,7 @@ public class Enemy
         return this.name;
     }
 
-    public domain GetDomain()
+    public Domain GetDomain()
     {
         return this.dmn;
     }

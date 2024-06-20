@@ -143,6 +143,9 @@ public class GameController : MonoBehaviour
         {
             this.waveClock -= Time.deltaTime;
         }
+
+        //Update experience
+        this.scoreManager.UpdateExperience(this.player.GetExperience());
     }
 
     private void FixedUpdate()
@@ -196,6 +199,7 @@ public class GameController : MonoBehaviour
         this.gameLevel = 1;
 
         Globals.gameRunning = true;
+        Globals.playerFiring = false;
         Globals.scrollRate = Globals.startScrollRate;
         Globals.creationLimit = Globals.initialCreationLimit;
         Globals.destructionLimit = Globals.initialDestructionLimit;
@@ -225,6 +229,7 @@ public class GameController : MonoBehaviour
         PlayerStats.experience += scoreManager.GetExperience();
 
         //Need to clear the player, any enemies, projectiles, surfaces, and anything else present
+
         Destroy(this.player.gameObject);
         foreach (var enemy in FindObjectsOfType<EnemyObject>())
         {
@@ -253,7 +258,7 @@ public class GameController : MonoBehaviour
         
         scoreManager.EndRun();
 
-        this.upgradePanel.gameObject.SetActive(true);
+        this.upgradePanel.DisplayUpgradePanel();
     }
 
     public void Reload()

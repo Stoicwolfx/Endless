@@ -63,11 +63,11 @@ public class EnemyDatabase : MonoBehaviour
 
         foreach (EnemyJson eJson in rootJson.enemiesJson)
         {
-            Enemy.domain eDmn = eJson.dmn switch
+            Enemy.Domain eDmn = eJson.dmn switch
             {
-                "ground" => Enemy.domain.ground,
-                "air" => Enemy.domain.air,
-                _ => Enemy.domain.ground,
+                "ground" => Enemy.Domain.ground,
+                "air" => Enemy.Domain.air,
+                _ => Enemy.Domain.ground,
             };
             Weapon weapon = (eJson.weapon == null) ? null : this.weaponDatabase.GetWeapon(eJson.weapon);
             Sprite sprite = (eJson.sprite == null) ? null : Resources.Load<Sprite>(eJson.sprite);
