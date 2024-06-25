@@ -24,8 +24,8 @@ public static class PlayerStats : object
     public static float jumpTime = 0.1f;
     public static float maxJump = 1.0f;
 
-    public static float moveForce = 2.0f;
-    public static float maxVelocity = 3.0f;
+    public static float moveForce = 4.5f;
+    public static float maxVelocity = 4.5f;
 
     public static int experience = 0;
 

@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     private GameObject gun;
     private float aimAngle;
+    private float cntrlInput;
 
     private WeaponObject currentWeapon;
     private List<WeaponObject> weapons;
@@ -292,17 +293,36 @@ public void Initialize()
     public void OnMove(InputAction.CallbackContext context)
     {
         //Deadband check (should add a modifiable setting
-        if (context.ReadValue<float>() == 0.02f) return;
+        if (context.ReadValue<float>() == 0.02f)
+        {
+            return;
+        }
 
         float xMod = context.ReadValue<float>();
 
+        //this.MovePlayer();
+
         //Velocity method works but may change to the AddForce method in the future (needs tweaking though)
-        if (this.playerBody.velocity.x < (this.maxVelocity + Globals.scrollRate))
+        if (Globals.OppositeSigns(this.playerBody.velocity.x, xMod))
         {
-            //this.playerBody.velocity = new Vector2((this.maxVelocity + Globals.scrollRate) * xMod,
-            //                                        this.playerBody.velocity.y);
-            this.playerBody.AddForce(new Vector2(this.moveForce * xMod, 0.0f), ForceMode2D.Impulse);
+            this.playerBody.velocity = new Vector2(this.playerBody.velocity.x + xMod * this.moveForce * 2.0f,this.playerBody.velocity.y);
         }
+        else if (Mathf.Abs(this.playerBody.velocity.x) < (this.maxVelocity - Globals.scrollRate))
+        {
+            float delta = xMod - this.cntrlInput;
+            this.playerBody.velocity = new Vector2(this.playerBody.velocity.x + delta * moveForce, this.playerBody.velocity.y);
+        }
+        else
+        {
+            this.playerBody.velocity = new Vector2((xMod < 0 ? -1 : 1) * PlayerStats.maxVelocity, this.playerBody.velocity.y);
+        }
+
+        this.cntrlInput = xMod;
+    }
+
+    private void movePlayer()
+    {
+
     }
 
     public void OnAim(InputAction.CallbackContext context)

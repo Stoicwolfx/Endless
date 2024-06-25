@@ -53,4 +53,8 @@ public static class Globals
 
     public static Globals.DatabasesStatus databasesStatus = new DatabasesStatus(false);
 
+    public static bool OppositeSigns(float x, float y)
+    {
+        return (x < 0) ? (y > 0) : (y < 0);
+    }
 }
