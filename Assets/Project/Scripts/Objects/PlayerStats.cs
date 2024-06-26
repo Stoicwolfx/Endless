@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public static class PlayerStats : object
 {
@@ -41,6 +42,16 @@ public static class PlayerStats : object
     public static int maxVelocityLevel = 0;
     public static int hpLevel = 0;
     public static int defenseLevel = 0;
+    
+    //Max Levels
+    private static int jumpForceMaxLevel = 5;
+    private static int maxJumpsMaxLevel = 3;
+    private static int jumpTimeMaxLevel = 9;
+    private static int moveForceMaxLevel = 9;
+    private static int maxVelocityMaxLevel = 9;
+    private static int hpMaxLevel = 9;
+    private static int defenseMaxLevel = 9;
+
     
     private static void PlayerLevelUp()
     {
@@ -93,10 +104,10 @@ public static class PlayerStats : object
     {
         int cost = PlayerStats.UpgradeCost(stat);
 
-        if (cost > PlayerStats.experience) return false;
+        if ((cost > PlayerStats.experience) || (PlayerStats.GetStatMaxLevel(stat) <= PlayerStats.GetStatLevel(stat))) return false;
         
         PlayerStats.experience -= cost;
-        PlayerStats.playerLevel++;
+        PlayerStats.PlayerLevelUp();
         switch (stat)
         {
             case PlayerStats.Stat.JumpForce:
@@ -136,7 +147,7 @@ public static class PlayerStats : object
                 cost = PlayerStats.Fibonacci(PlayerStats.jumpForceLevel);
                 break;
             case PlayerStats.Stat.MaxJumps:
-                cost = PlayerStats.Fibonacci(PlayerStats.maxJumpsLevel);
+                cost = PlayerStats.Fibonacci(PlayerStats.maxJumpsLevel * 3);
                 break;
             case PlayerStats.Stat.JumpTime:
                 cost = PlayerStats.Fibonacci(PlayerStats.jumpTimeLevel);
@@ -159,6 +170,76 @@ public static class PlayerStats : object
         }
 
         return cost;
+    }
+
+    public static int GetStatLevel(PlayerStats.Stat stat)
+    {
+        int level = 0;
+
+        switch (stat)
+        {
+            case PlayerStats.Stat.JumpForce:
+                level = PlayerStats.jumpForceLevel;
+                break;
+            case PlayerStats.Stat.MaxJumps:
+                level = PlayerStats.maxJumpsLevel;
+                break;
+            case PlayerStats.Stat.JumpTime:
+                level = PlayerStats.jumpTimeLevel;
+                break;
+            case PlayerStats.Stat.MoveForce:
+                level = PlayerStats.moveForceLevel;
+                break;
+            case PlayerStats.Stat.MaxVelocity:
+                level = PlayerStats.maxVelocityLevel;
+                break;
+            case PlayerStats.Stat.HP:
+                level = PlayerStats.hpLevel;
+                break;
+            case PlayerStats.Stat.Defense:
+                level = PlayerStats.defenseLevel;
+                break;
+            default:
+                level = 0;
+                break;
+        }
+
+        return level;
+    }
+
+    public static int GetStatMaxLevel(PlayerStats.Stat stat)
+    {
+        int maxLevel = 0;
+
+        switch (stat)
+        {
+            case PlayerStats.Stat.JumpForce:
+                maxLevel = PlayerStats.jumpForceMaxLevel;
+                break;
+            case PlayerStats.Stat.MaxJumps:
+                maxLevel = PlayerStats.maxJumpsMaxLevel;
+                break;
+            case PlayerStats.Stat.JumpTime:
+                maxLevel = PlayerStats.jumpTimeMaxLevel;
+                break;
+            case PlayerStats.Stat.MoveForce:
+                maxLevel = PlayerStats.moveForceMaxLevel;
+                break;
+            case PlayerStats.Stat.MaxVelocity:
+                maxLevel = PlayerStats.maxVelocityMaxLevel;
+                break;
+            case PlayerStats.Stat.HP:
+                maxLevel = PlayerStats.hpMaxLevel;
+                break;
+            case PlayerStats.Stat.Defense:
+                maxLevel = PlayerStats.defenseMaxLevel;
+                break;
+            default:
+                maxLevel = 0;
+                break;
+        }
+
+        return maxLevel;
     }
 
     private static int Fibonacci(int n)
