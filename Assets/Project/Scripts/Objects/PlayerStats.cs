@@ -42,6 +42,16 @@ public static class PlayerStats : object
     public static int hpLevel = 0;
     public static int defenseLevel = 0;
     
+    //Max Levels
+    private static int jumpForceMaxLevel = 5;
+    private static int maxJumpsMaxLevel = 3;
+    private static int jumpTimeMaxLevel = 9;
+    private static int moveForceMaxLevel = 9;
+    private static int maxVelocityMaxLevel = 9;
+    private static int hpMaxLevel = 9;
+    private static int defenseMaxLevel = 9;
+
+    
     private static void PlayerLevelUp()
     {
         PlayerStats.playerLevel++;
@@ -136,7 +146,7 @@ public static class PlayerStats : object
                 cost = PlayerStats.Fibonacci(PlayerStats.jumpForceLevel);
                 break;
             case PlayerStats.Stat.MaxJumps:
-                cost = PlayerStats.Fibonacci(PlayerStats.maxJumpsLevel);
+                cost = PlayerStats.Fibonacci(PlayerStats.maxJumpsLevel * 3);
                 break;
             case PlayerStats.Stat.JumpTime:
                 cost = PlayerStats.Fibonacci(PlayerStats.jumpTimeLevel);
