@@ -163,6 +163,13 @@ public class Surface : MonoBehaviour
             this.maxY = yPos + yScale * 0.5f;
             this.minY = yPos - yScale * 0.5f;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            Destroy(other.gameObject.GetComponentInParent<ProjectileObject>().gameObject);
+        }
     }
 }

@@ -8,9 +8,9 @@
 		"projectile":"basicKinetic",
 		"stats": {
 			"RateOfFire":"3",
-			"Speed":"4",
+			"Speed":"6",
 			"Power":"1",
-			"Accuracy":"9",
+			"Accuracy":"90",
 			"Range":"7",
 			"MagRounds":"6",
 			"MaxRounds":"-1",
@@ -26,9 +26,9 @@
 		"projectile":"basicKinetic",
 		"stats": {
 			"RateOfFire":"2",
-			"Speed":"3",
+			"Speed":"7",
 			"Power":"2",
-			"Accuracy":"10",
+			"Accuracy":"95",
 			"Range":"8",
 			"MagRounds":"7",
 			"MaxRounds":"54",

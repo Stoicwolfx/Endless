@@ -48,7 +48,26 @@ public class Player : MonoBehaviour
     private float cntrlInput;
 
     private WeaponObject currentWeapon;
-    private List<WeaponObject> weapons;
+
+    private struct PlayerWeapons
+    {
+        WeaponObject weapon;
+        bool haveWeapon;
+
+        public PlayerWeapons(WeaponObject weapon)
+        {
+            this.weapon = weapon;
+            this.haveWeapon = false;
+        }
+
+        public PlayerWeapons(WeaponObject weapon, bool haveWeapon)
+        {
+            this.weapon = weapon;
+            this.haveWeapon = haveWeapon;
+        }
+    }
+
+    private List<PlayerWeapons> weapons;
     private Dictionary<Projectile.projectileType, int> projectiles = new Dictionary<Projectile.projectileType, int>();
 
     [SerializeField] private Projectile projectilePreFab;
@@ -118,7 +137,7 @@ public void Initialize()
         this.weapons = new();
         this.currentWeapon = this.transform.GetChild(1).gameObject.GetComponent<WeaponObject>();
         this.currentWeapon.Create(weaponDatabase.GetWeapon("Pistol"));
-        this.weapons.Add(this.currentWeapon);
+        this.weapons.Add(new PlayerWeapons(this.currentWeapon,true));
     }
 
     // Update is called once per frame
@@ -345,6 +364,16 @@ public void Initialize()
     public void OnFire(InputAction.CallbackContext context)
     {
         this.currentWeapon.Fire(this.aimAngle);
+    }
+
+    public void PreviousWeapon(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void NextWeapon(InputAction.CallbackContext context)
+    {
+
     }
 
     public int GetNumProjectile(Projectile.projectileType projectileType)
