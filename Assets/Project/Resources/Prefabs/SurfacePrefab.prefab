@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5709758661673819498}
   - component: {fileID: 88323613321849866}
   - component: {fileID: -4669158876859827096}
+  - component: {fileID: -3997589539001026480}
   m_Layer: 0
   m_Name: SurfacePrefab
   m_TagString: Surface
@@ -181,3 +182,30 @@ MonoBehaviour:
   minY: 0
   rotation: 0
   gapPrefab: {fileID: 7623778888995877786, guid: af2a8b5d66faedb498dbb36070cbfbee, type: 3}
+--- !u!50 &-3997589539001026480
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7283803382472432389}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 6200000, guid: 1c3e6224025e43f47b047cb2f4434be5, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

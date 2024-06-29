@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class Globals
@@ -56,5 +57,12 @@ public static class Globals
     public static bool OppositeSigns(float x, float y)
     {
         return (x < 0) ? (y > 0) : (y < 0);
+    }
+
+    public static GameObject GetChildObjectByName(GameObject parent, string name)
+    {
+        Transform[] children = parent.GetComponentsInChildren<Transform>();
+        Transform child = children.FirstOrDefault(n =>  n.gameObject.name == name);
+        return (child != null) ? child.gameObject : null;
     }
 }

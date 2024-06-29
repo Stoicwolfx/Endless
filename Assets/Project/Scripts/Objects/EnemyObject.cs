@@ -301,12 +301,16 @@ public class EnemyObject : MonoBehaviour
         {
             this.jumping = false;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    { 
+        if (other.gameObject.CompareTag("Gap")) { return; }
 
-        else if (collision.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("Projectile"))
         {
-            ProjectileObject projectile = collision.gameObject.GetComponent<ProjectileObject>();
-            
+            ProjectileObject projectile = other.gameObject.GetComponentInParent<ProjectileObject>();
+
             //If projectile was already destroyed (hit two things at once) then return
             if (projectile == null)
             {
@@ -314,13 +318,8 @@ public class EnemyObject : MonoBehaviour
             }
 
             this.Damage(projectile.GetPower());
-            if (collision == null) return;
-            Destroy(projectile);
+            if (other == null) return;
+            Destroy(projectile.gameObject);
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
     }
 }
