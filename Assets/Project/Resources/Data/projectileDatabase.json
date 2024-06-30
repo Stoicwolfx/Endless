@@ -37,5 +37,18 @@
 			"range":"0",
 			"splashDamage":"0"
 		}
+	},
+	{
+		"id":"3",
+		"name":"basicGernade",
+		"description":"Basic gernade",
+		"type":"gernade",
+		"sprite":"null",
+		"stats": {
+			"speed":"0",
+			"power":"0",
+			"range":"0",
+			"splashDamage":"0"
+		}
 	}
 ]

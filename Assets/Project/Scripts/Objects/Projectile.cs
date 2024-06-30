@@ -10,6 +10,7 @@ public class Projectile
     {
         kinetic,
         energy,
+        gernade,
         missile
     }
     private int id;

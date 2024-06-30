@@ -34,5 +34,77 @@
 			"MaxRounds":"54",
 			"ReloadTime":"6"
 		}
+	},
+	{
+		"id":"2",
+		"type":"melee",
+		"name":"Knife",
+		"description":"Short range but dangerours",
+		"sprite":"null",
+		"projectile":"null",
+		"stats": {
+			"RateOfFire":"6",
+			"Speed":"0",
+			"Power":"5",
+			"Accuracy":"100",
+			"Range":"1",
+			"MagRounds":"1",
+			"MaxRounds":"-1",
+			"ReloadTime":"0.166666666666667"
+		}
+	},
+	{
+		"id":"3",
+		"type":"melee",
+		"name":"Sword",
+		"description":"Longer range, strong",
+		"sprite":"null",
+		"projectile":"null",
+		"stats": {
+			"RateOfFire":"7",
+			"Speed":"0",
+			"Power":"7",
+			"Accuracy":"100",
+			"Range":"2",
+			"MagRounds":"1",
+			"MaxRounds":"-1",
+			"ReloadTime":"0.142857142857143"
+		}
+	},
+	{
+		"id":"4",
+		"type":"energy",
+		"name":"Laser",
+		"description":"Laser gun",
+		"sprite":"",
+		"projectile":"basicEnergy",
+		"stats": {
+			"RateOfFire":"10",
+			"Speed":"10",
+			"Power":"5",
+			"Accuracy":"95",
+			"Range":"10",
+			"MagRounds":"10",
+			"MaxRounds":"100",
+			"ReloadTime":"4"
+		}
+	},
+	{
+		"id":"5",
+		"type":"gernade",
+		"name":"Gernade",
+		"description":"Thrown gernade",
+		"sprite":"",
+		"projectile":"basicExplosive",
+		"stats": {
+			"RateOfFire":"1",
+			"Speed":"4",
+			"Power":"10",
+			"Accuracy":"50",
+			"Range":"5",
+			"MagRounds":"5",
+			"MaxRounds":"5",
+			"ReloadTime":"0"
+		}
 	}
 ]

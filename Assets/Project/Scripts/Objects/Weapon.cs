@@ -11,7 +11,8 @@ public class Weapon
         kinetic,
         explosive,
         energy,
-        melee
+        melee,
+        gernade
     }
 
     public enum enhancementType

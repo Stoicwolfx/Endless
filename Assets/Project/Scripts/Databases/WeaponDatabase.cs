@@ -71,6 +71,9 @@ public class WeaponDatabase : MonoBehaviour
                 case "explosive":
                     weaponType = Weapon.weaponType.explosive;
                     break;
+                case "gernade":
+                    weaponType = Weapon.weaponType.gernade;
+                    break;
                 case "energy":
                     weaponType = Weapon.weaponType.energy;
                     break;
