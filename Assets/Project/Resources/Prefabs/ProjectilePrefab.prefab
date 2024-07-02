@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7608630580497541321}
   - component: {fileID: 7875726131436844155}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ProjectilePrefab
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 6402369350001623258}
   - component: {fileID: 895462195145597475}
   - component: {fileID: 6194334619353603120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: basicKinetic
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 2651763731913258469}
   - component: {fileID: 1745184331391760138}
   - component: {fileID: 1596142039058901194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: basicMissile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 132413100883706270}
   - component: {fileID: 5780827227441107467}
   - component: {fileID: 359845627407785981}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: basicEnergy
   m_TagString: Projectile
   m_Icon: {fileID: 0}

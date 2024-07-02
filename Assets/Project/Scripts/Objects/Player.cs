@@ -243,6 +243,23 @@ public void Initialize()
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("WeaponDrop"))
+        {
+            WeaponObject newWeapon = new WeaponObject();
+            newWeapon.Create(other.gameObject.GetComponent<WeaponDrop>().GetWeapon());
+
+            //Note: Need to check if the player already has this weapon - if so just add the rounds
+
+            this.weapons.Add(new PlayerWeapons(newWeapon, true));
+
+            //Note: Need to add default starting rounds to the weapon definitions and also set that here
+
+            Destroy(other.gameObject.GetComponentInParent<WeaponDrop>().gameObject);
+        }
+    }
+
     public void UpdateExperience(int exp)
     {
         this.experience += exp;

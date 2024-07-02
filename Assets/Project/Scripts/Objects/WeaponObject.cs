@@ -21,9 +21,9 @@ public class WeaponObject : MonoBehaviour
     private void Awake()
     {
         if (!Globals.databasesStatus.projetilesBuilt)
-        { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
+            { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
         if (!Globals.databasesStatus.weaponsBuilt)
-        { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
+            { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
         this.weaponDatabase = GameObject.FindAnyObjectByType<WeaponDatabase>();
         this.projectileDatabase = GameObject.FindAnyObjectByType<ProjectileDatabase>();
         this.reloading = false;
@@ -34,7 +34,7 @@ public class WeaponObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame

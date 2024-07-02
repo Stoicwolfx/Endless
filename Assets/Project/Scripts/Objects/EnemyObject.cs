@@ -8,8 +8,10 @@ using static Enemy;
 
 public class EnemyObject : MonoBehaviour
 {
-    private EnemyDatabase enemyDatabase;
+    [SerializeField] private WeaponDrop WeaponDrop;
 
+    private EnemyDatabase enemyDatabase;
+    
     private Enemy enemy;
     private Rigidbody2D rig;
 
@@ -93,6 +95,14 @@ public class EnemyObject : MonoBehaviour
         {
             Player player = GameObject.FindObjectOfType<Player>();
             player.UpdateExperience(this.enemy.GetStat("Experience"));
+
+            float dropChance = Random.Range(0f, 100f);
+            if (true)//dropChance <= this.enemy.GetStat("DropChance")) //NOTE: This will be fixed once I have confidence in it
+            {
+                WeaponDrop weaponDrop = Instantiate(this.WeaponDrop);
+                weaponDrop.Create(this.transform.position, "Random");
+            }
+
             Destroy(this.gameObject);
 
         }

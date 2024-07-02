@@ -23,14 +23,14 @@ public class ProjectileObject : MonoBehaviour
     private void Awake()
     {
         if (!Globals.databasesStatus.projetilesBuilt)
-        { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
+            { GameObject.FindAnyObjectByType<ProjectileDatabase>().Awake(); }
         this.projectileDatabase = GameObject.FindAnyObjectByType<ProjectileDatabase>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame

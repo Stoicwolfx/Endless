@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 865032136540307158}
   - component: {fileID: 67241477820411785}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 88323613321849866}
   - component: {fileID: -4669158876859827096}
   - component: {fileID: -3997589539001026480}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SurfacePrefab
   m_TagString: Surface
   m_Icon: {fileID: 0}

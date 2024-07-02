@@ -52,6 +52,10 @@ public class EnemyDatabase : MonoBehaviour
         Globals.databasesStatus.enemiesBuilt = true;
     }
 
+    private void Start()
+    {
+        
+    }
 
     private void BuildDatabase()
     {
@@ -78,7 +82,8 @@ public class EnemyDatabase : MonoBehaviour
                {"Defense", eJson.stats.Defense},
                {"HP", eJson.stats.HP},
                {"Speed", eJson.stats.Speed},
-               {"Experience", eJson.stats.Experience}
+               {"Experience", eJson.stats.Experience},
+               {"DropChance", eJson.stats.Experience}
            };
 
             Enemy enemy = new Enemy(
@@ -100,5 +105,11 @@ public class EnemyDatabase : MonoBehaviour
         Enemy temp = this.enemies.Find(enemy => enemy.GetName() == name);
         return temp;
     }
+
+    public List<Enemy> AllEnemies()
+    {
+        return this.enemies;
+    }
+
 
 }

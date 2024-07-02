@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5763309655389004129}
   - component: {fileID: 6178987351726044866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Air Sweeper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7441195023288705120}
   - component: {fileID: 8680952073788242311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground Pounder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 1405012877981298022}
   - component: {fileID: 3009901054178692162}
   - component: {fileID: 8910380965811981476}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cf26bde7ceb6d4fac90ee9d0d55ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponDrop: {fileID: 6128702983731978400, guid: 18098f6245462824fb8498829a5bcf24, type: 3}
 --- !u!50 &8910380965811981476
 Rigidbody2D:
   serializedVersion: 4

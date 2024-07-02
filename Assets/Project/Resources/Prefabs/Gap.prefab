@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7127613287585470900}
   - component: {fileID: 3836965613580879491}
   - component: {fileID: 7623778888995877786}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Gap
   m_TagString: Gap
   m_Icon: {fileID: 0}

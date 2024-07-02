@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using static Weapon;
+
 
 [Serializable]
 public class WeaponsJson
@@ -48,6 +50,11 @@ public class WeaponDatabase : MonoBehaviour
         this.projectileDatabase = GameObject.FindAnyObjectByType<ProjectileDatabase>();
         this.BuildDatabase();
         Globals.databasesStatus.weaponsBuilt = true;
+    }
+
+    private void Start()
+    {
+        
     }
 
     //    public Weapon(int id, weaponType type, string name, string description, Sprite sprite, Dictionary<string, int> stats)
@@ -115,7 +122,8 @@ public class WeaponDatabase : MonoBehaviour
 
     public Weapon GetWeapon(string name)
     {
-        Weapon temp = this.weapons.Find(weapon => weapon.GetName() == name);
+        string weaponName = (name == "Random") ? ((Weapon.weaponType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Weapon.weaponType)).Length)).ToString() : name;
+        Weapon temp = this.weapons.Find(weapon => weapon.GetName() == weaponName);
         return temp;
     }
 }
