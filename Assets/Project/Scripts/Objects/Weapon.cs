@@ -76,6 +76,11 @@ public class Weapon
         return this.name;
     }
 
+    public int GetId() 
+    {
+        return this.id;
+    }
+
     public Projectile GetProjectile()
     {
         return this.projectile;

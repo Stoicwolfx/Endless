@@ -51,6 +51,12 @@ public class Projectile
         return this.type;
     }
 
+    public static projectileType GetType(String type)
+    {
+        Enum.TryParse(type, out Projectile.projectileType projectile);
+        return projectile;
+    }
+
     public int GetSpeed()
     {
         return this.stats["Speed"];

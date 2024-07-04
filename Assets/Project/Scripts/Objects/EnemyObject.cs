@@ -97,10 +97,16 @@ public class EnemyObject : MonoBehaviour
             player.UpdateExperience(this.enemy.GetStat("Experience"));
 
             float dropChance = Random.Range(0f, 100f);
-            if (true)//dropChance <= this.enemy.GetStat("DropChance")) //NOTE: This will be fixed once I have confidence in it
+            //NOTE: DropChance <= this.enemy.GetStat("DropChance")) //NOTE: This will be fixed once I have confidence in it
+            //  Also need to create a weapon.GetRandom() function and add a way to determine possible drops from enemies
+            if (true)
             {
                 WeaponDrop weaponDrop = Instantiate(this.WeaponDrop);
-                weaponDrop.Create(this.transform.position, "Random");
+
+                //Note: Need to use this enemy drops and rates for those drops to find the answer. Maybe pull the random from below
+                //      And then create a new method that calcs based off rates of enemies and drops/what can drop
+
+                weaponDrop.Create(this.transform.position, "1911"); //NOTE: Need to not have this hardcoded
             }
 
             Destroy(this.gameObject);

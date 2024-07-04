@@ -247,7 +247,7 @@ public void Initialize()
     {
         if (other.gameObject.CompareTag("WeaponDrop"))
         {
-            WeaponObject newWeapon = new WeaponObject();
+            WeaponObject newWeapon = other.gameObject.AddComponent<WeaponObject>();
             newWeapon.Create(other.gameObject.GetComponent<WeaponDrop>().GetWeapon());
 
             //Note: Need to check if the player already has this weapon - if so just add the rounds

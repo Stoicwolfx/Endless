@@ -13,7 +13,9 @@
 			"HP":"2",
 			"Speed":"3",
 			"Experience":"1",
-			"DropChance":"5"
+			"DropChance":"5",
+			"WeaponDrop":"0,1,2",
+			"ProjectileDrop":"0"
 		}
 	},
 	{
@@ -30,7 +32,9 @@
 			"HP":"2",
 			"Speed":"3",
 			"Experience":"1",
-			"DropChance":"5"
+			"DropChance":"5",
+			"WeaponDrop":"0,1,4",
+			"ProjectileDrop":"0,1"
 		}
 	}
 ]

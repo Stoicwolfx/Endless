@@ -23,6 +23,9 @@ public class EnemyStats
     public int HP;
     public int Speed;
     public int Experience;
+    public int DropChance;
+    public string WeaponDrop;
+    public string ProjectileDrop;
 }
 
 [Serializable]
@@ -83,8 +86,23 @@ public class EnemyDatabase : MonoBehaviour
                {"HP", eJson.stats.HP},
                {"Speed", eJson.stats.Speed},
                {"Experience", eJson.stats.Experience},
-               {"DropChance", eJson.stats.Experience}
-           };
+               {"DropChance", eJson.stats.DropChance}
+            };
+
+            //Parse Drops into arrays
+            List<int> wpnDropIds = new List<int>();
+            List<int> projDropIds = new List<int>();
+
+            foreach (string wpn in eJson.stats.WeaponDrop.Split(',')) 
+            {
+                int.TryParse(wpn, out int wpnId);
+                wpnDropIds.Add(wpnId);
+            }
+            foreach (string proj in eJson.stats.ProjectileDrop.Split(','))
+            {
+                int.TryParse(proj, out int projId);
+                projDropIds.Add(projId);
+            }
 
             Enemy enemy = new Enemy(
                 eJson.id,
@@ -94,7 +112,9 @@ public class EnemyDatabase : MonoBehaviour
                 eJson.description,
                 weapon,
                 sprite,
-                stats);
+                stats,
+                wpnDropIds,
+                projDropIds);
 
             this.enemies.Add(enemy);
         }

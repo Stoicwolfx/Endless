@@ -24,6 +24,7 @@ public class WeaponStats
     public int MagRounds;
     public int MaxRounds;
     public int ReloadTime;
+    public int DropWeight;
 }
 
 [Serializable]
@@ -104,7 +105,8 @@ public class WeaponDatabase : MonoBehaviour
                {"Range", wJson.stats.Range},
                {"MagRounds", wJson.stats.MagRounds},
                {"MaxRounds", wJson.stats.MaxRounds},
-               {"ReloadTime", wJson.stats.ReloadTime}
+               {"ReloadTime", wJson.stats.ReloadTime},
+               {"DropWeight", wJson.stats.DropWeight}
            };
 
             Weapon weapon = new Weapon(
@@ -122,8 +124,26 @@ public class WeaponDatabase : MonoBehaviour
 
     public Weapon GetWeapon(string name)
     {
-        string weaponName = (name == "Random") ? ((Weapon.weaponType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(Weapon.weaponType)).Length)).ToString() : name;
-        Weapon temp = this.weapons.Find(weapon => weapon.GetName() == weaponName);
-        return temp;
+        Weapon weapon;
+        if (name == "Random")
+        {
+            weapon = this.GetRandomWeapon();
+        }
+        else
+        {
+            weapon = this.weapons.Find(weapon => weapon.GetName() == name);
+        }
+        return weapon;
+    }
+
+    public Weapon GetWeapon(int id)
+    {
+        return this.weapons.Find(weapon => weapon.GetId()  == id);
+    }
+
+    private Weapon GetRandomWeapon()
+    {
+        int rnd = UnityEngine.Random.Range(0, this.weapons.Count);
+        return this.weapons[rnd];
     }
 }

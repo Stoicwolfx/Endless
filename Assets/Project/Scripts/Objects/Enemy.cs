@@ -21,6 +21,8 @@ public class Enemy
     private Weapon weapon;
     private Sprite sprite;
     private Dictionary<string, int> stats = new();
+    private List<int> weaponDropIds = new List<int>();
+    private List<int> projectileDropIds = new List<int>();
 
     public Enemy(Enemy enemy)
     {
@@ -34,7 +36,7 @@ public class Enemy
         this.stats = enemy.stats;
     }
 
-    public Enemy(int id, string name, Domain dmn, int level, string description, Weapon weapon, Sprite sprite, Dictionary<string, int> stats)
+    public Enemy(int id, string name, Domain dmn, int level, string description, Weapon weapon, Sprite sprite, Dictionary<string, int> stats, List<int> weaponDropIds, List<int> projectileDropIds)
     {
         this.id = id;
         this.name = name;
@@ -44,6 +46,8 @@ public class Enemy
         this.weapon = weapon;
         this.sprite = sprite;
         this.stats = stats;
+        this.weaponDropIds = weaponDropIds;
+        this.projectileDropIds = projectileDropIds;
     }
 
     public string GetName()

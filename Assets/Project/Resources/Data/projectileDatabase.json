@@ -9,7 +9,8 @@
 			"speed":"0",
 			"power":"0",
 			"range":"0",
-			"splashDamage":"0"
+			"splashDamage":"0",
+			"DropWeight":"50"
 		}
 	},
 	{
@@ -22,7 +23,8 @@
 			"speed":"0",
 			"power":"0",
 			"range":"0",
-			"splashDamage":"0"
+			"splashDamage":"0",
+			"DropWeight":"50"
 		}
 	},
 	{
@@ -35,7 +37,8 @@
 			"speed":"0",
 			"power":"0",
 			"range":"0",
-			"splashDamage":"0"
+			"splashDamage":"0",
+			"DropWeight":"30"
 		}
 	},
 	{
@@ -48,7 +51,8 @@
 			"speed":"0",
 			"power":"0",
 			"range":"0",
-			"splashDamage":"0"
+			"splashDamage":"0",
+			"DropWeight":"30"
 		}
 	}
 ]
