@@ -6,7 +6,15 @@ using UnityEngine;
 
 public class Projectile
 {
+
     public enum ProjectileType
+    {
+        basicKinetic,
+        basicEnergy,
+        basicGernade,
+        basicMissile
+    }
+    public enum ProjectileClass
     {
         kinetic,
         energy,
@@ -14,8 +22,8 @@ public class Projectile
         missile
     }
     private int id;
-    private string name;
     private string description;
+    private ProjectileClass projectileClass;
     private ProjectileType type;
     private Sprite sprite;
     private Dictionary<string, int> stats = new();
@@ -24,36 +32,42 @@ public class Projectile
     public Projectile(Projectile projectile)
     {
         this.id = projectile.id;
-        this.name = projectile.name;
-        this.description = projectile.description;
         this.type = projectile.type;
+        this.projectileClass = projectile.projectileClass;
+        this.description = projectile.description;
         this.sprite = projectile.sprite;
         this.stats = projectile.stats;
     }
 
-    public Projectile(int id, string name, string description, ProjectileType type, Sprite sprite, Dictionary<string, int> stats)
+    public Projectile(int id, ProjectileType type, string description, ProjectileClass projectileClass, Sprite sprite, Dictionary<string, int> stats)
     {
         this.id = id;
-        this.name = name;
-        this.description = description;
         this.type = type;
+        this.description = description;
+        this.projectileClass = projectileClass;
         this.sprite = sprite;
         this.stats = stats;
     }
 
-    public string GetName()
+    public new ProjectileType GetType()
     {
-        return this.name;
+        return this.type;
     }
 
-    public new ProjectileType GetType()
+    public ProjectileClass GetClass()
     { 
-        return this.type;
+        return this.projectileClass;
     }
 
     public static ProjectileType GetType(String type)
     {
         Enum.TryParse(type, out Projectile.ProjectileType projectile);
+        return projectile;
+    }
+
+    public static ProjectileClass GetClass(String pClass)
+    {
+        Enum.TryParse(pClass, out Projectile.ProjectileClass projectile);
         return projectile;
     }
 

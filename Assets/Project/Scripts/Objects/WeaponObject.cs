@@ -127,4 +127,14 @@ public class WeaponObject : MonoBehaviour
     {
         return this.weapon.GetName();
     }
+
+    public int GetDefaultAmmo()
+    {
+        return this.weapon.GetDefaultAmmo();
+    }
+
+    public Projectile.ProjectileType GetProjectileType()
+    {
+        return this.projectile.GetType();
+    }
 }

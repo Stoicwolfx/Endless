@@ -1,11 +1,12 @@
 [
 	{
 		"id":"0",
-		"type":"kinetic",
+		"class":"kinetic",
 		"name":"Pistol",
 		"description":"Simple starting weapon.",
 		"sprite":"null",
-		"projectile":"basicKinetic",
+		"projectileType":"basicKinetic",
+		"ammoCount":"-1",
 		"stats": {
 			"RateOfFire":"3",
 			"Speed":"6",
@@ -20,11 +21,12 @@
 	},
 	{
 		"id":"1",
-		"type":"kinetic",
+		"class":"kinetic",
 		"name":"1911",
 		"description":"More powerful but slower.",
 		"sprite":"null",
-		"projectile":"basicKinetic",
+		"projectileType":"basicKinetic",
+		"ammoCount":"14",
 		"stats": {
 			"RateOfFire":"2",
 			"Speed":"7",
@@ -32,18 +34,19 @@
 			"Accuracy":"95",
 			"Range":"8",
 			"MagRounds":"7",
-			"MaxRounds":"54",
+			"MaxRounds":"70",
 			"ReloadTime":"6",
 			"DropWeight":"40"
 		}
 	},
 	{
 		"id":"2",
-		"type":"melee",
+		"class":"melee",
 		"name":"Knife",
 		"description":"Short range but dangerours",
 		"sprite":"null",
-		"projectile":"null",
+		"projectileType":"null",
+		"ammoCount":"-1",
 		"stats": {
 			"RateOfFire":"6",
 			"Speed":"0",
@@ -58,11 +61,12 @@
 	},
 	{
 		"id":"3",
-		"type":"melee",
+		"class":"melee",
 		"name":"Sword",
 		"description":"Longer range, strong",
 		"sprite":"null",
-		"projectile":"null",
+		"projectileType":"null",
+		"ammoCount":"-1",
 		"stats": {
 			"RateOfFire":"7",
 			"Speed":"0",
@@ -77,11 +81,12 @@
 	},
 	{
 		"id":"4",
-		"type":"energy",
+		"class":"energy",
 		"name":"Laser",
 		"description":"Laser gun",
 		"sprite":"",
-		"projectile":"basicEnergy",
+		"projectileType":"basicEnergy",
+		"ammoCount":"20",
 		"stats": {
 			"RateOfFire":"10",
 			"Speed":"10",
@@ -96,19 +101,20 @@
 	},
 	{
 		"id":"5",
-		"type":"gernade",
+		"class":"gernade",
 		"name":"Gernade",
 		"description":"Thrown gernade",
 		"sprite":"",
-		"projectile":"basicExplosive",
+		"projectileType":"basicGernade",
+		"ammoCount":"2",
 		"stats": {
 			"RateOfFire":"1",
 			"Speed":"4",
 			"Power":"10",
 			"Accuracy":"50",
 			"Range":"5",
-			"MagRounds":"5",
-			"MaxRounds":"5",
+			"MagRounds":"1",
+			"MaxRounds":"10",
 			"ReloadTime":"0",
 			"DropWeight":"10"
 		}

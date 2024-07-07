@@ -34,6 +34,7 @@ public class WeaponJson
     public string type;
     public string name;
     public string description;
+    public int ammoCount;
     public string sprite;
     public string projectile;
     public WeaponStats stats;
@@ -94,7 +95,7 @@ public class WeaponDatabase : MonoBehaviour
             }
 
             Sprite sprite = (wJson.sprite == null) ? null : Resources.Load<Sprite>(wJson.sprite);
-            Projectile projectile = (wJson.projectile == null) ? null : this.projectileDatabase.GetProjectile(wJson.projectile);
+            Projectile projectile = (wJson.projectile == null) ? null : this.projectileDatabase.GetProjectile(Projectile.GetType(wJson.projectile));
 
             Dictionary<string, int> stats = new()
             {
@@ -114,6 +115,7 @@ public class WeaponDatabase : MonoBehaviour
                 weaponType,
                 wJson.name,
                 wJson.description,
+                wJson.ammoCount,
                 sprite,
                 projectile,
                 stats);

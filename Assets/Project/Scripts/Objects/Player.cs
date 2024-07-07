@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
     private float cntrlInput;
 
     private WeaponObject currentWeapon;
+    private int currentWpnIndx;
 
     private struct PlayerWeapons
     {
@@ -65,6 +67,11 @@ public class Player : MonoBehaviour
             this.weapon = weapon;
             this.haveWeapon = haveWeapon;
         }
+
+        public WeaponObject GetWeapon() => this.weapon;
+
+        public bool HaveWeapon() => this.haveWeapon;
+
     }
 
     private List<PlayerWeapons> weapons;
@@ -130,14 +137,16 @@ public void Initialize()
         this.gun = this.transform.GetChild(1).gameObject;
         this.aimAngle = 90.0f;
 
-        this.projectiles[Projectile.ProjectileType.kinetic] = 0;
-        this.projectiles[Projectile.ProjectileType.energy] = 0;
-        this.projectiles[Projectile.ProjectileType.missile] = 0;
+        foreach (int typeVal in Enum.GetValues(typeof(Projectile.ProjectileType)))
+        {
+            this.projectiles[(Projectile.ProjectileType)typeVal] = 0;
+        }
 
         this.weapons = new();
         this.currentWeapon = this.transform.GetChild(1).gameObject.GetComponent<WeaponObject>();
         this.currentWeapon.Create(weaponDatabase.GetWeapon("Pistol"));
         this.weapons.Add(new PlayerWeapons(this.currentWeapon,true));
+        this.currentWpnIndx = 0;
     }
 
     // Update is called once per frame
@@ -251,9 +260,18 @@ public void Initialize()
 
             //Note: Need to check if the player already has this weapon - if so just add the rounds
 
-            this.weapons.Add(new PlayerWeapons(newWeapon, true));
+            WeaponObject results = this.weapons.Find(weapon => weapon.GetWeapon().GetName() == newWeapon.GetName()).GetWeapon();
+            if (results == null)
+            {
+                this.weapons.Add(new PlayerWeapons(newWeapon, true));
+            }
+            //No 'else' needed -- already have the weapon; just need to add ammo
 
-            //Note: Need to add default starting rounds to the weapon definitions and also set that here
+            if (newWeapon.GetDefaultAmmo() > 0)
+            {
+                Projectile.ProjectileType newProjecileType = newWeapon.GetProjectileType();
+                this.projectiles[newProjecileType] += newWeapon.GetDefaultAmmo();
+            }
 
             Destroy(other.gameObject.GetComponentInParent<WeaponDrop>().gameObject);
         }
@@ -355,11 +373,6 @@ public void Initialize()
         this.cntrlInput = xMod;
     }
 
-    private void MovePlayer()
-    {
-
-    }
-
     public void OnAim(InputAction.CallbackContext context)
     {
         float aimX = context.ReadValue<Vector2>().x;
@@ -384,7 +397,23 @@ public void Initialize()
 
     public void PreviousWeapon(InputAction.CallbackContext context)
     {
+        bool wpnCheck = false;
 
+        while (!wpnCheck)
+        {
+            if (this.currentWpnIndx == 0)
+            {
+                this.currentWpnIndx = this.weapons.Count - 1;
+            }
+            else
+            {
+                this.currentWpnIndx--;
+            }
+            wpnCheck = this.weapons[currentWpnIndx].HaveWeapon();
+            //NOTE: Need to add an additional check for ammo type in invintory -- due to speed of game skip anything with 0
+        }
+
+        this.currentWeapon = this.weapons[this.currentWpnIndx].GetWeapon();
     }
 
     public void NextWeapon(InputAction.CallbackContext context)

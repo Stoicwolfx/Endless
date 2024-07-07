@@ -34,6 +34,7 @@ public class Weapon
     private weaponType type;
     private string name;
     private string description;
+    private int ammoCount;
     private Sprite sprite;
     private Projectile projectile;
     private Dictionary<string, int> stats = new();
@@ -55,17 +56,19 @@ public class Weapon
         this.type = weapon.type;
         this.name = weapon.name;
         this.description = weapon.description;
+        this.ammoCount = weapon.ammoCount;
         this.sprite = weapon.sprite;
         this.projectile = weapon.projectile;
         this.stats = weapon.stats;
     }
 
-    public Weapon(int id, weaponType type, string name, string description, Sprite sprite, Projectile projectile, Dictionary<string, int> stats)
+    public Weapon(int id, weaponType type, string name, string description, int ammoCount, Sprite sprite, Projectile projectile, Dictionary<string, int> stats)
     {
         this.id = id;
         this.type = type;
         this.name = name;
         this.description = description;
+        this.ammoCount = ammoCount;
         this.sprite = sprite;
         this.projectile = projectile;
         this.stats = stats;
@@ -119,5 +122,10 @@ public class Weapon
     public void ReloadMag(int totalRounds)
     {
         this.stats["MagRounds"] = (totalRounds >= this.stats["MaxRounds"]) ? this.stats["MaxRounds"] : totalRounds;
+    }
+
+    public int GetDefaultAmmo()
+    {
+        return this.ammoCount;
     }
 }

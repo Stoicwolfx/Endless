@@ -57,7 +57,7 @@ public class ProjectileObject : MonoBehaviour
 
         foreach (Transform child in this.transform)
         {
-            if (child.name == projectile.GetName())
+            if (child.name == projectile.GetType().ToString())
             {
                 child.gameObject.SetActive(true);
                 this.cldr = child.gameObject.GetComponent<Collider2D>();
@@ -94,16 +94,16 @@ public class ProjectileObject : MonoBehaviour
         this.transform.Rotate(0, 0, aimAngle - 90.0f);
 
         //for the differences in behavior for the different types of projectiles
-        if (this.projectile.GetType() == Projectile.ProjectileType.kinetic)
+        if (this.projectile.GetClass() == Projectile.ProjectileClass.kinetic)
         {
             GameObject projectileType = Globals.GetChildObjectByName(this.gameObject, "basicKinetic");
             projectileType.SetActive(true);
         }
-        else if (this.projectile.GetType() == Projectile.ProjectileType.energy)
+        else if (this.projectile.GetClass() == Projectile.ProjectileClass.energy)
         {
             ;
         }
-        else if (this.projectile.GetType() == Projectile.ProjectileType.missile)
+        else if (this.projectile.GetClass() == Projectile.ProjectileClass.missile)
         {
             ;
         }

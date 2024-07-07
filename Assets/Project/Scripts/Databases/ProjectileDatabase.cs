@@ -26,9 +26,9 @@ public class ProjectileStats
 public class ProjectileJson
 {
     public int id;
-    public string name;
     public string description;
     public string type;
+    public string pClass;
     public string sprite;
     public ProjectileStats stats;
 }
@@ -54,23 +54,6 @@ public class ProjectileDatabase : MonoBehaviour
 
         foreach (ProjectileJson pJson in rootJson.projectilesJson)
         {
-            Projectile.ProjectileType projectileType = Projectile.GetType(pJson.type);
-            //NOTE: remove this block if the above works and then implement in other databases as needed
-            //switch (pJson.type)
-            //{
-            //    case "kinetic":
-            //        projectileType = Projectile.projectileType.kinetic;
-            //        break;
-            //    case "energy":
-            //        projectileType = Projectile.projectileType.energy;
-            //        break;
-            //    case "missile":
-            //        projectileType = Projectile.projectileType.missile;
-            //        break;
-            //    default:
-            //        projectileType = Projectile.projectileType.kinetic;
-            //        break;
-            //}
 
             Sprite sprite = (pJson.sprite == null) ? null : Resources.Load<Sprite>(pJson.sprite);
 
@@ -85,9 +68,9 @@ public class ProjectileDatabase : MonoBehaviour
 
             Projectile projectile = new(
                 pJson.id,
-                pJson.name,
+                Projectile.GetType(pJson.type),
                 pJson.description,
-                projectileType,
+                Projectile.GetClass(pJson.pClass),
                 sprite,
                 stats);
 
@@ -95,9 +78,9 @@ public class ProjectileDatabase : MonoBehaviour
         }
     }
 
-    public Projectile GetProjectile(string name)
+    public Projectile GetProjectile(Projectile.ProjectileType type)
     {
-        Projectile temp = this.projectiles.Find(projectile => projectile.GetName() == name);
+        Projectile temp = this.projectiles.Find(projectile => projectile.GetType() == type);
         return temp;
     }
 }

@@ -1,9 +1,9 @@
 [
 	{
 		"id":"0",
-		"name":"basicKinetic",
+		"projectileType":"basicKinetic",
 		"description":"Basic kinetic projectile.",
-		"type":"kinetic",
+		"class":"kinetic",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",
@@ -15,9 +15,9 @@
 	},
 	{
 		"id":"1",
-		"name":"basicEnergy",
+		"projectileType":"basicEnergy",
 		"description":"Basic energy projectile",
-		"type":"energy",
+		"class":"energy",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",
@@ -29,9 +29,9 @@
 	},
 	{
 		"id":"2",
-		"name":"basicMissile",
+		"projectileType":"basicMissile",
 		"description":"Basic missile projectile",
-		"type":"missile",
+		"class":"missile",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",
@@ -43,9 +43,9 @@
 	},
 	{
 		"id":"3",
-		"name":"basicGernade",
+		"projectileType":"basicGernade",
 		"description":"Basic gernade",
-		"type":"gernade",
+		"class":"gernade",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",
