@@ -79,7 +79,7 @@ public class EnemyDatabase : MonoBehaviour
             Weapon weapon = (eJson.weapon == null) ? null : this.weaponDatabase.GetWeapon(eJson.weapon);
             Sprite sprite = (eJson.sprite == null) ? null : Resources.Load<Sprite>(eJson.sprite);
 
-            Dictionary<string, int> stats = new Dictionary<string, int>
+            Dictionary<string, int> stats = new()
             {
                {"Power", eJson.stats.Power},
                {"Defense", eJson.stats.Defense},
@@ -90,8 +90,8 @@ public class EnemyDatabase : MonoBehaviour
             };
 
             //Parse Drops into arrays
-            List<int> wpnDropIds = new List<int>();
-            List<int> projDropIds = new List<int>();
+            List<int> wpnDropIds = new();
+            List<int> projDropIds = new();
 
             foreach (string wpn in eJson.stats.WeaponDrop.Split(',')) 
             {
@@ -104,7 +104,7 @@ public class EnemyDatabase : MonoBehaviour
                 projDropIds.Add(projId);
             }
 
-            Enemy enemy = new Enemy(
+            Enemy enemy = new(
                 eJson.id,
                 eJson.name, 
                 eDmn,

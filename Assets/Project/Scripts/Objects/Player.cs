@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     }
 
     private List<PlayerWeapons> weapons;
-    private Dictionary<Projectile.projectileType, int> projectiles = new Dictionary<Projectile.projectileType, int>();
+    private Dictionary<Projectile.ProjectileType, int> projectiles = new();
 
     [SerializeField] private Projectile projectilePreFab;
 
@@ -130,9 +130,9 @@ public void Initialize()
         this.gun = this.transform.GetChild(1).gameObject;
         this.aimAngle = 90.0f;
 
-        this.projectiles[Projectile.projectileType.kinetic] = 0;
-        this.projectiles[Projectile.projectileType.energy] = 0;
-        this.projectiles[Projectile.projectileType.missile] = 0;
+        this.projectiles[Projectile.ProjectileType.kinetic] = 0;
+        this.projectiles[Projectile.ProjectileType.energy] = 0;
+        this.projectiles[Projectile.ProjectileType.missile] = 0;
 
         this.weapons = new();
         this.currentWeapon = this.transform.GetChild(1).gameObject.GetComponent<WeaponObject>();
@@ -247,8 +247,7 @@ public void Initialize()
     {
         if (other.gameObject.CompareTag("WeaponDrop"))
         {
-            WeaponObject newWeapon = other.gameObject.AddComponent<WeaponObject>();
-            newWeapon.Create(other.gameObject.GetComponent<WeaponDrop>().GetWeapon());
+            WeaponObject newWeapon = other.gameObject.GetComponent<WeaponDrop>().GetWeapon();
 
             //Note: Need to check if the player already has this weapon - if so just add the rounds
 
@@ -356,7 +355,7 @@ public void Initialize()
         this.cntrlInput = xMod;
     }
 
-    private void movePlayer()
+    private void MovePlayer()
     {
 
     }
@@ -393,12 +392,12 @@ public void Initialize()
 
     }
 
-    public int GetNumProjectile(Projectile.projectileType projectileType)
+    public int GetNumProjectile(Projectile.ProjectileType projectileType)
     {
         return this.projectiles[projectileType];
     }
 
-    public void UseProjectile(Projectile.projectileType projectileType, int count)
+    public void UseProjectile(Projectile.ProjectileType projectileType, int count)
     {
         this.projectiles[projectileType] -= count;
     }

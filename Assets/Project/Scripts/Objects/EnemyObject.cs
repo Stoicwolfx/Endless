@@ -11,6 +11,7 @@ public class EnemyObject : MonoBehaviour
     [SerializeField] private WeaponDrop WeaponDrop;
 
     private EnemyDatabase enemyDatabase;
+    private WeaponDatabase weaponDatabase;
     
     private Enemy enemy;
     private Rigidbody2D rig;
@@ -26,6 +27,9 @@ public class EnemyObject : MonoBehaviour
         this.jumping = false;
         if (!Globals.databasesStatus.enemiesBuilt)
             { GameObject.FindAnyObjectByType<EnemyDatabase>().Awake(); }
+        if (!Globals.databasesStatus.weaponsBuilt)
+            { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
+        this.weaponDatabase = GameObject.FindAnyObjectByType<WeaponDatabase>();
         this.enemyDatabase = GameObject.FindAnyObjectByType<EnemyDatabase>();
     }
 
@@ -105,8 +109,9 @@ public class EnemyObject : MonoBehaviour
 
                 //Note: Need to use this enemy drops and rates for those drops to find the answer. Maybe pull the random from below
                 //      And then create a new method that calcs based off rates of enemies and drops/what can drop
-
-                weaponDrop.Create(this.transform.position, "1911"); //NOTE: Need to not have this hardcoded
+                List<int> wpnDrops = this.enemy.GetWeaponDrops();
+                Weapon weapon = this.weaponDatabase.GetWeapon(wpnDrops);
+                weaponDrop.Create(this.transform.position, weapon); //NOTE: Need to not have this hardcoded
             }
 
             Destroy(this.gameObject);
@@ -313,7 +318,7 @@ public class EnemyObject : MonoBehaviour
         }
 
         //this will need to be adjusted or removed after I update the ground behavior
-        if (collision.gameObject.tag == "Surface")
+        if (collision.gameObject.CompareTag("Surface"))
         {
             this.jumping = false;
         }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Projectile
 {
-    public enum projectileType
+    public enum ProjectileType
     {
         kinetic,
         energy,
@@ -16,9 +16,9 @@ public class Projectile
     private int id;
     private string name;
     private string description;
-    private projectileType type;
+    private ProjectileType type;
     private Sprite sprite;
-    private Dictionary<string, int> stats = new Dictionary<string, int>();
+    private Dictionary<string, int> stats = new();
 
 
     public Projectile(Projectile projectile)
@@ -31,7 +31,7 @@ public class Projectile
         this.stats = projectile.stats;
     }
 
-    public Projectile(int id, string name, string description, projectileType type, Sprite sprite, Dictionary<string, int> stats)
+    public Projectile(int id, string name, string description, ProjectileType type, Sprite sprite, Dictionary<string, int> stats)
     {
         this.id = id;
         this.name = name;
@@ -46,14 +46,14 @@ public class Projectile
         return this.name;
     }
 
-    public new projectileType GetType()
+    public new ProjectileType GetType()
     { 
         return this.type;
     }
 
-    public static projectileType GetType(String type)
+    public static ProjectileType GetType(String type)
     {
-        Enum.TryParse(type, out Projectile.projectileType projectile);
+        Enum.TryParse(type, out Projectile.ProjectileType projectile);
         return projectile;
     }
 
@@ -62,7 +62,6 @@ public class Projectile
         return this.stats["Speed"];
     }
 
-    //CMC
     public void GetStats(Dictionary<string, int> newStats)
     {
         foreach (var item in this.stats)

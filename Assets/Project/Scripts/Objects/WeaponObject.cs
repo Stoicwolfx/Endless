@@ -97,9 +97,9 @@ public class WeaponObject : MonoBehaviour
             this.Reload(this.player.GetNumProjectile(this.projectile.GetType()));
         }
 
-        Vector3 position = new Vector3(this.transform.position.x + Mathf.Cos(this.transform.rotation.z) * (this.transform.localScale.y / 2.0f), 
-                                       this.transform.position.y + Mathf.Sin(this.transform.rotation.z) * (this.transform.localScale.x / 2.0f), 
-                                       this.transform.position.z);
+        Vector3 position = new(this.transform.position.x + Mathf.Cos(this.transform.rotation.z) * (this.transform.localScale.y / 2.0f), 
+                               this.transform.position.y + Mathf.Sin(this.transform.rotation.z) * (this.transform.localScale.x / 2.0f), 
+                               this.transform.position.z);
 
         //Copied from weapon to her -- temp note
         if (this.fireClock > 0.0f)

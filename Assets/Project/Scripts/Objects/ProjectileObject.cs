@@ -18,7 +18,7 @@ public class ProjectileObject : MonoBehaviour
 
     private float aimAngle;
 
-    private Dictionary<string, int> stats = new Dictionary<string, int>();
+    private Dictionary<string, int> stats = new();
 
     private void Awake()
     {
@@ -94,16 +94,16 @@ public class ProjectileObject : MonoBehaviour
         this.transform.Rotate(0, 0, aimAngle - 90.0f);
 
         //for the differences in behavior for the different types of projectiles
-        if (this.projectile.GetType() == Projectile.projectileType.kinetic)
+        if (this.projectile.GetType() == Projectile.ProjectileType.kinetic)
         {
             GameObject projectileType = Globals.GetChildObjectByName(this.gameObject, "basicKinetic");
             projectileType.SetActive(true);
         }
-        else if (this.projectile.GetType() == Projectile.projectileType.energy)
+        else if (this.projectile.GetType() == Projectile.ProjectileType.energy)
         {
             ;
         }
-        else if (this.projectile.GetType() == Projectile.projectileType.missile)
+        else if (this.projectile.GetType() == Projectile.ProjectileType.missile)
         {
             ;
         }

@@ -35,7 +35,7 @@ public class ProjectileJson
 
 public class ProjectileDatabase : MonoBehaviour
 {
-    private List<Projectile> projectiles = new List<Projectile>();
+    private List<Projectile> projectiles = new();
 
     public void Awake()
     {
@@ -54,7 +54,7 @@ public class ProjectileDatabase : MonoBehaviour
 
         foreach (ProjectileJson pJson in rootJson.projectilesJson)
         {
-            Projectile.projectileType projectileType = Projectile.GetType(pJson.type);
+            Projectile.ProjectileType projectileType = Projectile.GetType(pJson.type);
             //NOTE: remove this block if the above works and then implement in other databases as needed
             //switch (pJson.type)
             //{
@@ -74,7 +74,7 @@ public class ProjectileDatabase : MonoBehaviour
 
             Sprite sprite = (pJson.sprite == null) ? null : Resources.Load<Sprite>(pJson.sprite);
 
-            Dictionary<string, int> stats = new Dictionary<string, int>
+            Dictionary<string, int> stats = new()
             {
                {"Speed", pJson.stats.speed},
                {"Power", pJson.stats.power},
@@ -83,7 +83,7 @@ public class ProjectileDatabase : MonoBehaviour
                {"DropWeight", pJson.stats.dropWeight }
            };
 
-            Projectile projectile = new Projectile(
+            Projectile projectile = new(
                 pJson.id,
                 pJson.name,
                 pJson.description,

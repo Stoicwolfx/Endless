@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponDrop : MonoBehaviour
 {
-    private Weapon weapon;
+    [SerializeField] WeaponObject weapon;
     private WeaponDatabase weaponDatabase;
 
     private void Awake()
@@ -23,13 +23,14 @@ public class WeaponDrop : MonoBehaviour
         
     }
 
-    public void Create(Vector3 pos,string weapon)
+    public void Create(Vector3 pos, Weapon weapon)
     {
         this.transform.position = pos;
-        this.weapon = weaponDatabase.GetWeapon(weapon);
+        this.weapon = Instantiate(this.weapon);
+        this.weapon.Create(new Weapon(weapon));
     }
 
-    public Weapon GetWeapon()
+    public WeaponObject GetWeapon()
     {
         return this.weapon;
     }

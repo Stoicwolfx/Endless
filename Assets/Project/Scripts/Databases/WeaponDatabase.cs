@@ -41,7 +41,7 @@ public class WeaponJson
 
 public class WeaponDatabase : MonoBehaviour
 {
-    private List<Weapon> weapons = new List<Weapon>();
+    private List<Weapon> weapons = new();
     private ProjectileDatabase projectileDatabase;
 
     public void Awake()
@@ -96,7 +96,7 @@ public class WeaponDatabase : MonoBehaviour
             Sprite sprite = (wJson.sprite == null) ? null : Resources.Load<Sprite>(wJson.sprite);
             Projectile projectile = (wJson.projectile == null) ? null : this.projectileDatabase.GetProjectile(wJson.projectile);
 
-            Dictionary<string, int> stats = new Dictionary<string, int>
+            Dictionary<string, int> stats = new()
             {
                {"RateOfFire", wJson.stats.RateOfFire},
                {"Speed", wJson.stats.Speed},
@@ -109,7 +109,7 @@ public class WeaponDatabase : MonoBehaviour
                {"DropWeight", wJson.stats.DropWeight}
            };
 
-            Weapon weapon = new Weapon(
+            Weapon weapon = new(
                 wJson.id,
                 weaponType,
                 wJson.name,
@@ -139,6 +139,41 @@ public class WeaponDatabase : MonoBehaviour
     public Weapon GetWeapon(int id)
     {
         return this.weapons.Find(weapon => weapon.GetId()  == id);
+    }
+
+    public Weapon GetWeapon(List<int> wpnDrops)
+    {
+        Weapon weapon= null;
+
+        List<Weapon> wpns = new();
+        foreach (int id in wpnDrops)
+        {
+            wpns.Add(this.GetWeapon(id));
+        }
+        int dropWeight = 0;
+        foreach (Weapon wpn in wpns)
+        {
+            dropWeight += wpn.GetDropWeight();
+        }
+
+        int rnd = UnityEngine.Random.Range(0, dropWeight);
+        int counter = 0;
+        foreach (Weapon wpn in wpns)
+        {
+            if (rnd < (counter + wpn.GetDropWeight()))
+            {
+                weapon = wpn;
+                break;
+            }
+            counter += wpn.GetDropWeight();
+        }
+
+        if (weapon != null)
+        {
+            weapon = wpns.Last();
+        }
+
+        return weapon;
     }
 
     private Weapon GetRandomWeapon()

@@ -36,7 +36,7 @@ public class Weapon
     private string description;
     private Sprite sprite;
     private Projectile projectile;
-    private Dictionary<string, int> stats = new Dictionary<string, int>();
+    private Dictionary<string, int> stats = new();
     //Deictionary Components:
     //  RateOfFire
     //  Speed
@@ -99,6 +99,11 @@ public class Weapon
     public float GetReloadTime()
     {
         return (float)this.stats["ReloadTime"] / 10.0f;
+    }
+
+    public int GetDropWeight()
+    {
+        return this.stats["DropWeight"];
     }
 
     public Dictionary<string, int> GetStats()
