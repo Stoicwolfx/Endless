@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HpText;
     [SerializeField] private CameraController cameraController;
 
+    [SerializeField] private WeaponManager weaponManager;
+
     private Surface lastSurface;
     private Player player;
 
@@ -206,6 +208,7 @@ public class GameController : MonoBehaviour
 
         this.waveClock = this.startClock;
 
+        this.weaponManager.gameObject.SetActive(true);
         this.player = Instantiate(playerPrefab);
         this.player.Initialize();
 

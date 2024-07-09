@@ -128,4 +128,9 @@ public class Weapon
     {
         return this.ammoCount;
     }
+
+    public Weapon.weaponType GetWeaponType()
+    {
+        return this.type;
+    }
 }

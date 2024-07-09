@@ -1,7 +1,7 @@
 [
 	{
 		"id":"0",
-		"class":"kinetic",
+		"wClass":"kinetic",
 		"name":"Pistol",
 		"description":"Simple starting weapon.",
 		"sprite":"null",
@@ -21,7 +21,7 @@
 	},
 	{
 		"id":"1",
-		"class":"kinetic",
+		"wClass":"kinetic",
 		"name":"1911",
 		"description":"More powerful but slower.",
 		"sprite":"null",
@@ -41,7 +41,7 @@
 	},
 	{
 		"id":"2",
-		"class":"melee",
+		"wClass":"melee",
 		"name":"Knife",
 		"description":"Short range but dangerours",
 		"sprite":"null",
@@ -61,7 +61,7 @@
 	},
 	{
 		"id":"3",
-		"class":"melee",
+		"wClass":"melee",
 		"name":"Sword",
 		"description":"Longer range, strong",
 		"sprite":"null",
@@ -81,7 +81,7 @@
 	},
 	{
 		"id":"4",
-		"class":"energy",
+		"wClass":"energy",
 		"name":"Laser",
 		"description":"Laser gun",
 		"sprite":"",
@@ -101,7 +101,7 @@
 	},
 	{
 		"id":"5",
-		"class":"gernade",
+		"wClass":"gernade",
 		"name":"Gernade",
 		"description":"Thrown gernade",
 		"sprite":"",

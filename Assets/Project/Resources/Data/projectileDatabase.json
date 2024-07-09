@@ -3,7 +3,7 @@
 		"id":"0",
 		"projectileType":"basicKinetic",
 		"description":"Basic kinetic projectile.",
-		"class":"kinetic",
+		"pClass":"kinetic",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",
@@ -17,7 +17,7 @@
 		"id":"1",
 		"projectileType":"basicEnergy",
 		"description":"Basic energy projectile",
-		"class":"energy",
+		"pClass":"energy",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",
@@ -31,7 +31,7 @@
 		"id":"2",
 		"projectileType":"basicMissile",
 		"description":"Basic missile projectile",
-		"class":"missile",
+		"pClass":"missile",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",
@@ -45,7 +45,7 @@
 		"id":"3",
 		"projectileType":"basicGernade",
 		"description":"Basic gernade",
-		"class":"gernade",
+		"pClass":"gernade",
 		"sprite":"null",
 		"stats": {
 			"speed":"0",

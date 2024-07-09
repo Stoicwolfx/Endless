@@ -89,6 +89,7 @@
     <Compile Include="Assets\Project\Controls\EndlessPlayerInputs.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Project\Scripts\Conntrollers\WeaponManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Project\Scripts\Objects\Player.cs" />
     <Compile Include="Assets\Project\Scripts\Screens\StartPanel.cs" />
@@ -96,10 +97,10 @@
     <Compile Include="Assets\Project\Scripts\Databases\WeaponDatabase.cs" />
     <Compile Include="Assets\Project\Scripts\ControlInteractions\PullAndHoldInteraction.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Project\Scripts\Conntrollers\ScoreManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Project\Scripts\Conntrollers\GameController.cs" />
     <Compile Include="Assets\Project\Scripts\Screens\StartScreenPanel.cs" />
-    <Compile Include="Assets\Project\Scripts\Screens\ScoreManager.cs" />
     <Compile Include="Assets\Project\Scripts\Databases\EnemyDatabase.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />

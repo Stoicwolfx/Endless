@@ -31,12 +31,12 @@ public class WeaponStats
 public class WeaponJson
 {
     public int id;
-    public string type;
+    public string wClass;
     public string name;
     public string description;
     public int ammoCount;
     public string sprite;
-    public string projectile;
+    public string projectileType;
     public WeaponStats stats;
 }
 
@@ -72,7 +72,7 @@ public class WeaponDatabase : MonoBehaviour
         foreach (WeaponJson wJson in rootJson.weaponsJson)
         {
             Weapon.weaponType weaponType;
-            switch (wJson.type)
+            switch (wJson.wClass)
             {
                 case "kinetic":
                     weaponType = Weapon.weaponType.kinetic;
@@ -95,7 +95,7 @@ public class WeaponDatabase : MonoBehaviour
             }
 
             Sprite sprite = (wJson.sprite == null) ? null : Resources.Load<Sprite>(wJson.sprite);
-            Projectile projectile = (wJson.projectile == null) ? null : this.projectileDatabase.GetProjectile(Projectile.GetType(wJson.projectile));
+            Projectile projectile = (wJson.projectileType == null) ? null : this.projectileDatabase.GetProjectile(Projectile.GetType(wJson.projectileType));
 
             Dictionary<string, int> stats = new()
             {

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     private TextMeshProUGUI hpText;
     private ScoreManager scoreManager;
+    private WeaponManager weaponManager;
     private int experience;
 
     private int jumpCount = 0;
@@ -84,6 +85,7 @@ public class Player : MonoBehaviour
         if (!Globals.databasesStatus.weaponsBuilt)
             { GameObject.FindAnyObjectByType<WeaponDatabase>().Awake(); }
         this.weaponDatabase = GameObject.FindAnyObjectByType<WeaponDatabase>();
+        this.weaponManager = GameObject.FindAnyObjectByType<WeaponManager>();
 
         TextMeshProUGUI[] uiElements = GameObject.FindObjectsOfType<TextMeshProUGUI>();
         foreach (var uiElement in uiElements)
@@ -147,6 +149,16 @@ public void Initialize()
         this.currentWeapon.Create(weaponDatabase.GetWeapon("Pistol"));
         this.weapons.Add(new PlayerWeapons(this.currentWeapon,true));
         this.currentWpnIndx = 0;
+
+
+        string wname = this.currentWeapon.GetName();
+        int mammo = this.currentWeapon.GetMagAmmo();
+        int tammo = this.projectiles[this.currentWeapon.GetProjectileType()];
+        Weapon.weaponType wtype = this.currentWeapon.GetWeaponType();
+        this.weaponManager.UpdateData(wname, mammo, tammo, wtype);//this.currentWeapon.GetName(),
+                                      //this.currentWeapon.GetMagAmmo(),
+                                      //this.projectiles[this.currentWeapon.GetProjectileType()],
+                                      //this.currentWeapon.GetWeaponType());
     }
 
     // Update is called once per frame
@@ -172,6 +184,11 @@ public void Initialize()
         {
             this.currentWeapon.Fire(this.aimAngle);
         }
+
+        this.weaponManager.UpdateData(this.currentWeapon.GetName(),
+                                      this.currentWeapon.GetMagAmmo(),
+                                      this.projectiles[this.currentWeapon.GetProjectileType()],
+                                      this.currentWeapon.GetWeaponType());
     }
 
     private void FixedUpdate()
@@ -418,7 +435,23 @@ public void Initialize()
 
     public void NextWeapon(InputAction.CallbackContext context)
     {
+        bool wpnCheck = false;
 
+        while (!wpnCheck)
+        {
+            if (this.currentWpnIndx == (this.weapons.Count - 1))
+            {
+                this.currentWpnIndx = 0;
+            }
+            else
+            {
+                this.currentWpnIndx++;
+            }
+            wpnCheck = this.weapons[currentWpnIndx].HaveWeapon();
+            //NOTE: Need to add an additional check for ammo type in invintory -- due to speed of game skip anything with 0
+        }
+
+        this.currentWeapon = this.weapons[this.currentWpnIndx].GetWeapon();
     }
 
     public int GetNumProjectile(Projectile.ProjectileType projectileType)

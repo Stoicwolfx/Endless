@@ -27,7 +27,7 @@ public class ProjectileJson
 {
     public int id;
     public string description;
-    public string type;
+    public string projectileType;
     public string pClass;
     public string sprite;
     public ProjectileStats stats;
@@ -68,7 +68,7 @@ public class ProjectileDatabase : MonoBehaviour
 
             Projectile projectile = new(
                 pJson.id,
-                Projectile.GetType(pJson.type),
+                Projectile.GetType(pJson.projectileType),
                 pJson.description,
                 Projectile.GetClass(pJson.pClass),
                 sprite,

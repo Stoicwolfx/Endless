@@ -71,6 +71,7 @@ public class WeaponObject : MonoBehaviour
             this.weapon.ReloadMag(totalRounds);
             this.reloading = false;
             this.reloadClock = 0.0f;
+            this.player.UseProjectile(this.projectile.GetType(), this.weapon.GetMagRounds());
         }
 
         return this.reloading;
@@ -117,7 +118,6 @@ public class WeaponObject : MonoBehaviour
             if (this.weapon.GetName() != "Pistol")
             {
                 this.weapon.UseProjectile(count);
-                this.player.UseProjectile(this.projectile.GetType(), count);
             }
         }
         //
@@ -136,5 +136,15 @@ public class WeaponObject : MonoBehaviour
     public Projectile.ProjectileType GetProjectileType()
     {
         return this.projectile.GetType();
+    }
+
+    public int GetMagAmmo()
+    {
+        return this.weapon.GetMagRounds();
+    }
+
+    public Weapon.weaponType GetWeaponType()
+    {
+        return this.weapon.GetWeaponType();
     }
 }
