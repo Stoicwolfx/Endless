@@ -150,15 +150,10 @@ public void Initialize()
         this.weapons.Add(new PlayerWeapons(this.currentWeapon,true));
         this.currentWpnIndx = 0;
 
-
-        string wname = this.currentWeapon.GetName();
-        int mammo = this.currentWeapon.GetMagAmmo();
-        int tammo = this.projectiles[this.currentWeapon.GetProjectileType()];
-        Weapon.weaponType wtype = this.currentWeapon.GetWeaponType();
-        this.weaponManager.UpdateData(wname, mammo, tammo, wtype);//this.currentWeapon.GetName(),
-                                      //this.currentWeapon.GetMagAmmo(),
-                                      //this.projectiles[this.currentWeapon.GetProjectileType()],
-                                      //this.currentWeapon.GetWeaponType());
+        this.weaponManager.UpdateData(this.currentWeapon.GetName(),
+                                      this.currentWeapon.GetMagAmmo(),
+                                      this.projectiles[this.currentWeapon.GetProjectileType()],
+                                      this.currentWeapon.GetWeaponType());
     }
 
     // Update is called once per frame
@@ -282,7 +277,6 @@ public void Initialize()
             {
                 this.weapons.Add(new PlayerWeapons(newWeapon, true));
             }
-            //No 'else' needed -- already have the weapon; just need to add ammo
 
             if (newWeapon.GetDefaultAmmo() > 0)
             {
@@ -412,10 +406,10 @@ public void Initialize()
         this.currentWeapon.Fire(this.aimAngle);
     }
 
-    public void PreviousWeapon(InputAction.CallbackContext context)
+    public void OnPreviousWeapon(InputAction.CallbackContext context)
     {
         bool wpnCheck = false;
-
+        Debug.Log("OnPrevious");
         while (!wpnCheck)
         {
             if (this.currentWpnIndx == 0)
@@ -431,12 +425,13 @@ public void Initialize()
         }
 
         this.currentWeapon = this.weapons[this.currentWpnIndx].GetWeapon();
+        Debug.Log("Previous Weapon: " + this.currentWeapon.GetName());
     }
 
-    public void NextWeapon(InputAction.CallbackContext context)
+    public void OnNextWeapon(InputAction.CallbackContext context)
     {
         bool wpnCheck = false;
-
+        Debug.Log("OnNext");
         while (!wpnCheck)
         {
             if (this.currentWpnIndx == (this.weapons.Count - 1))
@@ -452,6 +447,7 @@ public void Initialize()
         }
 
         this.currentWeapon = this.weapons[this.currentWpnIndx].GetWeapon();
+        Debug.Log("Next Weapon: " + this.currentWeapon.GetName());
     }
 
     public int GetNumProjectile(Projectile.ProjectileType projectileType)

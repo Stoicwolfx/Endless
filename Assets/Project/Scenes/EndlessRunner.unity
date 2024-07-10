@@ -764,7 +764,7 @@ GameObject:
   - component: {fileID: 201170245}
   - component: {fileID: 201170244}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponText
   m_TagString: uiElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

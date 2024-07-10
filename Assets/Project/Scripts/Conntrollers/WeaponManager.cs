@@ -43,7 +43,7 @@ public class WeaponManager : MonoBehaviour
         }
         else if (!this.meleeWeapon)
         {
-            this.ammoText.text = this.currentMagAmmo + " / \u221E";
+            this.ammoText.text = this.currentMagAmmo + " / INF";
         }
         else
         {
