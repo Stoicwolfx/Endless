@@ -7,7 +7,7 @@ public class WeaponManager : MonoBehaviour
 {
     private string weapon = "";
     private int currentMagAmmo = 0;
-    private int currentTypeAmmo = 0;
+    private int currentTotalAmmo = 0;
     private bool meleeWeapon = false;
     [SerializeField] private TextMeshProUGUI weaponText;
     [SerializeField] private TextMeshProUGUI ammoText;
@@ -30,16 +30,17 @@ public class WeaponManager : MonoBehaviour
     {
         
         this.currentMagAmmo = magAmmo;
-        this.currentTypeAmmo = totalAmmo;
+        this.currentTotalAmmo = totalAmmo;
         this.weapon = weapon;
         this.meleeWeapon = (wType == Weapon.weaponType.melee);
     }
 
     private void UpdateDisplay()
     {
-        if (this.currentTypeAmmo != -1)
+        this.weaponText.text = this.weapon;
+        if (this.weaponText.text != "Pistol" && !this.meleeWeapon)
         {
-            this.ammoText.text = this.currentMagAmmo + " / " + this.currentTypeAmmo;
+            this.ammoText.text = this.currentMagAmmo + " / " + this.currentTotalAmmo;
         }
         else if (!this.meleeWeapon)
         {
@@ -49,7 +50,6 @@ public class WeaponManager : MonoBehaviour
         {
             this.ammoText.text = "";
         }
-        this.weaponText.text = weapon;
     }
 
     public void UpdateMagAmmo(int ammo)

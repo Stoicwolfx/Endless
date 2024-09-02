@@ -27,6 +27,7 @@ public class WeaponDrop : MonoBehaviour
     {
         this.transform.position = pos;
         this.weapon = Instantiate(this.weapon);
+        this.weapon.gameObject.SetActive(false);
         this.weapon.Create(new Weapon(weapon));
     }
 

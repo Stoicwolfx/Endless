@@ -48,12 +48,28 @@ public class WeaponObject : MonoBehaviour
         {
             this.reloadClock -= Time.deltaTime;
         }
+        else if (this.weapon.GetMagRounds() == 0)
+        {
+            Projectile.ProjectileType pt = this.projectile.GetType();
+            int totalA = this.player.GetNumProjectile(pt);
+
+            this.Reload(totalA);
+            //this.Reload(this.player.GetNumProjectile(this.projectile.GetType()));
+        }
     }
 
     public void Create(Weapon weapon)
     {
         this.weapon = weapon;
         this.projectile = weapon.GetProjectile();
+    }
+
+    public void SetPlayer(Player player)
+        { this.player = player; }
+
+    public void SetPrefab()
+    {
+        this.projectilePrefab = Resources.Load("ProjectilePrefab") as ProjectileObject;
     }
 
     public bool Reload(int totalRounds)
@@ -71,7 +87,10 @@ public class WeaponObject : MonoBehaviour
             this.weapon.ReloadMag(totalRounds);
             this.reloading = false;
             this.reloadClock = 0.0f;
-            this.player.UseProjectile(this.projectile.GetType(), this.weapon.GetMagRounds());
+            if (this.weapon.GetName() != "Pistol")
+            {
+                this.player.UseProjectile(this.projectile.GetType(), this.weapon.GetMagRounds());
+            }
         }
 
         return this.reloading;
@@ -81,26 +100,26 @@ public class WeaponObject : MonoBehaviour
     {
         //Currently detects on pull and release. Only want it detected on pull or hold... need to research
         int count = 0;
+        if (this.weapon.GetMagRounds() == 0) 
+            this.Reload(this.player.GetNumProjectile(this.projectile.GetType()));
+
+        if (this.weapon.GetName() != "Pistol") 
+            { int z = 0; }
+
         if ((this.player.GetNumProjectile(this.projectile.GetType()) == 0) &&
-            (this.weapon.GetName() != "Pistol")) return;
+            (this.weapon.GetMagRounds() == 0)) 
+            return;
 
         if (this.reloading && (this.reloadClock > 0.0f))
         {
             return;
-        }
-        else if ((this.weapon.GetMagRounds() == 0) &&
-                  !this.reloading)
-        {
-            this.Reload(this.player.GetNumProjectile(this.projectile.GetType()));
         }
         else if (this.reloading)
         {
             this.Reload(this.player.GetNumProjectile(this.projectile.GetType()));
         }
 
-        Vector3 position = new(this.transform.position.x + Mathf.Cos(this.transform.rotation.z) * (this.transform.localScale.y / 2.0f), 
-                               this.transform.position.y + Mathf.Sin(this.transform.rotation.z) * (this.transform.localScale.x / 2.0f), 
-                               this.transform.position.z);
+        
 
         //Copied from weapon to her -- temp note
         if (this.fireClock > 0.0f)
@@ -109,18 +128,29 @@ public class WeaponObject : MonoBehaviour
         }
         else
         {
+            Vector3 position = new(this.transform.position.x + Mathf.Cos(this.transform.rotation.z) * (this.transform.localScale.y / 2.0f),
+                               this.transform.position.y + Mathf.Sin(this.transform.rotation.z) * (this.transform.localScale.x / 2.0f),
+                               this.transform.position.z);
+
             ProjectileObject newProjectile = Instantiate(this.projectilePrefab, position, Quaternion.identity);
 
             newProjectile.Create(this.weapon.GetProjectile(), this.player);
             newProjectile.Fire(aimAngle, this.weapon.GetStats());
             this.fireClock = 1.0f / (float)this.weapon.GetRateOfFire();
 
-            if (this.weapon.GetName() != "Pistol")
+            if (this.weapon.GetWeaponType() != Weapon.weaponType.melee)
             {
+                //NOTE: Need to get the number of rounds per shot from the weapon - structure not built yet
+                count = 1;
                 this.weapon.UseProjectile(count);
             }
         }
-        //
+
+        if ((this.weapon.GetMagRounds() == 0) &&
+                  !this.reloading)
+        {
+            this.Reload(this.player.GetNumProjectile(this.projectile.GetType()));
+        }
     }
 
     public string GetName()

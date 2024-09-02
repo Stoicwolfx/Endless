@@ -330,7 +330,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8304029148603583048}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnPreviousWeapon
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

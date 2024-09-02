@@ -14,7 +14,7 @@
 			"Speed":"3",
 			"Experience":"1",
 			"DropChance":"5",
-			"WeaponDrop":"0,1,2",
+			"WeaponDrop":"2",
 			"ProjectileDrop":"0"
 		}
 	},
@@ -33,7 +33,7 @@
 			"Speed":"3",
 			"Experience":"1",
 			"DropChance":"5",
-			"WeaponDrop":"0,1,4",
+			"WeaponDrop":"1,4",
 			"ProjectileDrop":"0,1"
 		}
 	}

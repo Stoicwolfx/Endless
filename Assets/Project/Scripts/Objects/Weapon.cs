@@ -121,7 +121,14 @@ public class Weapon
 
     public void ReloadMag(int totalRounds)
     {
-        this.stats["MagRounds"] = (totalRounds >= this.stats["MaxRounds"]) ? this.stats["MaxRounds"] : totalRounds;
+        if (this.name == "Pistol")
+        {
+            this.stats["MagRounds"] = this.stats["MaxRounds"];
+        }
+        else
+        {
+            this.stats["MagRounds"] = (totalRounds >= this.stats["MaxRounds"]) ? this.stats["MaxRounds"] : totalRounds;
+        }
     }
 
     public int GetDefaultAmmo()

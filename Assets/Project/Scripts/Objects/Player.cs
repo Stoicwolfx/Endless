@@ -271,8 +271,9 @@ public void Initialize()
             WeaponObject newWeapon = other.gameObject.GetComponent<WeaponDrop>().GetWeapon();
 
             //Note: Need to check if the player already has this weapon - if so just add the rounds
-
+            //Note: new weapons seem to be added with parts of them null. Need to figure out why
             WeaponObject results = this.weapons.Find(weapon => weapon.GetWeapon().GetName() == newWeapon.GetName()).GetWeapon();
+            
             if (results == null)
             {
                 this.weapons.Add(new PlayerWeapons(newWeapon, true));
@@ -401,15 +402,14 @@ public void Initialize()
         this.gun.transform.RotateAround(this.transform.position, this.gun.transform.forward, deltaAngle);
     }
 
-    public void OnFire(InputAction.CallbackContext context)
+    public void OnFire()//InputAction.CallbackContext context)
     {
         this.currentWeapon.Fire(this.aimAngle);
     }
 
-    public void OnPreviousWeapon(InputAction.CallbackContext context)
+    public void OnPreviousWeapon()//InputAction.CallbackContext context)
     {
         bool wpnCheck = false;
-        Debug.Log("OnPrevious");
         while (!wpnCheck)
         {
             if (this.currentWpnIndx == 0)
@@ -425,13 +425,12 @@ public void Initialize()
         }
 
         this.currentWeapon = this.weapons[this.currentWpnIndx].GetWeapon();
-        Debug.Log("Previous Weapon: " + this.currentWeapon.GetName());
     }
 
     public void OnNextWeapon(InputAction.CallbackContext context)
     {
         bool wpnCheck = false;
-        Debug.Log("OnNext");
+
         while (!wpnCheck)
         {
             if (this.currentWpnIndx == (this.weapons.Count - 1))
@@ -447,7 +446,6 @@ public void Initialize()
         }
 
         this.currentWeapon = this.weapons[this.currentWpnIndx].GetWeapon();
-        Debug.Log("Next Weapon: " + this.currentWeapon.GetName());
     }
 
     public int GetNumProjectile(Projectile.ProjectileType projectileType)

@@ -14,7 +14,7 @@
 			"Accuracy":"90",
 			"Range":"7",
 			"MagRounds":"6",
-			"MaxRounds":"-1",
+			"MaxRounds":"6",
 			"ReloadTime":"5",
 			"DropWeight":"5"
 		}
@@ -54,7 +54,7 @@
 			"Accuracy":"100",
 			"Range":"1",
 			"MagRounds":"1",
-			"MaxRounds":"-1",
+			"MaxRounds":"0",
 			"ReloadTime":"0.166666666666667",
 			"DropWeight":"25"
 		}
@@ -74,7 +74,7 @@
 			"Accuracy":"100",
 			"Range":"2",
 			"MagRounds":"1",
-			"MaxRounds":"-1",
+			"MaxRounds":"0",
 			"ReloadTime":"0.142857142857143",
 			"DropWeight":"10"
 		}
