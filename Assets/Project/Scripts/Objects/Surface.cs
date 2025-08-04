@@ -38,7 +38,7 @@ public class Surface : MonoBehaviour
     public void Create()
     {
         this.transform.position = new Vector3(this.initialXPos, this.initialYPos, 0.0f);
-        this.transform.localScale = new Vector3(this.initialXScale, this.initialYScale, 0.0f);
+        this.transform.localScale = new Vector3(this.initialXScale, this.initialYScale, 0.0001f);
 
         this.maxX = this.transform.position.x + this.transform.localScale.x * 0.5f;
         this.maxY = this.transform.position.y + this.transform.localScale.y * 0.5f;
@@ -89,7 +89,7 @@ public class Surface : MonoBehaviour
         xScale = Random.Range(Globals.minSurfaceWidth, Globals.maxSurfaceWidth);
         yScale = Random.Range(minHeight, maxHeight);
 
-        this.transform.localScale = new Vector3(xScale, yScale, 0.0f);
+        this.transform.localScale = new Vector3(xScale, yScale, 0.0001f);
         xPos = lastX + this.transform.localScale.x * 0.5f + xGap;
         yPos = Globals.screenBottom + this.transform.localScale.y * 0.5f;
 

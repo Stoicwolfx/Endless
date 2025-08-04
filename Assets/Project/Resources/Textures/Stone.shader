@@ -778,7 +778,7 @@ float4 o5177398537494_0_1_rgba = o5177398537494_0_b;
 			o.Albedo = ((o5177398537494_0_1_rgba).rgb).rgb*p_o5161158192115_albedo_color.rgb;
 			o.Metallic = 1.0*p_o5161158192115_metallic;
 			o.Smoothness = 1.0-(dot((o5175653706991_0_1_rgba).rgb, tofloat3(1.0))/3.0)*p_o5161158192115_roughness;
-			o.Alpha = 1.0;
+			o.Alpha = 0.0;
 			o.Normal = o5165486713930_0_1_rgb*tofloat3(-1.0, 1.0, -1.0)+tofloat3(1.0, 0.0, 1.0);
 		}
 		ENDCG
